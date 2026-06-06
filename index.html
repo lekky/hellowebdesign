@@ -175,7 +175,8 @@
   .pkg.feat .btn-fill:hover{background:#fff;color:#0c2a26}
   .feat-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--teal);color:#0c2a26;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 13px;border-radius:999px;white-space:nowrap}
   .addons{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;justify-content:center}
-  .addons span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 18px;font-size:13.5px;font-weight:500;color:var(--teal-ink)}
+  .addons span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 18px;font-size:13.5px;font-weight:500;color:var(--teal-ink);cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+  .addons span:hover{background:var(--paper-2);border-color:var(--teal);transform:translateY(-1px)}
   @media(max-width:980px){.pkg-grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:560px){.pkg-grid{grid-template-columns:1fr}}
 
@@ -424,26 +425,26 @@
       <div class="pkg reveal">
         <div class="pkg-name">Starter Site</div><div class="pkg-sub">One-page, get online fast</div><div class="price">From £499</div>
         <ul><li>Single-page design</li><li>Mobile responsive</li><li>Contact form included</li><li>Live within a week</li></ul>
-        <a href="#contact" class="btn btn-line">Get in touch</a>
+        <a href="#contact" class="btn btn-line" data-prefill="Starter Website (one page)">Get in touch</a>
       </div>
       <div class="pkg feat reveal d1">
         <span class="feat-badge">Most popular</span><div class="pkg-name">Business Pro</div><div class="pkg-sub">For growing businesses</div><div class="price">Custom</div>
         <ul><li>Multi-page website</li><li>Custom design</li><li>Advanced SEO setup</li><li>Google integration</li></ul>
-        <a href="#contact" class="btn btn-fill">Start your project</a>
+        <a href="#contact" class="btn btn-fill" data-prefill="Business Website (multi page)">Start your project</a>
       </div>
       <div class="pkg reveal d2">
         <div class="pkg-name">E-Commerce</div><div class="pkg-sub">Sell online</div><div class="price">Custom</div>
         <ul><li>Full online shop</li><li>Secure payments</li><li>Order management</li><li>Product catalogue</li></ul>
-        <a href="#contact" class="btn btn-line">Get in touch</a>
+        <a href="#contact" class="btn btn-line" data-prefill="E-Commerce / Online Shop">Get in touch</a>
       </div>
       <div class="pkg reveal d3">
         <div class="pkg-name">Wedding</div><div class="pkg-sub">Your day, online</div><div class="price">From £499</div>
         <ul><li>Beautiful wedding site</li><li>RSVP form</li><li>Venue &amp; travel info</li><li>Custom photo gallery</li></ul>
-        <a href="#contact" class="btn btn-line">Get in touch</a>
+        <a href="#contact" class="btn btn-line" data-prefill="Wedding Website">Get in touch</a>
       </div>
     </div>
     <div class="addons reveal">
-      <span>+ Social Media Management</span><span>+ Web Applications</span><span>+ Mobile Apps</span><span>+ Business Process Consultancy</span>
+      <span data-prefill="Social Media Management">+ Social Media Management</span><span data-prefill="Web / Mobile Application">+ Web Applications</span><span data-prefill="Web / Mobile Application">+ Mobile Apps</span><span data-prefill="Something else">+ Business Process Consultancy</span>
     </div>
   </div>
 </section>
@@ -699,6 +700,16 @@
       box.textContent = "Sorry, something went wrong. Please try again, or email contact@hellowebdesign.co.uk.";
     }
   })();
+
+  // prefill the "What are you interested in?" select from a package/service CTA
+  const interestSelect = document.querySelector('select[name="interested_package"]');
+  document.querySelectorAll('[data-prefill]').forEach((el) => {
+    el.addEventListener('click', () => {
+      if (interestSelect){ interestSelect.value = el.dataset.prefill; }
+      // add-ons are <span> (no href) — scroll to the form ourselves
+      if (el.tagName !== 'A'){ document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
 
   // privacy policy modal
   const pModal = document.getElementById('privacyModal');

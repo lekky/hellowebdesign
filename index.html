@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>HelloWebDesign — Web Design &amp; Social Media in Urmston</title>
+<title>HelloWebDesign - Web Design &amp; Social Media in Urmston</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -514,11 +514,11 @@
   navToggle.addEventListener('click', () => { navLinks.classList.toggle('open'); navToggle.classList.toggle('open'); });
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navLinks.classList.remove('open'); navToggle.classList.remove('open'); }));
 
-  // reveal on scroll (scroll-position based — robust across environments)
+  // reveal on scroll (scroll-position based - robust across environments)
   const reveals = Array.from(document.querySelectorAll('.reveal'));
   function reveal(el){
     el.classList.add('in');
-    // watchdog: some embedded webviews stall opacity transitions — force the end state
+    // watchdog: some embedded webviews stall opacity transitions - force the end state
     setTimeout(() => {
       if (parseFloat(getComputedStyle(el).opacity) < 0.05){
         el.style.transition = 'none'; el.style.opacity = '1'; el.style.transform = 'none';

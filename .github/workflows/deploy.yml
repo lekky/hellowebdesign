@@ -39,3 +39,5 @@ jobs:
             **/node_modules/**
             .gitignore
             README.md
+            CLAUDE.md
+            .claude/**

@@ -1,0 +1,40 @@
+name: Deploy to SFTP
+
+# Runs whenever a PR is merged into main (a merge pushes to main),
+# and on direct pushes to main.
+on:
+  push:
+    branches: [main]
+
+# Avoid overlapping deploys if commits land close together.
+concurrency:
+  group: sftp-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Upload site over SFTP
+        uses: Dylan700/sftp-upload-action@v1.2.3
+        with:
+          server: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          port: ${{ secrets.SFTP_PORT || '22' }}
+          # local => remote. Adjust the remote path via the SFTP_REMOTE_PATH secret.
+          uploads: |
+            ./ => ${{ secrets.SFTP_REMOTE_PATH }}
+          # Don't ship repo plumbing or docs to the web server.
+          ignore: |
+            .git/*
+            .github/*
+            .gitignore
+            README.md
+          # Set to true if you want the remote dir mirrored (deletes files
+          # on the server that no longer exist in the repo). Off by default
+          # so it never removes anything you didn't expect.
+          delete: false

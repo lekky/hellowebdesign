@@ -340,6 +340,44 @@
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How quickly can my site go live?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Simple one-page starter sites can be live within a week. Multi-page, e-commerce and bespoke builds take a little longer - we'll agree a clear timeline with you before we start." }
+    },
+    {
+      "@type": "Question",
+      "name": "How much will it cost?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Starter sites begin at £499. Business, e-commerce and wedding sites are custom-quoted around what you actually need. The price we quote is the price you pay - no hidden fees." }
+    },
+    {
+      "@type": "Question",
+      "name": "Who will I actually be working with?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Us - Hanna and Rachid - directly, from the first chat through to launch. No account managers, no juniors, no handoffs." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you only work with businesses in Manchester?",
+      "acceptedAnswer": { "@type": "Answer", "text": "We're based in Urmston and work with businesses across Greater Manchester and beyond. Most of the work is done remotely, with on-site visits when they help." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you handle social media as well as websites?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. We offer social media management - content creation, scheduling, community management and on-site filming - on its own or alongside a website." }
+    },
+    {
+      "@type": "Question",
+      "name": "I already have a website - can you redesign it?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Definitely. Whether you want a complete rebuild or to improve what you've already got, just tell us what's not working and we'll take it from there." }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -817,12 +855,21 @@
     });
   });
 
-  // FAQ accordion (each item toggles independently)
+  // FAQ accordion (only one open at a time)
   document.querySelectorAll('.faq-q').forEach((q) => {
     q.addEventListener('click', () => {
       const item = q.closest('.faq-item');
-      const open = item.classList.toggle('open');
-      q.setAttribute('aria-expanded', open ? 'true' : 'false');
+      const wasOpen = item.classList.contains('open');
+      // close any open item
+      document.querySelectorAll('.faq-item.open').forEach((o) => {
+        o.classList.remove('open');
+        o.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      // open the clicked one (unless it was already open — then it just closes)
+      if (!wasOpen){
+        item.classList.add('open');
+        q.setAttribute('aria-expanded', 'true');
+      }
     });
   });
 

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HelloWebDesign — Web Design &amp; Social Media in Urmston</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --teal:#60BFB5;
+    --teal-deep:#2f7a72;
+    --teal-ink:#173f3a;
+    --paper:#f7f3ea;
+    --paper-2:#efe8d9;
+    --charcoal:#33373b;       /* ink, matched to the logo */
+    --charcoal-2:#2a2d31;
+    --charcoal-3:#212327;
+    --ink:#33373b;
+    --muted:#6f6a5f;
+    --line:#e2dbcb;
+    --serif:"Newsreader",Georgia,serif;
+    --sans:"Hanken Grotesk",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+  .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal-deep);font-weight:600}
+  h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.04;letter-spacing:-.01em}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-weight:600;font-size:15px;padding:14px 26px;border-radius:999px;transition:transform .2s ease,background .2s ease,color .2s,box-shadow .2s;white-space:nowrap}
+  .btn-fill{background:var(--charcoal);color:var(--paper)}
+  .btn-fill:hover{background:var(--teal-ink);transform:translateY(-2px);box-shadow:0 12px 24px -12px rgba(23,63,58,.5)}
+  .btn-line{border:1.5px solid var(--charcoal);color:var(--charcoal)}
+  .btn-line:hover{background:var(--charcoal);color:var(--paper)}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;background:rgba(247,243,234,.8);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s,background .3s}
+  nav.scrolled{border-color:var(--line);box-shadow:0 6px 24px -18px rgba(0,0,0,.4)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:78px}
+  .brand img{height:42px;width:auto}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a{font-size:14.5px;color:var(--ink);font-weight:600;position:relative}
+  .nav-links a:not(.nav-cta)::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--teal);transition:width .25s}
+  .nav-links a:not(.nav-cta):hover{color:var(--ink)}
+  .nav-links a:not(.nav-cta):hover::after{width:100%}
+  .nav-cta{background:var(--teal);color:#0c2a26!important;padding:11px 22px;border-radius:999px;font-weight:600;font-size:14px;white-space:nowrap}
+  .nav-cta:hover{background:var(--teal-deep);color:#fff!important}
+  .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+  .nav-toggle span{width:24px;height:2px;background:var(--ink);border-radius:2px;transition:.25s}
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-toggle.open span:nth-child(2){opacity:0}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  @media(max-width:880px){
+    .nav-toggle{display:flex}
+    .nav-links{position:absolute;top:78px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 18px 30px -20px rgba(0,0,0,.35);padding:8px 0;display:none}
+    .nav-links.open{display:flex}
+    .nav-links a{padding:14px 32px;font-size:16px}
+    .nav-links a:not(.nav-cta)::after{display:none}
+    .nav-cta{margin:10px 32px;text-align:center}
+  }
+
+  /* HERO */
+  .hero{padding:70px 0 90px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .hero h1{font-size:clamp(44px,6vw,78px);margin:18px 0 24px}
+  .hero h1 em{font-style:italic;color:var(--teal-deep)}
+  .hero p.lead{font-size:19px;color:var(--muted);max-width:40ch;margin-bottom:32px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .hero-photo{position:relative}
+  .hero-photo .frame{width:100%;border-radius:14px;aspect-ratio:4/5;object-fit:cover;box-shadow:0 30px 60px -28px rgba(23,63,58,.45)}
+  .hero-tag{position:absolute;left:-22px;bottom:34px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 20px;box-shadow:0 16px 30px -18px rgba(0,0,0,.3)}
+  .hero-tag b{font-family:var(--serif);font-size:22px;color:var(--teal-deep)}
+  .hero-tag span{display:block;font-size:12px;color:var(--muted);letter-spacing:.04em}
+  .speed{display:inline-flex;align-items:center;gap:8px;background:var(--paper-2);border:1px solid var(--line);padding:7px 15px;border-radius:999px;font-size:13px;font-weight:600;color:var(--teal-ink)}
+  .speed .pulse{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 0 rgba(96,191,181,.6);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(96,191,181,.55)}70%{box-shadow:0 0 0 9px rgba(96,191,181,0)}100%{box-shadow:0 0 0 0 rgba(96,191,181,0)}}
+  .hero-photo .float{position:absolute;animation:floaty 6s ease-in-out infinite}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  @media(max-width:880px){.hero-grid{grid-template-columns:1fr;gap:36px}}
+
+  /* marquee strip */
+  .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;background:var(--paper-2);overflow:hidden}
+  .strip-in{display:flex;align-items:center;gap:44px;width:max-content;animation:marq 26s linear infinite}
+  .strip:hover .strip-in{animation-play-state:paused}
+  @keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .strip span{font-family:var(--serif);font-size:20px;color:var(--teal-ink);opacity:.75;font-style:italic;white-space:nowrap}
+  .strip small{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap}
+  .strip .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0}
+
+  section{padding:96px 0}
+  .sec-head{max-width:640px;margin-bottom:48px}
+  .sec-head h2{font-size:clamp(32px,4.2vw,50px);margin:14px 0 16px}
+  .sec-head p{font-size:17px;color:var(--muted)}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:64px;align-items:center}
+  .about-media{position:relative}
+  .about-media .main{border-radius:14px;aspect-ratio:3/4;object-fit:cover;width:100%}
+  .about-media .inset{position:absolute;right:-26px;bottom:-26px;width:46%;border-radius:12px;border:5px solid var(--paper);aspect-ratio:4/3;object-fit:cover;box-shadow:0 20px 40px -22px rgba(0,0,0,.4)}
+  .about-body p{margin-bottom:18px;color:#46433c;font-size:16.5px}
+  .stats{display:flex;gap:40px;margin-top:30px;padding-top:28px;border-top:1px solid var(--line)}
+  .stat b{font-family:var(--serif);font-size:42px;color:var(--teal-deep);display:block;line-height:1}
+  .stat span{font-size:13px;color:var(--muted);letter-spacing:.04em}
+  @media(max-width:880px){.about-grid{grid-template-columns:1fr;gap:48px}.about-media .inset{width:40%}}
+
+  /* WORK */
+  .work{background:var(--paper-2)}
+  .work .eyebrow{color:var(--teal-deep)}
+  .work h2{color:var(--ink)}
+  .work .sec-head p{color:var(--muted)}
+  .work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .wc{background:#fff;border-radius:13px;overflow:hidden;border:1.5px solid #d6ccb6;box-shadow:0 14px 30px -26px rgba(0,0,0,.4);transition:transform .25s ease,box-shadow .25s;cursor:pointer;text-align:left;font-family:inherit;color:inherit;padding:0;display:flex;flex-direction:column}
+  .wc:hover{transform:translateY(-5px);box-shadow:0 24px 44px -28px rgba(0,0,0,.45)}
+  .wc-shot{position:relative;overflow:hidden;aspect-ratio:16/10;background:#e7e2d6;border-bottom:1px solid var(--line)}
+  .wc-shot img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s ease}
+  .wc:hover .wc-shot img{transform:scale(1.05)}
+  .wc-shot .badge-new{position:absolute;top:10px;left:10px;background:var(--teal);color:#0c2a26;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border-radius:999px;z-index:2}
+  .wc .wc-cat{display:block;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:4px}
+  .wc-body{padding:13px 15px 15px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .wc h3{font-size:16px;color:var(--ink);line-height:1.16}
+  .wc .arr{color:var(--teal-deep);font-weight:700;font-size:16px;flex-shrink:0;transition:transform .2s}
+  .wc:hover .arr{transform:translate(2px,-2px)}
+  @media(max-width:900px){.work-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.work-grid{grid-template-columns:1fr}}
+
+  /* SERVICES */
+  .svc-list{display:grid;gap:0;border-top:1px solid var(--line)}
+  .svc{display:grid;grid-template-columns:64px 1fr 1.25fr;gap:30px;padding:34px 0;border-bottom:1px solid var(--line);align-items:center;transition:padding-left .25s ease}
+  .svc:hover{padding-left:14px}
+  .svc .ic{width:54px;height:54px;border-radius:14px;background:var(--paper-2);display:flex;align-items:center;justify-content:center;color:var(--teal-deep);transition:background .25s,color .25s}
+  .svc:hover .ic{background:var(--teal);color:#0c2a26}
+  .svc .ic svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .svc h3{font-size:27px}
+  .svc p{color:var(--muted);font-size:16px}
+  @media(max-width:720px){.svc{grid-template-columns:54px 1fr;gap:18px}.svc p{grid-column:1/-1}}
+
+  /* WHY */
+  .why{background:var(--paper-2)}
+  .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:40px 56px}
+  .why-item{display:flex;gap:20px}
+  .why-item .n{font-family:var(--serif);font-size:30px;color:var(--teal-deep);font-style:italic;line-height:1;flex-shrink:0}
+  .why-item h3{font-size:21px;margin-bottom:8px}
+  .why-item p{color:var(--muted);font-size:15.5px}
+  @media(max-width:720px){.why-grid{grid-template-columns:1fr}}
+
+  /* PACKAGES */
+  .pkg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .pkg{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
+  .pkg:hover{transform:translateY(-5px);box-shadow:0 26px 50px -32px rgba(0,0,0,.35)}
+  .pkg.feat{background:var(--teal-ink);color:var(--paper);border-color:var(--teal-ink);position:relative}
+  .pkg .pkg-name{font-family:var(--serif);font-size:22px;margin-bottom:4px}
+  .pkg .pkg-sub{font-size:13px;color:var(--muted);margin-bottom:18px}
+  .pkg.feat .pkg-sub{color:#aecfca}
+  .pkg .price{font-family:var(--serif);font-size:34px;color:var(--teal-deep);margin-bottom:18px}
+  .pkg.feat .price{color:var(--teal)}
+  .pkg ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px;flex:1}
+  .pkg li{font-size:14px;display:flex;gap:9px;color:#46433c}
+  .pkg.feat li{color:#dce7e4}
+  .pkg li::before{content:"";width:16px;height:16px;border-radius:50%;background:var(--teal);flex-shrink:0;margin-top:3px;
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/12px no-repeat;
+    mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/12px no-repeat}
+  .pkg .btn{justify-content:center;font-size:14px;padding:12px}
+  .pkg.feat .btn-fill{background:var(--teal);color:#0c2a26}
+  .pkg.feat .btn-fill:hover{background:#fff;color:#0c2a26}
+  .feat-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--teal);color:#0c2a26;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 13px;border-radius:999px;white-space:nowrap}
+  .addons{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;justify-content:center}
+  .addons span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 18px;font-size:13.5px;font-weight:500;color:var(--teal-ink)}
+  @media(max-width:980px){.pkg-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.pkg-grid{grid-template-columns:1fr}}
+
+  /* TESTIMONIALS */
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .quote{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px}
+  .quote .stars{color:var(--teal);letter-spacing:3px;margin-bottom:14px;font-size:14px}
+  .quote p{font-family:var(--serif);font-size:18px;font-style:italic;line-height:1.45;color:#2e2b25;margin-bottom:18px}
+  .quote .who{font-size:13px;color:var(--muted);font-weight:600}
+  @media(max-width:880px){.quotes{grid-template-columns:1fr}}
+
+  /* CONTACT */
+  .contact{background:var(--charcoal-3);color:var(--paper)}
+  .contact .eyebrow{color:var(--teal)}
+  .contact h2{color:var(--paper)}
+  .ct-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px}
+  .ct-info p{color:#b7b2a6;margin:18px 0 28px;max-width:34ch}
+  .ct-line{display:flex;flex-direction:column;gap:3px;margin-bottom:20px}
+  .ct-line small{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)}
+  .ct-line a,.ct-line span{font-family:var(--serif);font-size:20px;color:var(--paper)}
+  form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  form .full{grid-column:1/-1}
+  label{display:block;font-size:13px;color:#b7b2a6;margin-bottom:7px;font-weight:500}
+  input,select,textarea{width:100%;background:var(--charcoal-2);border:1px solid #41454a;border-radius:9px;padding:13px 15px;color:var(--paper);font-family:var(--sans);font-size:15px}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--teal)}
+  textarea{min-height:110px;resize:vertical}
+  form .btn{justify-content:center}
+  form .btn-fill{background:var(--teal);color:#0c2a26}
+  form .btn-fill:hover{background:#fff;color:#0c2a26}
+  @media(max-width:880px){.ct-grid{grid-template-columns:1fr;gap:34px}form{grid-template-columns:1fr}}
+
+  /* FOOTER */
+  footer{background:var(--charcoal-3);color:#9a958b;padding:54px 0 30px}
+  .foot-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-bottom:34px;border-bottom:1px solid #36393e}
+  .foot-brand{max-width:34ch}
+  .foot-brand img{height:46px;margin-bottom:14px;filter:brightness(0) invert(1) opacity(.92)}
+  .foot-cols{display:flex;gap:60px;flex-wrap:wrap}
+  .foot-cols h4{color:var(--paper);font-family:var(--sans);font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+  .foot-cols a{display:block;font-size:14px;margin-bottom:9px}
+  .foot-cols a:hover{color:var(--teal)}
+  .foot-bot{padding-top:24px;font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  /* whatsapp */
+  .wa{position:fixed;right:22px;bottom:22px;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.4);z-index:60;transition:transform .2s}
+  .wa svg{width:30px;height:30px;fill:#fff}
+  .wa:hover{transform:scale(1.08)}
+
+  /* MODAL */
+  .modal{position:fixed;inset:0;z-index:100;display:none;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto}
+  .modal.open{display:flex}
+  .modal-bg{position:fixed;inset:0;background:rgba(20,18,14,.55);backdrop-filter:blur(4px);opacity:0;transition:opacity .3s}
+  .modal.open .modal-bg{opacity:1}
+  .modal-card{position:relative;background:var(--paper);border-radius:18px;max-width:780px;width:100%;overflow:hidden;box-shadow:0 40px 90px -30px rgba(0,0,0,.6);transform:translateY(20px) scale(.98);opacity:0;transition:transform .35s cubic-bezier(.22,.61,.36,1),opacity .35s;margin:auto}
+  .modal.open .modal-card{transform:none;opacity:1}
+  .modal-shot{aspect-ratio:16/9;background:#1c1e21;overflow:hidden}
+  .modal-shot img{width:100%;height:100%;object-fit:cover;object-position:top center}
+  .modal-close{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;background:rgba(28,30,33,.88);border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:#f3efe6;z-index:3;transition:transform .2s,background .2s}
+  .modal-close:hover{transform:rotate(90deg);background:var(--charcoal-3)}
+  .modal-body{padding:32px 36px 36px}
+  .modal-body .tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-deep);font-weight:600}
+  .modal-body h3{font-size:30px;margin:8px 0 6px}
+  .modal-body .meta{font-size:13px;color:var(--muted);margin-bottom:18px}
+  .modal-body .summary{font-size:16.5px;color:#46433c;margin-bottom:24px}
+  .modal-sub{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:12px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+  .chips span{background:var(--paper-2);border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:13px;font-weight:500;color:var(--teal-ink)}
+  .modal-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+  @media(max-width:600px){
+    .modal{align-items:flex-end;padding:0}
+    .modal-card{max-width:none;width:100%;border-radius:18px 18px 0 0;transform:translateY(100%);max-height:92vh;overflow-y:auto;margin:0}
+    .modal.open .modal-card{transform:none}
+    .modal-body{padding:26px 24px 30px}
+    .modal-cta{flex-direction:column}
+    .modal-cta .btn{width:100%;justify-content:center}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="brand"><img src="assets/logo.png" alt="HelloWebDesign" /></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#packages">Packages</a>
+      <a href="#contact" class="nav-cta">Get in touch</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="speed reveal"><span class="pulse"></span>Online within a week</span>
+      <h1 class="reveal d1">We build websites that <em>grow</em> your business.</h1>
+      <p class="lead reveal d2">A husband-and-wife studio in Urmston, helping small businesses across Manchester look brilliant online - without the jargon or the agency markup.</p>
+      <div class="hero-cta reveal d3">
+        <a href="#contact" class="btn btn-fill">Start your project →</a>
+        <a href="#work" class="btn btn-line">See our work</a>
+      </div>
+    </div>
+    <div class="hero-photo reveal d2">
+      <img class="frame" src="assets/couple.png" alt="Hanna and Rachid, HelloWebDesign" />
+      <div class="hero-tag float"><b>Hanna &amp; Rachid</b><span>The two people you'll actually work with</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="strip-in" id="marquee">
+    <small>18+ years with brands like</small><span class="dot"></span>
+    <span>Next</span><span class="dot"></span><span>Iceland</span><span class="dot"></span><span>Pets at Home</span><span class="dot"></span><span>SimplyBe</span><span class="dot"></span>
+    <small>18+ years with brands like</small><span class="dot"></span>
+    <span>Next</span><span class="dot"></span><span>Iceland</span><span class="dot"></span><span>Pets at Home</span><span class="dot"></span><span>SimplyBe</span><span class="dot"></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-media reveal">
+      <img class="main" src="assets/working.png" alt="Hanna and Rachid working together" />
+      <img class="inset" src="assets/desk.png" alt="Hanna managing social media analytics" />
+    </div>
+    <div class="about-body reveal d1">
+      <span class="eyebrow">About us</span>
+      <h2 style="font-size:clamp(30px,4vw,46px);margin:14px 0 22px">Real people who actually care about your business</h2>
+      <p>We're a family-run studio based in Urmston, working closely with local and specialist businesses to build their presence online - from websites to social media, with a hands-on, personal approach.</p>
+      <p>We take the time to understand your products, your customers and how your business actually works. That means less back-and-forth and content that feels genuine, not generic. You'll work directly with us, start to finish. No account managers, no handoffs, no middlemen.</p>
+      <div class="stats">
+        <div class="stat"><b data-count="18" data-suffix="+">0</b><span>Years experience</span></div>
+        <div class="stat"><b data-count="2">0</b><span>Person team</span></div>
+        <div class="stat"><b data-count="100" data-suffix="%">0</b><span>Hands-on</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" class="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Our work</span>
+      <h2>Recent projects for real local businesses</h2>
+      <p>A selection of sites, apps and social media we've designed, built and launched. Tap any project to see what we did.</p>
+    </div>
+    <div class="work-grid">
+      <button class="wc reveal" data-project="flok"><div class="wc-shot"><span class="badge-new">New</span><img src="assets/proj-flok.png" alt="FLÓK Medical Aesthetics" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website · Brand</span><h3>FLÓK Medical Aesthetics</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal d1" data-project="hs"><div class="wc-shot"><img src="assets/proj-hs-building.png" alt="HS Building Services" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>HS Building Services</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal d2" data-project="nailhead"><div class="wc-shot"><img src="assets/proj-nailhead.png" alt="Nailhead Properties" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>Nailhead Properties</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal" data-project="flightsim"><div class="wc-shot"><img src="assets/proj-flightsim.png" alt="Manchester Flight Sim Centre" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Booking · Web App</span><h3>Manchester Flight Sim Centre</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal d1" data-project="farmers"><div class="wc-shot"><img src="assets/proj-farmers.png" alt="The Farmers Arms" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>The Farmers Arms</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal d2" data-project="bbm"><div class="wc-shot"><img src="assets/proj-bbm.png" alt="Bolton Builders Merchants social media" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Social Media</span><h3>Bolton Builders Merchants</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal" data-project="savethedate"><div class="wc-shot"><img src="assets/proj-savethedate.png" alt="Save the Date wedding website" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Wedding</span><h3>Save the Date</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal d1" data-project="fennec"><div class="wc-shot"><img src="assets/proj-fennec.png" alt="Fennec Consulting" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>Fennec Consulting</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal d2" data-project="miners"><div class="wc-shot"><img src="assets/proj-miners.png" alt="The Miners Arms" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>The Miners Arms</h3></div><span class="arr">↗</span></div></button>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">What we do</span>
+      <h2>Everything you need to get online</h2>
+      <p>From a simple one-page site to a full shop and ongoing social media - all under one roof.</p>
+    </div>
+    <div class="svc-list">
+      <div class="svc reveal">
+        <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M7 21h10"/></svg></span>
+        <h3>Custom Websites</h3>
+        <p>Beautiful, responsive sites built to showcase your business and turn visitors into customers - from single-page builds to multi-page.</p>
+      </div>
+      <div class="svc reveal">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 12.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg></span>
+        <h3>E-Commerce</h3>
+        <p>Ready to sell online? We set up your shop with product management, secure payments and everything you need to take orders.</p>
+      </div>
+      <div class="svc reveal">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1 1 21 11.5z"/><path d="M8 11h.01M12 11h.01M16 11h.01"/></svg></span>
+        <h3>Social Media Management</h3>
+        <p>Content creation, scheduling, community management and on-site filming visits. You focus on running the business.</p>
+      </div>
+      <div class="svc reveal">
+        <span class="ic"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
+        <h3>Bespoke Web &amp; Mobile Apps</h3>
+        <p>Need more than a standard site? We build custom web and mobile applications around how your business actually works.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Why pick us</span>
+      <h2>What makes us different</h2>
+      <p>We're not a faceless agency. Here's why local businesses choose us.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-item reveal"><span class="n">01</span><div><h3>You deal with us directly</h3><p>No account managers, no juniors. You speak to the people doing the work, every time.</p></div></div>
+      <div class="why-item reveal d1"><span class="n">02</span><div><h3>No hidden fees</h3><p>The price we quote is the price you pay. Extra work is always agreed before we proceed.</p></div></div>
+      <div class="why-item reveal"><span class="n">03</span><div><h3>We understand small business</h3><p>We run one ourselves. We know the budgets, the priorities and what actually moves the needle.</p></div></div>
+      <div class="why-item reveal d1"><span class="n">04</span><div><h3>Big-brand experience</h3><p>18+ years with household names, now focused entirely on helping local businesses grow.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+      <span class="eyebrow">Packages</span>
+      <h2>Simple, honest pricing</h2>
+      <p>Whether you need a starter site to get online or ongoing support, there's a package for you.</p>
+    </div>
+    <div class="pkg-grid">
+      <div class="pkg reveal">
+        <div class="pkg-name">Starter Site</div><div class="pkg-sub">One-page, get online fast</div><div class="price">From £499</div>
+        <ul><li>Single-page design</li><li>Mobile responsive</li><li>Contact form included</li><li>Live within a week</li></ul>
+        <a href="#contact" class="btn btn-line">Get in touch</a>
+      </div>
+      <div class="pkg feat reveal d1">
+        <span class="feat-badge">Most popular</span><div class="pkg-name">Business Pro</div><div class="pkg-sub">For growing businesses</div><div class="price">Custom</div>
+        <ul><li>Multi-page website</li><li>Custom design</li><li>Advanced SEO setup</li><li>Google integration</li></ul>
+        <a href="#contact" class="btn btn-fill">Start your project</a>
+      </div>
+      <div class="pkg reveal d2">
+        <div class="pkg-name">E-Commerce</div><div class="pkg-sub">Sell online</div><div class="price">Custom</div>
+        <ul><li>Full online shop</li><li>Secure payments</li><li>Order management</li><li>Product catalogue</li></ul>
+        <a href="#contact" class="btn btn-line">Get in touch</a>
+      </div>
+      <div class="pkg reveal d3">
+        <div class="pkg-name">Wedding</div><div class="pkg-sub">Your day, online</div><div class="price">From £499</div>
+        <ul><li>Beautiful wedding site</li><li>RSVP form</li><li>Venue &amp; travel info</li><li>Custom photo gallery</li></ul>
+        <a href="#contact" class="btn btn-line">Get in touch</a>
+      </div>
+    </div>
+    <div class="addons reveal">
+      <span>+ Social Media Management</span><span>+ Web Applications</span><span>+ Mobile Apps</span><span>+ Business Process Consultancy</span>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="why" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+      <span class="eyebrow">Testimonials</span>
+      <h2>What our clients say</h2>
+    </div>
+    <div class="quotes">
+      <div class="quote reveal"><div class="stars">★★★★★</div><p>"They took the time to actually understand our business. The new site does the talking for us."</p><div class="who">Local hospitality client</div></div>
+      <div class="quote reveal d1"><div class="stars">★★★★★</div><p>"Working with two real people who care made all the difference. No jargon, no fuss."</p><div class="who">Owner-operated retailer</div></div>
+      <div class="quote reveal d2"><div class="stars">★★★★★</div><p>"The whole process was easy and they had us up and running in a couple of weeks."</p><div class="who">Wedding services client</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap ct-grid">
+    <div class="ct-info reveal">
+      <span class="eyebrow">Contact</span>
+      <h2 style="font-size:clamp(30px,4vw,46px);margin-top:14px">Say hello</h2>
+      <p>Ready to get started? Drop us a message and we'll reply within 24 hours. No pressure, no hard sell - just a friendly chat.</p>
+      <div class="ct-line"><small>Email</small><a href="mailto:contact@hellowebdesign.co.uk">contact@hellowebdesign.co.uk</a></div>
+      <div class="ct-line"><small>Phone</small><span>Hanna 07763 648866 · Rachid 07816 130955</span></div>
+      <div class="ct-line"><small>Based in</small><span>Urmston, Manchester, UK</span></div>
+    </div>
+    <form onsubmit="return false" class="reveal d1">
+      <div><label>Your name *</label><input type="text" /></div>
+      <div><label>Phone number</label><input type="tel" /></div>
+      <div><label>Email address *</label><input type="email" /></div>
+      <div><label>Business name</label><input type="text" /></div>
+      <div class="full"><label>What are you interested in? *</label>
+        <select><option>Select an option</option><option>Starter Website (one page)</option><option>Business Website (multi page)</option><option>E-Commerce / Online Shop</option><option>Wedding Website</option><option>Social Media Management</option><option>Web / Mobile Application</option><option>Something else</option></select>
+      </div>
+      <div class="full"><label>Tell us a bit about what you need</label><textarea></textarea></div>
+      <div class="full"><a href="#" class="btn btn-fill" style="width:100%">Send message →</a></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img src="assets/logo.png" alt="HelloWebDesign" />
+        <p style="font-size:14px;margin-top:6px">A husband-and-wife creative studio helping local businesses build their online presence. Based in Greater Manchester.</p>
+      </div>
+      <div class="foot-cols">
+        <div><h4>Explore</h4><a href="#about">About</a><a href="#work">Work</a><a href="#services">Services</a><a href="#packages">Packages</a></div>
+        <div><h4>Get in touch</h4><a href="mailto:contact@hellowebdesign.co.uk">Email us</a><a href="tel:07763648866">Hanna 07763 648866</a><a href="tel:07816130955">Rachid 07816 130955</a><a href="#">Urmston, Manchester</a></div>
+      </div>
+    </div>
+    <div class="foot-bot"><span>© 2026 HelloWebDesign. All rights reserved.</span><a href="#">Privacy Policy</a></div>
+  </div>
+</footer>
+
+<a class="wa" href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.413c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.515 5.26l-.999 3.648 3.973-1.042zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></a>
+
+<!-- MODAL -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal-bg" data-close></div>
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <button class="modal-close" data-close aria-label="Close">✕</button>
+    <div class="modal-shot"><img id="m-img" alt="" /></div>
+    <div class="modal-body">
+      <span class="tag" id="m-tag"></span>
+      <h3 id="m-title"></h3>
+      <div class="meta" id="m-meta"></div>
+      <p class="summary" id="m-summary"></p>
+      <div class="modal-sub">What we did</div>
+      <div class="chips" id="m-chips"></div>
+      <div class="modal-cta">
+        <a id="m-view" class="btn btn-line" target="_blank" rel="noopener">View project ↗</a>
+        <a href="#contact" class="btn btn-fill" data-close>Start a project like this →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // nav shadow on scroll
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 12));
+
+  // mobile menu
+  const navToggle = document.getElementById('navToggle'), navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => { navLinks.classList.toggle('open'); navToggle.classList.toggle('open'); });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navLinks.classList.remove('open'); navToggle.classList.remove('open'); }));
+
+  // reveal on scroll (scroll-position based — robust across environments)
+  const reveals = Array.from(document.querySelectorAll('.reveal'));
+  function reveal(el){
+    el.classList.add('in');
+    // watchdog: some embedded webviews stall opacity transitions — force the end state
+    setTimeout(() => {
+      if (parseFloat(getComputedStyle(el).opacity) < 0.05){
+        el.style.transition = 'none'; el.style.opacity = '1'; el.style.transform = 'none';
+      }
+    }, 820);
+  }
+  function revealCheck(){
+    const trigger = innerHeight * 0.92;
+    for (const el of reveals){
+      if (el.classList.contains('in')) continue;
+      if (el.getBoundingClientRect().top < trigger) reveal(el);
+    }
+  }
+
+  // animated count-up
+  const counters = Array.from(document.querySelectorAll('[data-count]'));
+  function runCount(el){
+    const target = +el.dataset.count, suffix = el.dataset.suffix || '';
+    const dur = 1100, t0 = performance.now();
+    const tick = (t) => {
+      const p = Math.min(1, (t - t0) / dur), eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(eased * target) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+  function countCheck(){
+    const trigger = innerHeight * 0.85;
+    for (let i = counters.length - 1; i >= 0; i--){
+      const el = counters[i];
+      if (el.getBoundingClientRect().top < trigger){ runCount(el); counters.splice(i,1); }
+    }
+  }
+
+  function onScroll(){ revealCheck(); countCheck(); }
+  addEventListener('scroll', onScroll, { passive:true });
+  addEventListener('resize', onScroll);
+  // initial passes (next frame + small delay to catch late layout)
+  requestAnimationFrame(onScroll);
+  setTimeout(onScroll, 150);
+  // safety: ensure nothing stays hidden
+  setTimeout(() => reveals.forEach(el => { if(!el.classList.contains('in')) reveal(el); }), 2600);
+
+  // project case studies
+  const projects = {
+    flok: { tag:'Website · Brand', title:'FLÓK Medical Aesthetics', meta:'Medical aesthetics & skin clinic · 2026', img:'assets/proj-flok.png', url:'https://www.flok-aesthetics.com/',
+      summary:"A recent build for a skin and aesthetics clinic that wanted to feel like a welcoming community, not a clinical treatment room. We crafted an elegant, editorial site with a calm serif voice, soft imagery and clear paths to booking and treatments.",
+      chips:['Brand-led web design','Editorial layout','Treatments & pricing','Booking journey','Reviews & training pages','Mobile responsive'] },
+    hs: { tag:'Website', title:'HS Building Services', meta:'Builders · Greater Manchester', img:'assets/proj-hs-building.png',
+      summary:"A bold, confident site for an Urmston builder covering roofing, extensions, renovations and loft conversions. Designed to win trust fast and funnel visitors straight to a free quote.",
+      chips:['Custom website','Strong hero & branding','Services breakdown','Get-a-quote forms','Project gallery'] },
+    nailhead: { tag:'Website', title:'Nailhead Properties', meta:'Property investment · Manchester', img:'assets/proj-nailhead.png',
+      summary:"A warm, trustworthy site for a Greater Manchester property investment company - telling their 'putting heart back into homes' story and reassuring sellers with fair, transparent messaging.",
+      chips:['Custom website','Story-led about page','Trust signals','Portfolio of homes','Enquiry capture'] },
+    flightsim: { tag:'Booking · Web App', title:'Manchester Flight Sim Centre', meta:'Experience days · Salford', img:'assets/proj-flightsim.png',
+      summary:"A booking-focused build for a flight-simulator experience centre, making it easy for the public, pilots and trainees to choose a simulator and book a session.",
+      chips:['Booking platform','Experience packages','Secure payments','Mobile responsive'] },
+    farmers: { tag:'Website', title:'The Farmers Arms', meta:'Country pub · Burscough', img:'assets/proj-farmers.png',
+      summary:"A characterful site for a proper country pub on the Leeds & Liverpool canal - big atmospheric imagery, an editorial headline treatment and quick access to the menu and 'find us'.",
+      chips:['Custom website','Full-bleed imagery','Menu & opening hours','Find-us & directions'] },
+    bbm: { tag:'Social Media Management', title:'Bolton Builders Merchants', meta:'Social media · Atherton', img:'assets/proj-bbm.png',
+      summary:"Ongoing social media management with a sense of humour. We create and film playful, on-brand content that grew a builders' merchant into a properly entertaining follow - racking up 13.9K+ likes.",
+      chips:['Content strategy','On-site filming','Editing & scheduling','Community management','Trend-led video'] },
+    savethedate: { tag:'Wedding', title:'Save the Date', meta:'Wedding website', img:'assets/proj-savethedate.png',
+      summary:"A personal one-page wedding site to share the day with guests - the schedule, location, accommodation and an easy RSVP, wrapped in a warm, romantic look.",
+      chips:['Wedding website','RSVP form','Schedule & location','Photo gallery','Gift list'] },
+    fennec: { tag:'Website', title:'Fennec Consulting', meta:'Business, IT & web solutions', img:'assets/proj-fennec.png',
+      summary:"A clean, professional site for a business, IT and web consultancy - clear services, transparent pricing and a confident first impression.",
+      chips:['Custom website','Services & pricing','Contact journey','Mobile responsive'] },
+    miners: { tag:'Website', title:'The Miners Arms', meta:'Village pub', img:'assets/proj-miners.png',
+      summary:"A welcoming site for a quaint, peaceful village pub - showing off the setting with a relaxed, friendly tone and easy links to the menu and gallery.",
+      chips:['Custom website','Atmospheric hero','Menu & gallery','Find-us & contact'] }
+  };
+
+  const modal = document.getElementById('modal');
+  function openProject(id){
+    const p = projects[id]; if(!p) return;
+    document.getElementById('m-img').src = p.img;
+    document.getElementById('m-img').alt = p.title;
+    document.getElementById('m-tag').textContent = p.tag;
+    document.getElementById('m-title').textContent = p.title;
+    document.getElementById('m-meta').textContent = p.meta;
+    document.getElementById('m-summary').textContent = p.summary;
+    document.getElementById('m-chips').innerHTML = p.chips.map(c => '<span>'+c+'</span>').join('');
+    const view = document.getElementById('m-view');
+    if (p.url){ view.href = p.url; view.style.display = ''; } else { view.style.display = 'none'; }
+    modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  document.querySelectorAll('.wc').forEach(b => b.addEventListener('click', () => openProject(b.dataset.project)));
+  modal.addEventListener('click', (e) => { if (e.target.hasAttribute('data-close')) closeModal(); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+</script>
+
+</body>
+</html>

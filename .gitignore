@@ -6,3 +6,6 @@ node_modules/
 # Claude Design handoff bundle (source material, not for deploy)
 _design/
 _design_index.html
+
+# Local preview config (not for deploy)
+.claude/

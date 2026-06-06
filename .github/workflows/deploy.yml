@@ -1,4 +1,4 @@
-name: Deploy to SFTP
+name: Deploy to FTP
 
 # Runs whenever a PR is merged into main (a merge pushes to main),
 # and on direct pushes to main.
@@ -8,7 +8,7 @@ on:
 
 # Avoid overlapping deploys if commits land close together.
 concurrency:
-  group: sftp-deploy
+  group: ftp-deploy
   cancel-in-progress: true
 
 jobs:
@@ -18,23 +18,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Upload site over SFTP
-        uses: Dylan700/sftp-upload-action@v1.2.3
+      - name: Deploy via explicit FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.SFTP_HOST }}
           username: ${{ secrets.SFTP_USERNAME }}
           password: ${{ secrets.SFTP_PASSWORD }}
-          port: ${{ secrets.SFTP_PORT || '22' }}
-          # local => remote. Adjust the remote path via the SFTP_REMOTE_PATH secret.
-          uploads: |
-            ./ => ${{ secrets.SFTP_REMOTE_PATH }}
+          port: 21
+          protocol: ftps          # explicit FTPS (FTP over TLS) on port 21
+          # Login already lands in /public_html, so deploy from repo root to "here".
+          local-dir: ./
+          server-dir: ./
           # Don't ship repo plumbing or docs to the web server.
-          ignore: |
-            .git/*
-            .github/*
+          # NOTE: setting `exclude` overrides the action's defaults, so the
+          # .git globs are repeated here intentionally.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/node_modules/**
             .gitignore
             README.md
-          # Set to true if you want the remote dir mirrored (deletes files
-          # on the server that no longer exist in the repo). Off by default
-          # so it never removes anything you didn't expect.
-          delete: false

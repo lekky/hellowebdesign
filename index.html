@@ -206,6 +206,21 @@
   .quote .who span{display:block;font-weight:500;color:var(--muted)}
   @media(max-width:880px){.quotes{grid-template-columns:1fr}}
 
+  /* FAQ */
+  .faq{max-width:760px;margin:0 auto;border-top:1px solid var(--line)}
+  .faq-item{border-bottom:1px solid var(--line)}
+  .faq-q{width:100%;background:none;border:0;cursor:pointer;font-family:var(--serif);font-weight:500;font-size:clamp(18px,2.4vw,22px);color:var(--ink);text-align:left;padding:24px 48px 24px 0;position:relative;line-height:1.3;transition:color .2s}
+  .faq-q:hover{color:var(--teal-deep)}
+  .faq-q .pm{position:absolute;right:2px;top:26px;width:20px;height:20px;color:var(--teal-deep)}
+  .faq-q .pm::before,.faq-q .pm::after{content:"";position:absolute;background:currentColor;border-radius:2px}
+  .faq-q .pm::before{left:0;right:0;top:9px;height:2px}
+  .faq-q .pm::after{top:0;bottom:0;left:9px;width:2px;transition:transform .3s ease}
+  .faq-item.open .faq-q .pm::after{transform:scaleY(0)}
+  .faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+  .faq-item.open .faq-a{grid-template-rows:1fr}
+  .faq-a-inner{overflow:hidden}
+  .faq-a p{color:var(--muted);font-size:16.5px;padding-bottom:24px;max-width:64ch}
+
   /* CONTACT */
   .contact{background:var(--charcoal-3);color:var(--paper)}
   .contact .eyebrow{color:var(--teal)}
@@ -514,6 +529,43 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+      <span class="eyebrow">FAQs</span>
+      <h2>Questions, answered</h2>
+      <p>The things people usually ask before getting started.</p>
+    </div>
+    <div class="faq reveal">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How quickly can my site go live?<span class="pm"></span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Simple one-page starter sites can be live within a week. Multi-page, e-commerce and bespoke builds take a little longer - we'll agree a clear timeline with you before we start.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How much will it cost?<span class="pm"></span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Starter sites begin at £499. Business, e-commerce and wedding sites are custom-quoted around what you actually need. The price we quote is the price you pay - no hidden fees.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Who will I actually be working with?<span class="pm"></span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Us - Hanna and Rachid - directly, from the first chat through to launch. No account managers, no juniors, no handoffs.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Do you only work with businesses in Manchester?<span class="pm"></span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>We're based in Urmston and work with businesses across Greater Manchester and beyond. Most of the work is done remotely, with on-site visits when they help.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Do you handle social media as well as websites?<span class="pm"></span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Yes. We offer social media management - content creation, scheduling, community management and on-site filming - on its own or alongside a website.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">I already have a website - can you redesign it?<span class="pm"></span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Definitely. Whether you want a complete rebuild or to improve what you've already got, just tell us what's not working and we'll take it from there.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact" class="contact">
   <div class="wrap ct-grid">
@@ -762,6 +814,15 @@
       if (interestSelect){ interestSelect.value = el.dataset.prefill; }
       // add-ons are <span> (no href) — scroll to the form ourselves
       if (el.tagName !== 'A'){ document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // FAQ accordion (each item toggles independently)
+  document.querySelectorAll('.faq-q').forEach((q) => {
+    q.addEventListener('click', () => {
+      const item = q.closest('.faq-item');
+      const open = item.classList.toggle('open');
+      q.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
   });
 

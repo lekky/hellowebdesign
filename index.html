@@ -211,6 +211,9 @@
   .form-status{padding:13px 16px;border-radius:9px;font-size:14px;font-weight:500;line-height:1.45}
   .form-status.ok{background:rgba(96,191,181,.16);border:1px solid var(--teal);color:#d7f0ec}
   .form-status.err{background:rgba(214,96,90,.16);border:1px solid #d2655f;color:#f3d4d2}
+  .grecaptcha-badge{visibility:hidden!important}
+  .recaptcha-note{font-size:12px;color:#9a958b;line-height:1.5;margin-top:2px}
+  .recaptcha-note a{color:var(--teal);text-decoration:underline}
   @media(max-width:880px){.ct-grid{grid-template-columns:1fr;gap:34px}form{grid-template-columns:1fr}}
 
   /* FOOTER */
@@ -483,6 +486,7 @@
       <div class="full"><label>Tell us a bit about what you need</label><textarea name="message"></textarea></div>
       <input type="hidden" name="g-recaptcha-response" id="recaptchaToken" />
       <div class="full"><button type="submit" class="btn btn-fill">Send message →</button></div>
+      <p class="recaptcha-note full">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> apply.</p>
     </form>
   </div>
 </section>

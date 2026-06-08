@@ -160,6 +160,15 @@
   .wc:hover .arr{transform:translate(2px,-2px)}
   @media(max-width:900px){.work-grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:520px){.work-grid{grid-template-columns:1fr}}
+  /* mobile: collapse projects behind a toggle - show 6 at 2-col, 4 at 1-col */
+  .work-more-wrap{display:none;justify-content:center;margin-top:24px}
+  @media(max-width:900px){
+    .work-grid:not(.show-all) .wc:nth-child(n+7){display:none}
+    .work-more-wrap{display:flex}
+  }
+  @media(max-width:520px){
+    .work-grid:not(.show-all) .wc:nth-child(n+5){display:none}
+  }
 
   /* SERVICES */
   .svc-list{display:grid;gap:0;border-top:1px solid var(--line)}
@@ -481,6 +490,9 @@
       <button class="wc reveal d1" data-project="fennec"><div class="wc-shot"><img src="assets/proj-fennec.png" alt="Fennec Consulting" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>Fennec Consulting</h3></div><span class="arr">↗</span></div></button>
       <button class="wc reveal d2" data-project="miners"><div class="wc-shot"><img src="assets/proj-miners.png" alt="The Miners Arms" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>The Miners Arms</h3></div><span class="arr">↗</span></div></button>
     </div>
+    <div class="work-more-wrap">
+      <button class="btn btn-line" id="work-toggle" aria-expanded="false">Show all projects ↓</button>
+    </div>
   </div>
 </section>
 
@@ -749,6 +761,25 @@
     for (const el of reveals){
       if (el.classList.contains('in')) continue;
       if (el.getBoundingClientRect().top < trigger) reveal(el);
+    }
+  }
+
+  // projects: show first 4 on mobile, expand the rest on tap
+  const workGrid = document.querySelector('.work-grid');
+  const workToggle = document.getElementById('work-toggle');
+  if (workGrid && workToggle){
+    const total = workGrid.querySelectorAll('.wc').length;
+    if (total <= 4){
+      workToggle.closest('.work-more-wrap').remove();
+    } else {
+      const collapsed = 'Show all ' + total + ' projects ↓', expanded = 'Show fewer ↑';
+      workToggle.textContent = collapsed;
+      workToggle.addEventListener('click', () => {
+        const open = workGrid.classList.toggle('show-all');
+        workToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        workToggle.textContent = open ? expanded : collapsed;
+        if (!open) document.getElementById('work').scrollIntoView({behavior:'smooth', block:'start'});
+      });
     }
   }
 

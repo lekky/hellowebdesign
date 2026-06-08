@@ -89,6 +89,9 @@
   .nav-toggle.open span:nth-child(2){opacity:0}
   .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
   @media(max-width:880px){
+    nav,nav.scrolled{background:var(--charcoal)}
+    .brand img{filter:brightness(0) invert(1)}
+    .nav-toggle span{background:var(--paper)}
     .nav-toggle{display:flex}
     .nav-links{position:absolute;top:78px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 18px 30px -20px rgba(0,0,0,.35);padding:8px 0;display:none}
     .nav-links.open{display:flex}
@@ -194,7 +197,7 @@
   .pkg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
   .pkg{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
   .pkg:hover{transform:translateY(-5px);box-shadow:0 26px 50px -32px rgba(0,0,0,.35)}
-  .pkg.feat{background:var(--teal-ink);color:var(--paper);border-color:var(--teal-ink);position:relative}
+  .pkg.feat{background:var(--charcoal);color:var(--paper);border-color:var(--charcoal);position:relative}
   .pkg .pkg-name{font-family:var(--serif);font-size:22px;margin-bottom:4px}
   .pkg .pkg-sub{font-size:13px;color:var(--muted);margin-bottom:18px}
   .pkg.feat .pkg-sub{color:#aecfca}
@@ -481,12 +484,12 @@
     </div>
     <div class="work-grid">
       <button class="wc reveal" data-project="flok"><div class="wc-shot"><span class="badge-new">New</span><img src="assets/proj-flok.png" alt="FLÓK Medical Aesthetics" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website · Brand</span><h3>FLÓK Medical Aesthetics</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal d1" data-project="hs"><div class="wc-shot"><img src="assets/proj-hs-building.png" alt="HS Building Services" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>HS Building Services</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal d1" data-project="savethedate"><div class="wc-shot"><img src="assets/proj-savethedate.png" alt="Save the Date wedding website" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Wedding website</span><h3>Save the Date</h3></div><span class="arr">↗</span></div></button>
       <button class="wc reveal d2" data-project="nailhead"><div class="wc-shot"><img src="assets/proj-nailhead.png" alt="Nailhead Properties" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>Nailhead Properties</h3></div><span class="arr">↗</span></div></button>
       <button class="wc reveal" data-project="flightsim"><div class="wc-shot"><img src="assets/proj-flightsim.png" alt="Manchester Flight Sim Centre" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Booking · Web App</span><h3>Manchester Flight Sim Centre</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal d1" data-project="farmers"><div class="wc-shot"><img src="assets/proj-farmers.png" alt="The Farmers Arms" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>The Farmers Arms</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal d2" data-project="bbm"><div class="wc-shot"><img src="assets/proj-bbm.png" alt="Bolton Builders Merchants social media" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Social Media</span><h3>Bolton Builders Merchants</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal" data-project="savethedate"><div class="wc-shot"><img src="assets/proj-savethedate.png" alt="Save the Date wedding website" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Wedding</span><h3>Save the Date</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal d1" data-project="hs"><div class="wc-shot"><img src="assets/proj-hs-building.png" alt="HS Building Services" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>HS Building Services</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal d2" data-project="farmers"><div class="wc-shot"><img src="assets/proj-farmers.png" alt="The Farmers Arms" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>The Farmers Arms</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal" data-project="bbm"><div class="wc-shot"><img src="assets/proj-bbm.png" alt="Bolton Builders Merchants social media" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Social Media</span><h3>Bolton Builders Merchants</h3></div><span class="arr">↗</span></div></button>
       <button class="wc reveal d1" data-project="fennec"><div class="wc-shot"><img src="assets/proj-fennec.png" alt="Fennec Consulting" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>Fennec Consulting</h3></div><span class="arr">↗</span></div></button>
       <button class="wc reveal d2" data-project="miners"><div class="wc-shot"><img src="assets/proj-miners.png" alt="The Miners Arms" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>The Miners Arms</h3></div><span class="arr">↗</span></div></button>
     </div>

@@ -90,7 +90,6 @@
   .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
   @media(max-width:880px){
     nav,nav.scrolled{background:var(--charcoal)}
-    .brand img{filter:brightness(0) invert(1)}
     .nav-toggle span{background:var(--paper)}
     .nav-toggle{display:flex}
     .nav-links{position:absolute;top:78px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 18px 30px -20px rgba(0,0,0,.35);padding:8px 0;display:none}
@@ -413,7 +412,7 @@
 
 <nav id="nav">
   <div class="wrap nav-in">
-    <a href="#top" class="brand"><img src="assets/logo.png" alt="HelloWebDesign" /></a>
+    <a href="#top" class="brand"><picture><source media="(max-width:880px)" srcset="assets/logo-dark.png" /><img src="assets/logo.png" alt="HelloWebDesign" /></picture></a>
     <div class="nav-links" id="navLinks">
       <a href="#about">About</a>
       <a href="#work">Work</a>

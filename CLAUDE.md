@@ -15,8 +15,10 @@ to `/public_html`. The host is **FTP, not SFTP**, despite secrets being named `S
 
 **Ship changes this way — never push straight to `main`:**
 1. `git fetch origin && git checkout -B main origin/main` (resync — see gotcha)
-2. branch, commit, open a PR, squash-merge it
-3. watch the run, then `curl` the live URL to verify
+2. branch, commit, open a PR — then **STOP**
+3. **Never merge/squash a PR without the user's explicit go-ahead for that specific PR.**
+   Approval to make a change is NOT approval to deploy it. Open the PR and wait.
+4. once approved: squash-merge, watch the run, then `curl` the live URL to verify
 
 **Gotchas:**
 - Squash-merge makes local `main` diverge from `origin/main` (`pull --ff-only` aborts).

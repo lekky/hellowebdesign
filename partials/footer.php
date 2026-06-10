@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="foot-cols">
-        <div><h4>Explore</h4><a href="/">Home</a><a href="/#work">Work</a><a href="/#services">Services</a><a href="/#packages">Packages</a><a href="/social-media-management/">Social Media</a><a href="/wedding-websites/">Wedding Websites</a></div>
+        <div><h4>Explore</h4><a href="/">Home</a><a href="/#work">Work</a><a href="/#services">Services</a><a href="/#packages">Packages</a><a href="/web-design-manchester/">Web Design Manchester</a><a href="/small-business-websites/">Small Business Websites</a><a href="/social-media-management/">Social Media</a><a href="/wedding-websites/">Wedding Websites</a></div>
         <div><h4>Get in touch</h4><a href="mailto:contact@hellowebdesign.co.uk">Email us</a><a href="tel:07763648866">Hanna 07763 648866</a><a href="tel:07816130955">Rachid 07816 130955</a><a href="/#contact">Urmston, Manchester</a></div>
       </div>
     </div>

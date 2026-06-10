@@ -137,7 +137,7 @@ JSONLD;
 .feat-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--teal);color:#0c2a26;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 13px;border-radius:999px;white-space:nowrap}
 /* work cards (same as web-design-manchester) */
 .work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:760px;margin:8px auto 0}
-.work-card img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;display:block;margin-bottom:12px}
+.work-card img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:12px;display:block;margin-bottom:12px}
 .work-card h3{font-size:18px;margin-bottom:2px}
 .work-card p{color:var(--muted);font-size:14px}
 @media(max-width:560px){.pkg-grid{grid-template-columns:1fr}.work-grid{grid-template-columns:1fr}}

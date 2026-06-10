@@ -88,7 +88,7 @@ JSONLD;
 @media(max-width:720px){.feat-grid{grid-template-columns:1fr}}
 /* work grid */
   .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:8px}
-.work-card img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;display:block;margin-bottom:12px}
+.work-card img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:12px;display:block;margin-bottom:12px}
 .work-card h3{font-size:18px;margin-bottom:2px}
 .work-card p{color:var(--muted);font-size:14px}
 @media(max-width:880px){.work-grid{grid-template-columns:1fr}}

@@ -445,7 +445,7 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
 </section>
 
 <!-- CARE PLANS -->
-<section id="care-plans">
+<section id="care-plans" style="background:#e7f1ef">
   <div class="wrap">
     <div class="sec-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
       <span class="eyebrow">Care Plans</span>

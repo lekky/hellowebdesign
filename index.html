@@ -524,7 +524,7 @@
       <div class="svc reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1 1 21 11.5z"/><path d="M8 11h.01M12 11h.01M16 11h.01"/></svg></span>
         <h3>Social Media Management</h3>
-        <p>Content creation, scheduling, community management and on-site filming visits. You focus on running the business.</p>
+        <p>Content creation, scheduling, community management and on-site filming visits. You focus on running the business. <a href="/social-media-management/" style="color:var(--teal-deep);font-weight:600;white-space:nowrap">Learn more →</a></p>
       </div>
       <div class="svc reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
@@ -579,6 +579,7 @@
       <div class="pkg reveal d3">
         <div class="pkg-name">Wedding</div><div class="pkg-sub">Your day, online</div><div class="price">From £499</div>
         <ul><li>Beautiful wedding site</li><li>RSVP form</li><li>Venue &amp; travel info</li><li>Custom photo gallery</li></ul>
+        <a href="/wedding-websites/" style="font-size:13.5px;color:var(--teal-deep);font-weight:600;margin-bottom:14px;display:inline-block">More about wedding websites →</a>
         <a href="#contact" class="btn btn-line" data-prefill="Wedding Website">Get in touch</a>
       </div>
     </div>
@@ -680,7 +681,7 @@
         </div>
       </div>
       <div class="foot-cols">
-        <div><h4>Explore</h4><a href="#about">About</a><a href="#work">Work</a><a href="#services">Services</a><a href="#packages">Packages</a></div>
+        <div><h4>Explore</h4><a href="#about">About</a><a href="#work">Work</a><a href="#services">Services</a><a href="#packages">Packages</a><a href="/social-media-management/">Social Media</a><a href="/wedding-websites/">Wedding Websites</a></div>
         <div><h4>Get in touch</h4><a href="mailto:contact@hellowebdesign.co.uk">Email us</a><a href="tel:07763648866">Hanna 07763 648866</a><a href="tel:07816130955">Rachid 07816 130955</a><a href="#">Urmston, Manchester</a></div>
       </div>
     </div>
@@ -909,6 +910,9 @@
 
   // prefill the "What are you interested in?" select from a package/service CTA
   const interestSelect = document.querySelector('select[name="interested_package"]');
+  // ...or from a query param (links from service pages: /?prefill=...#contact)
+  const prefillParam = new URLSearchParams(location.search).get('prefill');
+  if (prefillParam && interestSelect){ interestSelect.value = prefillParam; }
   document.querySelectorAll('[data-prefill]').forEach((el) => {
     el.addEventListener('click', () => {
       if (interestSelect){ interestSelect.value = el.dataset.prefill; }
@@ -943,6 +947,8 @@
     pLink.addEventListener('click', (e) => { e.preventDefault(); pModal.classList.add('open'); pModal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; });
     pModal.addEventListener('click', (e) => { if (e.target.hasAttribute('data-pclose')) closePrivacy(); });
     addEventListener('keydown', (e) => { if (e.key === 'Escape') closePrivacy(); });
+    // deep link from service pages (/#privacy)
+    if (location.hash === '#privacy'){ pLink.click(); }
   }
 </script>
 

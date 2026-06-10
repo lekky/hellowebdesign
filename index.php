@@ -444,6 +444,30 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
   </div>
 </section>
 
+<!-- CARE PLANS -->
+<section id="care-plans" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+      <span class="eyebrow">Care Plans</span>
+      <h2>After launch, we've got your back</h2>
+      <p>Your website kept secure, updated and online - so you can get on with running your business.</p>
+    </div>
+    <div class="care-grid">
+      <div class="pkg reveal">
+        <div class="pkg-name">Essentials</div><div class="pkg-sub">Peace of mind, handled</div><div class="price">&pound;19<span class="per">/mo</span></div>
+        <ul><li>Secure hosting &amp; domain renewal</li><li>SSL certificate + daily backups</li><li>Software &amp; security updates</li><li>Uptime monitoring</li><li>Email support</li></ul>
+        <a href="#contact" class="btn btn-line" data-prefill="Care Plan - Essentials">Get started</a>
+      </div>
+      <div class="pkg feat reveal d1">
+        <span class="feat-badge">Most popular</span><div class="pkg-name">Complete</div><div class="pkg-sub">We keep it fresh for you</div><div class="price">&pound;49<span class="per">/mo</span></div>
+        <ul><li>Everything in Essentials, plus:</li><li>Up to 1 hour of edits each month</li><li>Priority support</li><li>Monthly performance check</li><li>Seasonal tweaks &amp; updates</li></ul>
+        <a href="#contact" class="btn btn-fill" data-prefill="Care Plan - Complete">Get started</a>
+      </div>
+    </div>
+    <p class="care-note">No contracts - cancel any time.</p>
+  </div>
+</section>
+
 <!-- TESTIMONIALS -->
 <section class="why" style="background:var(--paper-2)">
   <div class="wrap">

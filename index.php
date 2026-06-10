@@ -196,6 +196,11 @@ JSONLD;
 .addons span:hover{background:var(--paper-2);border-color:var(--teal);transform:translateY(-1px)}
 @media(max-width:980px){.pkg-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.pkg-grid{grid-template-columns:1fr}}
+.care-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:680px;margin:0 auto}
+.price .per{font-size:15px;color:var(--muted);font-weight:500}
+.pkg.feat .price .per{color:#aecfca}
+.care-note{text-align:center;font-size:13.5px;color:var(--muted);margin-top:22px}
+@media(max-width:560px){.care-grid{grid-template-columns:1fr}}
 /* TESTIMONIALS */
   .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .quote{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px}

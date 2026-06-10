@@ -717,7 +717,7 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
     });
   }
 
-  // show a status banner after the PHP redirect (index.html?status=success|error#contact)
+  // show a status banner after the PHP redirect (/?status=success|error#contact)
   (() => {
     const status = new URLSearchParams(location.search).get('status');
     if (!status) return;

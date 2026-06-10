@@ -196,6 +196,11 @@ JSONLD;
 .addons span:hover{background:var(--paper-2);border-color:var(--teal);transform:translateY(-1px)}
 @media(max-width:980px){.pkg-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.pkg-grid{grid-template-columns:1fr}}
+.care-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:680px;margin:0 auto}
+.price .per{font-size:15px;color:var(--muted);font-weight:500}
+.pkg.feat .price .per{color:#aecfca}
+.care-note{text-align:center;font-size:13.5px;color:var(--muted);margin-top:22px}
+@media(max-width:560px){.care-grid{grid-template-columns:1fr}}
 /* TESTIMONIALS */
   .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .quote{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px}
@@ -439,6 +444,30 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
   </div>
 </section>
 
+<!-- CARE PLANS -->
+<section id="care-plans" style="background:#e7f1ef">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+      <span class="eyebrow">Care Plans</span>
+      <h2>After launch, we've got your back</h2>
+      <p>Your website kept secure, updated and online - so you can get on with running your business.</p>
+    </div>
+    <div class="care-grid">
+      <div class="pkg reveal">
+        <div class="pkg-name">Essentials</div><div class="pkg-sub">Peace of mind, handled</div><div class="price">&pound;19<span class="per">/mo</span></div>
+        <ul><li>Secure hosting &amp; domain renewal</li><li>SSL certificate + daily backups</li><li>Software &amp; security updates</li><li>Uptime monitoring</li><li>Email support</li></ul>
+        <a href="#contact" class="btn btn-line" data-prefill="Care Plan - Essentials">Get started</a>
+      </div>
+      <div class="pkg feat reveal d1">
+        <span class="feat-badge">Most popular</span><div class="pkg-name">Complete</div><div class="pkg-sub">We keep it fresh for you</div><div class="price">&pound;49<span class="per">/mo</span></div>
+        <ul><li>Everything in Essentials, plus:</li><li>Up to 1 hour of edits each month</li><li>Priority support</li><li>Monthly performance check</li><li>Seasonal tweaks &amp; updates</li></ul>
+        <a href="#contact" class="btn btn-fill" data-prefill="Care Plan - Complete">Get started</a>
+      </div>
+    </div>
+    <p class="care-note">No contracts - cancel any time.</p>
+  </div>
+</section>
+
 <!-- TESTIMONIALS -->
 <section class="why" style="background:var(--paper-2)">
   <div class="wrap">
@@ -487,6 +516,10 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
         <button class="faq-q" aria-expanded="false">I already have a website - can you redesign it?<span class="pm"></span></button>
         <div class="faq-a"><div class="faq-a-inner"><p>Definitely. Whether you want a complete rebuild or to improve what you've already got, just tell us what's not working and we'll take it from there.</p></div></div>
       </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What happens after my site goes live?<span class="pm"></span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>We don't disappear once you're online. Our optional care plans keep your site secure, backed up and updated - and the Complete plan includes an hour of changes each month. There's no obligation: plenty of clients look after their own site, and that's fine too.</p></div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -509,7 +542,7 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
       <div><label>Email address *</label><input type="email" name="email" required /></div>
       <div><label>Business name</label><input type="text" name="business_name" /></div>
       <div class="full"><label>What are you interested in? *</label>
-        <select name="interested_package" required><option value="">Select an option</option><option>Starter Website (one page)</option><option>Business Website (multi page)</option><option>E-Commerce / Online Shop</option><option>Wedding Website</option><option>Social Media Management</option><option>Web / Mobile Application</option><option>Something else</option></select>
+        <select name="interested_package" required><option value="">Select an option</option><option>Starter Website (one page)</option><option>Business Website (multi page)</option><option>E-Commerce / Online Shop</option><option>Wedding Website</option><option>Social Media Management</option><option>Care Plan - Essentials</option><option>Care Plan - Complete</option><option>Web / Mobile Application</option><option>Something else</option></select>
       </div>
       <div class="full"><label>Tell us a bit about what you need</label><textarea name="message"></textarea></div>
       <input type="hidden" name="g-recaptcha-response" id="recaptchaToken" />

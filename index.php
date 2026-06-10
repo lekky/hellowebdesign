@@ -516,6 +516,10 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
         <button class="faq-q" aria-expanded="false">I already have a website - can you redesign it?<span class="pm"></span></button>
         <div class="faq-a"><div class="faq-a-inner"><p>Definitely. Whether you want a complete rebuild or to improve what you've already got, just tell us what's not working and we'll take it from there.</p></div></div>
       </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What happens after my site goes live?<span class="pm"></span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>We don't disappear once you're online. Our optional care plans keep your site secure, backed up and updated - and the Complete plan includes an hour of changes each month. There's no obligation: plenty of clients look after their own site, and that's fine too.</p></div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -538,7 +542,7 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
       <div><label>Email address *</label><input type="email" name="email" required /></div>
       <div><label>Business name</label><input type="text" name="business_name" /></div>
       <div class="full"><label>What are you interested in? *</label>
-        <select name="interested_package" required><option value="">Select an option</option><option>Starter Website (one page)</option><option>Business Website (multi page)</option><option>E-Commerce / Online Shop</option><option>Wedding Website</option><option>Social Media Management</option><option>Web / Mobile Application</option><option>Something else</option></select>
+        <select name="interested_package" required><option value="">Select an option</option><option>Starter Website (one page)</option><option>Business Website (multi page)</option><option>E-Commerce / Online Shop</option><option>Wedding Website</option><option>Social Media Management</option><option>Care Plan - Essentials</option><option>Care Plan - Complete</option><option>Web / Mobile Application</option><option>Something else</option></select>
       </div>
       <div class="full"><label>Tell us a bit about what you need</label><textarea name="message"></textarea></div>
       <input type="hidden" name="g-recaptcha-response" id="recaptchaToken" />

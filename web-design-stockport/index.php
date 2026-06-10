@@ -1,8 +1,8 @@
 <?php
-  $title       = 'Web Design Manchester | Local Website Designers - HelloWebDesign';
-  $desc        = 'Local Manchester web design from a husband-and-wife studio in Urmston. We meet you in person, build the site ourselves and you deal with us directly - no account managers. Sites from £499.';
-  $twitterDesc = 'Local Manchester web design from a husband-and-wife studio. We meet you in person and you deal with us directly. Sites from £499.';
-  $canonical   = 'https://hellowebdesign.co.uk/web-design-manchester/';
+  $title       = 'Web Design Stockport | Local Website Designers - HelloWebDesign';
+  $desc        = 'Local Stockport web design from a husband-and-wife studio in Urmston. We meet you in person, build the site ourselves and you deal with us directly - no account managers. Sites from £499.';
+  $twitterDesc = 'Local Stockport web design from a husband-and-wife studio. We meet you in person and you deal with us directly. Sites from £499.';
+  $canonical   = 'https://hellowebdesign.co.uk/web-design-stockport/';
   $needsRecaptcha = false;
   $navItems    = [
     ['/',         'Home'],
@@ -16,11 +16,11 @@
 {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Web Design Manchester",
+  "name": "Web Design Stockport",
   "serviceType": "Web design",
-  "description": "Local website design for small businesses across Greater Manchester - built in person by a husband-and-wife studio in Urmston. Sites from £499.",
-  "url": "https://hellowebdesign.co.uk/web-design-manchester/",
-  "areaServed": { "@type": "Place", "name": "Greater Manchester, UK" },
+  "description": "Local website design for small businesses across Stockport and Greater Manchester - built in person by a husband-and-wife studio in Urmston. Sites from £499.",
+  "url": "https://hellowebdesign.co.uk/web-design-stockport/",
+  "areaServed": { "@type": "Place", "name": "Stockport, Greater Manchester, UK" },
   "provider": {
     "@type": "ProfessionalService",
     "name": "HelloWebDesign",
@@ -42,7 +42,7 @@
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hellowebdesign.co.uk/" },
     { "@type": "ListItem", "position": 2, "name": "Web Design Greater Manchester", "item": "https://hellowebdesign.co.uk/web-design-greater-manchester/" },
-    { "@type": "ListItem", "position": 3, "name": "Web Design Manchester", "item": "https://hellowebdesign.co.uk/web-design-manchester/" }
+    { "@type": "ListItem", "position": 3, "name": "Web Design Stockport", "item": "https://hellowebdesign.co.uk/web-design-stockport/" }
   ]
 }
 </script>
@@ -53,13 +53,13 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Do you meet clients in person around Manchester?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. We're based in Urmston and happily meet small businesses across Greater Manchester in person to talk through the project - it's how we get the detail right." }
+      "name": "Do you meet clients in person around Stockport?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. We're based in Urmston, a short drive away, and happily meet Stockport businesses in person to talk through the project - it's how we get the detail right." }
     },
     {
       "@type": "Question",
       "name": "Which areas do you cover?",
-      "acceptedAnswer": { "@type": "Answer", "text": "We work with businesses right across Greater Manchester - Manchester, Salford, Trafford, Urmston, Bolton and the surrounding towns - and remotely further afield when it suits." }
+      "acceptedAnswer": { "@type": "Answer", "text": "We work with businesses right across Greater Manchester - Stockport, Manchester, Salford, Trafford, Urmston and the surrounding towns - and remotely further afield when it suits." }
     },
     {
       "@type": "Question",
@@ -120,9 +120,9 @@ JSONLD;
 <header class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">Web Design · Manchester</span>
-      <h1>Web design in Manchester, from two people who actually <em>pick up the phone</em>.</h1>
-      <p class="lead">We're a husband-and-wife studio in Urmston building websites for small businesses across Greater Manchester. You deal with us directly - the people doing the work - and we'll happily meet you in person to get it right.</p>
+      <span class="eyebrow">Web Design · Stockport</span>
+      <h1>Web design in Stockport, from two people who actually <em>pick up the phone</em>.</h1>
+      <p class="lead">We're a husband-and-wife studio just up the road in Urmston, building websites for small businesses in and around Stockport. You deal with us directly - the people doing the work - and we'll happily meet you in person to get it right.</p>
       <div class="hero-cta">
         <a href="/?prefill=Business%20Website%20(multi%20page)#contact" class="btn btn-fill">Start a chat &rarr;</a>
         <a href="#work" class="btn btn-line">See our work</a>
@@ -130,7 +130,7 @@ JSONLD;
       <p class="areas-back"><a href="/web-design-greater-manchester/">&larr; See all the areas we cover across Greater Manchester</a></p>
     </div>
     <div class="hero-photo">
-      <img src="/assets/proj-nailhead.png" width="1000" height="515" fetchpriority="high" alt="Nailhead Properties website designed by HelloWebDesign in Manchester" />
+      <img src="/assets/proj-nailhead.png" width="1000" height="515" fetchpriority="high" alt="Nailhead Properties website designed by HelloWebDesign for a Greater Manchester business" />
     </div>
   </div>
 </header>
@@ -144,10 +144,10 @@ JSONLD;
       <p>Big-brand experience, focused entirely on helping small businesses near us grow.</p>
     </div>
     <div class="feat-grid">
-      <div class="feat-item"><span class="n">01</span><div><h3>We meet you in person</h3><p>Based in Urmston, we'll come and see you across Greater Manchester. It's easier to build the right thing when we've sat down together.</p></div></div>
+      <div class="feat-item"><span class="n">01</span><div><h3>We meet you in person</h3><p>Based in Urmston, just a short drive from Stockport, we'll come and see you to talk it through. It's easier to build the right thing when we've sat down together.</p></div></div>
       <div class="feat-item"><span class="n">02</span><div><h3>You deal with us directly</h3><p>No account managers, no juniors. You speak to the two people actually designing and building your site, every time.</p></div></div>
       <div class="feat-item"><span class="n">03</span><div><h3>We understand small business</h3><p>We run one ourselves, so we know the budgets and priorities - and what actually brings in customers.</p></div></div>
-      <div class="feat-item"><span class="n">04</span><div><h3>Big-brand experience</h3><p>20+ years working with household names, now focused entirely on local businesses around Manchester.</p></div></div>
+      <div class="feat-item"><span class="n">04</span><div><h3>Big-brand experience</h3><p>20+ years working with household names, now focused entirely on local businesses around Stockport and Greater Manchester.</p></div></div>
     </div>
   </div>
 </section>
@@ -160,7 +160,7 @@ JSONLD;
       <h2>Recent websites for Greater Manchester businesses</h2>
     </div>
     <div class="work-grid">
-      <div class="work-card"><img src="/assets/proj-nailhead.png" width="1000" height="515" loading="lazy" decoding="async" alt="Nailhead Properties website - property investment, Manchester" /><h3>Nailhead Properties</h3><p>Property investment &middot; Manchester</p></div>
+      <div class="work-card"><img src="/assets/proj-nailhead.png" width="1000" height="515" loading="lazy" decoding="async" alt="Nailhead Properties website - property investment, Greater Manchester" /><h3>Nailhead Properties</h3><p>Property investment &middot; Manchester</p></div>
       <div class="work-card"><img src="/assets/proj-flightsim.png" width="612" height="400" loading="lazy" decoding="async" alt="Manchester Flight Sim Centre booking website, Salford" /><h3>Manchester Flight Sim Centre</h3><p>Booking &amp; web app &middot; Salford</p></div>
       <div class="work-card"><img src="/assets/proj-hs-building.png" width="1590" height="861" loading="lazy" decoding="async" alt="HS Building Services website, Greater Manchester" /><h3>HS Building Services</h3><p>Builders &middot; Greater Manchester</p></div>
     </div>
@@ -187,12 +187,12 @@ JSONLD;
     </div>
     <div class="faq">
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Do you meet clients in person around Manchester?<span class="pm"></span></button>
-        <div class="faq-a"><div class="faq-a-inner"><p>Yes. We're based in Urmston and happily meet small businesses across Greater Manchester in person to talk through the project - it's how we get the detail right.</p></div></div>
+        <button class="faq-q" aria-expanded="false">Do you meet clients in person around Stockport?<span class="pm"></span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Yes. We're based in Urmston, a short drive away, and happily meet Stockport businesses in person to talk through the project - it's how we get the detail right.</p></div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Which areas do you cover?<span class="pm"></span></button>
-        <div class="faq-a"><div class="faq-a-inner"><p>We work with businesses right across Greater Manchester - Manchester, Salford, Trafford, Urmston, Bolton and the surrounding towns - and remotely further afield when it suits.</p></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><p>We work with businesses right across Greater Manchester - Stockport, Manchester, Salford, Trafford, Urmston and the surrounding towns - and remotely further afield when it suits.</p></div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">How much does a website cost?<span class="pm"></span></button>
@@ -206,7 +206,7 @@ JSONLD;
 <section class="cta-band">
   <div class="wrap">
     <span class="eyebrow" style="color:var(--teal)">Ready when you are</span>
-    <h2>Let's build your Manchester business a website</h2>
+    <h2>Let's build your Stockport business a website</h2>
     <p>Drop us a message and we'll reply within 24 hours. No pressure, no hard sell - just a friendly chat about what you need.</p>
     <a href="/?prefill=Business%20Website%20(multi%20page)#contact" class="btn btn-fill">Get in touch &rarr;</a>
   </div>

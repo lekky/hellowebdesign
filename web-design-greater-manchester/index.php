@@ -1,14 +1,15 @@
 <?php
-  $title       = 'Web Design Manchester | Local Website Designers - HelloWebDesign';
-  $desc        = 'Local Manchester web design from a husband-and-wife studio in Urmston. We meet you in person, build the site ourselves and you deal with us directly - no account managers. Sites from £499.';
-  $twitterDesc = 'Local Manchester web design from a husband-and-wife studio. We meet you in person and you deal with us directly. Sites from £499.';
-  $canonical   = 'https://hellowebdesign.co.uk/web-design-manchester/';
+  $title       = 'Web Design Greater Manchester | Local Website Designers - HelloWebDesign';
+  $desc        = 'Local web design across Greater Manchester from a husband-and-wife studio in Urmston. We meet you in person, build the site ourselves and you deal with us directly - no account managers. Sites from £499.';
+  $twitterDesc = 'Local web design across Greater Manchester from a husband-and-wife studio. We meet you in person and you deal with us directly. Sites from £499.';
+  $canonical   = 'https://hellowebdesign.co.uk/web-design-greater-manchester/';
   $needsRecaptcha = false;
   $navItems    = [
-    ['/',         'Home'],
-    ['#why',      'Why local'],
-    ['#work',     'Our work'],
-    ['#faq',      'FAQs'],
+    ['/',        'Home'],
+    ['#areas',   'Areas'],
+    ['#why',     'Why local'],
+    ['#work',    'Our work'],
+    ['#faq',     'FAQs'],
   ];
   $ctaHref     = '/?prefill=Business%20Website%20(multi%20page)#contact';
   $jsonLd      = <<<'JSONLD'
@@ -16,10 +17,10 @@
 {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Web Design Manchester",
+  "name": "Web Design Greater Manchester",
   "serviceType": "Web design",
   "description": "Local website design for small businesses across Greater Manchester - built in person by a husband-and-wife studio in Urmston. Sites from £499.",
-  "url": "https://hellowebdesign.co.uk/web-design-manchester/",
+  "url": "https://hellowebdesign.co.uk/web-design-greater-manchester/",
   "areaServed": { "@type": "Place", "name": "Greater Manchester, UK" },
   "provider": {
     "@type": "ProfessionalService",
@@ -41,8 +42,7 @@
   "@type": "BreadcrumbList",
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hellowebdesign.co.uk/" },
-    { "@type": "ListItem", "position": 2, "name": "Web Design Greater Manchester", "item": "https://hellowebdesign.co.uk/web-design-greater-manchester/" },
-    { "@type": "ListItem", "position": 3, "name": "Web Design Manchester", "item": "https://hellowebdesign.co.uk/web-design-manchester/" }
+    { "@type": "ListItem", "position": 2, "name": "Web Design Greater Manchester", "item": "https://hellowebdesign.co.uk/web-design-greater-manchester/" }
   ]
 }
 </script>
@@ -53,13 +53,13 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Do you meet clients in person around Manchester?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. We're based in Urmston and happily meet small businesses across Greater Manchester in person to talk through the project - it's how we get the detail right." }
+      "name": "Which parts of Greater Manchester do you cover?",
+      "acceptedAnswer": { "@type": "Answer", "text": "All of it. We're based in Urmston and work with small businesses right across Greater Manchester - Manchester, Salford, Stockport, Trafford, Bolton, Bury and the surrounding towns - meeting in person where it helps and remotely further afield when it suits." }
     },
     {
       "@type": "Question",
-      "name": "Which areas do you cover?",
-      "acceptedAnswer": { "@type": "Answer", "text": "We work with businesses right across Greater Manchester - Manchester, Salford, Trafford, Urmston, Bolton and the surrounding towns - and remotely further afield when it suits." }
+      "name": "Do you meet clients in person?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. We happily come and see small businesses across Greater Manchester in person to talk through the project - it's how we get the detail right." }
     },
     {
       "@type": "Question",
@@ -79,10 +79,16 @@ JSONLD;
 .hero h1{font-size:clamp(40px,5.4vw,66px);margin:18px 0 24px}
 .hero p.lead{font-size:19px;color:var(--muted);max-width:44ch;margin-bottom:32px}
 .hero-photo img{width:100%;height:auto;border-radius:14px;aspect-ratio:4/3;object-fit:cover;box-shadow:0 30px 60px -28px rgba(23,63,58,.45)}
-.areas-back{margin-top:24px;font-size:14px}
-.areas-back a{color:var(--teal-deep);font-weight:600;text-decoration:none;border-bottom:1px solid transparent}
-.areas-back a:hover{border-bottom-color:var(--teal-deep)}
 .alt{background:var(--paper-2)}
+/* areas grid */
+  .areas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
+.area-card{display:block;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px 26px;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+.area-card:hover{transform:translateY(-3px);box-shadow:0 18px 34px -22px rgba(23,63,58,.45);border-color:var(--teal)}
+.area-card h3{font-size:20px;margin:0 0 6px;color:var(--teal-ink)}
+.area-card p{color:var(--muted);font-size:14.5px;margin:0;line-height:1.5}
+.area-card .go{display:inline-block;margin-top:14px;color:var(--teal-deep);font-size:13px;font-weight:600}
+.areas-note{color:var(--muted);font-size:15px;margin-top:24px}
+@media(max-width:760px){.areas-grid{grid-template-columns:1fr}}
 /* feature grid */
   .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:40px 56px}
 .feat-item{display:flex;gap:20px}
@@ -96,17 +102,6 @@ JSONLD;
 .work-card h3{font-size:18px;margin-bottom:2px}
 .work-card p{color:var(--muted);font-size:14px}
 @media(max-width:880px){.work-grid{grid-template-columns:1fr}}
-/* case study */
-  .case-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
-.case-grid img{width:100%;height:auto;border-radius:14px;border:1.5px solid #d6ccb6;box-shadow:0 24px 44px -28px rgba(0,0,0,.45)}
-.case-body h2{font-size:clamp(28px,3.6vw,42px);margin:14px 0 18px}
-.case-body p{color:#46433c;font-size:16.5px;margin-bottom:16px}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 26px}
-.chips span{background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:13px;font-weight:500;color:var(--teal-ink)}
-.quote{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px;margin-top:8px}
-.quote .stars{color:var(--teal);letter-spacing:3px;margin-bottom:12px;font-size:14px}
-.quote p{font-family:var(--serif);font-size:18px;font-style:italic;line-height:1.45;color:#2e2b25;margin-bottom:14px}
-@media(max-width:880px){.case-grid{grid-template-columns:1fr;gap:36px}}
 /* CTA band */
   .cta-band{background:var(--charcoal-3);color:var(--paper);text-align:center}
 .cta-band h2{color:var(--paper);font-size:clamp(30px,4vw,46px);margin:14px 0 18px}
@@ -120,23 +115,46 @@ JSONLD;
 <header class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">Web Design · Manchester</span>
-      <h1>Web design in Manchester, from two people who actually <em>pick up the phone</em>.</h1>
-      <p class="lead">We're a husband-and-wife studio in Urmston building websites for small businesses across Greater Manchester. You deal with us directly - the people doing the work - and we'll happily meet you in person to get it right.</p>
+      <span class="eyebrow">Web Design · Greater Manchester</span>
+      <h1>Web design across Greater Manchester, from two people who actually <em>pick up the phone</em>.</h1>
+      <p class="lead">We're a husband-and-wife studio in Urmston building websites for small businesses right across Greater Manchester. You deal with us directly - the people doing the work - and we'll happily meet you in person to get it right.</p>
       <div class="hero-cta">
         <a href="/?prefill=Business%20Website%20(multi%20page)#contact" class="btn btn-fill">Start a chat &rarr;</a>
-        <a href="#work" class="btn btn-line">See our work</a>
+        <a href="#areas" class="btn btn-line">See the areas we cover</a>
       </div>
-      <p class="areas-back"><a href="/web-design-greater-manchester/">&larr; See all the areas we cover across Greater Manchester</a></p>
     </div>
     <div class="hero-photo">
-      <img src="/assets/proj-nailhead.png" width="1000" height="515" fetchpriority="high" alt="Nailhead Properties website designed by HelloWebDesign in Manchester" />
+      <img src="/assets/proj-nailhead.png" width="1000" height="515" fetchpriority="high" alt="Nailhead Properties website designed by HelloWebDesign for a Greater Manchester business" />
     </div>
   </div>
 </header>
 
+<!-- AREAS -->
+<section id="areas" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Areas we cover</span>
+      <h2>Local web design, town by town</h2>
+      <p>We work all over Greater Manchester. Here are the towns we have dedicated pages for - more added as we go.</p>
+    </div>
+    <div class="areas-grid">
+      <a class="area-card" href="/web-design-manchester/">
+        <h3>Web Design Manchester</h3>
+        <p>In-person websites for small businesses across Manchester and Salford.</p>
+        <span class="go">View Manchester &rarr;</span>
+      </a>
+      <a class="area-card" href="/web-design-stockport/">
+        <h3>Web Design Stockport</h3>
+        <p>Local websites for Stockport businesses - we're a short drive away in Urmston.</p>
+        <span class="go">View Stockport &rarr;</span>
+      </a>
+    </div>
+    <p class="areas-note">Don't see your town? We cover the whole of Greater Manchester - <a href="/?prefill=Business%20Website%20(multi%20page)#contact">drop us a message</a> and we'll come to you.</p>
+  </div>
+</section>
+
 <!-- WHY LOCAL -->
-<section id="why" class="alt">
+<section id="why">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Why local</span>
@@ -147,13 +165,13 @@ JSONLD;
       <div class="feat-item"><span class="n">01</span><div><h3>We meet you in person</h3><p>Based in Urmston, we'll come and see you across Greater Manchester. It's easier to build the right thing when we've sat down together.</p></div></div>
       <div class="feat-item"><span class="n">02</span><div><h3>You deal with us directly</h3><p>No account managers, no juniors. You speak to the two people actually designing and building your site, every time.</p></div></div>
       <div class="feat-item"><span class="n">03</span><div><h3>We understand small business</h3><p>We run one ourselves, so we know the budgets and priorities - and what actually brings in customers.</p></div></div>
-      <div class="feat-item"><span class="n">04</span><div><h3>Big-brand experience</h3><p>20+ years working with household names, now focused entirely on local businesses around Manchester.</p></div></div>
+      <div class="feat-item"><span class="n">04</span><div><h3>Big-brand experience</h3><p>20+ years working with household names, now focused entirely on local businesses around Greater Manchester.</p></div></div>
     </div>
   </div>
 </section>
 
 <!-- LOCAL WORK -->
-<section id="work">
+<section id="work" class="alt">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Our work</span>
@@ -168,18 +186,18 @@ JSONLD;
 </section>
 
 <!-- TESTIMONIAL -->
-<section class="alt">
+<section>
   <div class="wrap" style="max-width:760px">
-    <div class="quote">
-      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p>"Really impressed with the whole process. They took the time to understand what we needed and delivered a site we're genuinely proud of. Couldn't recommend them enough."</p>
+    <div class="quote" style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px">
+      <div class="stars" style="color:var(--teal);letter-spacing:3px;margin-bottom:12px;font-size:14px">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p style="font-family:var(--serif);font-size:18px;font-style:italic;line-height:1.45;color:#2e2b25;margin-bottom:14px">"Really impressed with the whole process. They took the time to understand what we needed and delivered a site we're genuinely proud of. Couldn't recommend them enough."</p>
       <div class="who"><strong>Anoush S</strong>Local Pub Owner</div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq">
+<section id="faq" class="alt">
   <div class="wrap">
     <div class="sec-head" style="margin-left:auto;margin-right:auto;text-align:center">
       <span class="eyebrow">FAQs</span>
@@ -187,12 +205,12 @@ JSONLD;
     </div>
     <div class="faq">
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Do you meet clients in person around Manchester?<span class="pm"></span></button>
-        <div class="faq-a"><div class="faq-a-inner"><p>Yes. We're based in Urmston and happily meet small businesses across Greater Manchester in person to talk through the project - it's how we get the detail right.</p></div></div>
+        <button class="faq-q" aria-expanded="false">Which parts of Greater Manchester do you cover?<span class="pm"></span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>All of it. We're based in Urmston and work with small businesses right across Greater Manchester - Manchester, Salford, Stockport, Trafford, Bolton, Bury and the surrounding towns - meeting in person where it helps and remotely further afield when it suits.</p></div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Which areas do you cover?<span class="pm"></span></button>
-        <div class="faq-a"><div class="faq-a-inner"><p>We work with businesses right across Greater Manchester - Manchester, Salford, Trafford, Urmston, Bolton and the surrounding towns - and remotely further afield when it suits.</p></div></div>
+        <button class="faq-q" aria-expanded="false">Do you meet clients in person?<span class="pm"></span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Yes. We happily come and see small businesses across Greater Manchester in person to talk through the project - it's how we get the detail right.</p></div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">How much does a website cost?<span class="pm"></span></button>
@@ -206,7 +224,7 @@ JSONLD;
 <section class="cta-band">
   <div class="wrap">
     <span class="eyebrow" style="color:var(--teal)">Ready when you are</span>
-    <h2>Let's build your Manchester business a website</h2>
+    <h2>Let's build your Greater Manchester business a website</h2>
     <p>Drop us a message and we'll reply within 24 hours. No pressure, no hard sell - just a friendly chat about what you need.</p>
     <a href="/?prefill=Business%20Website%20(multi%20page)#contact" class="btn btn-fill">Get in touch &rarr;</a>
   </div>

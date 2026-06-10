@@ -363,7 +363,7 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
       <div class="svc reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M7 21h10"/></svg></span>
         <h3>Custom Websites</h3>
-        <p>Beautiful, responsive sites built to showcase your business and turn visitors into customers - from single-page builds to multi-page.</p>
+        <p>Beautiful, responsive sites built to showcase your business and turn visitors into customers - from single-page builds to multi-page. <a href="/web-design-manchester/" style="color:var(--teal-deep);font-weight:600;white-space:nowrap">Web design in Manchester →</a></p>
       </div>
       <div class="svc reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 12.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg></span>
@@ -413,6 +413,7 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
       <div class="pkg reveal">
         <div class="pkg-name">Starter Site</div><div class="pkg-sub">One-page, get online fast</div><div class="price">From £499</div>
         <ul><li>Single-page design</li><li>Mobile responsive</li><li>Contact form included</li><li>Live within a week</li></ul>
+        <a href="/small-business-websites/" style="font-size:13.5px;color:var(--teal-deep);font-weight:600;margin-bottom:14px;display:inline-block">More about small business websites →</a>
         <a href="#contact" class="btn btn-line" data-prefill="Starter Website (one page)">Get in touch</a>
       </div>
       <div class="pkg feat reveal d1">

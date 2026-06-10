@@ -9,3 +9,9 @@ _design_index.html
 
 # Local preview config (not for deploy)
 .claude/
+
+# Playwright MCP scratch artifacts
+.playwright-mcp/
+
+# Local dev/verification scratch (never deploy)
+.dev/

@@ -6,7 +6,15 @@
 
 **Architecture:** Each page is a single `<slug>/index.php` that sets PHP head vars, includes the shared `partials/head.php` / `partials/nav.php` / `partials/footer.php`, carries a per-page inline `<style>` block copied from an existing landing page, and renders Hero → content → FAQ → CTA. SEO comes from unique title/desc/canonical + three JSON-LD blocks (Service / BreadcrumbList / FAQPage) per page. No build step.
 
-**Tech Stack:** Plain PHP includes, HTML, `assets/site.css` + `assets/site.js`. Local verification via PHP's built-in server (`php -S`) + Claude preview tools. No unit-test framework exists; verification is render + structured-data validation + visual check.
+**Tech Stack:** Plain PHP includes, HTML, `assets/site.css` + `assets/site.js`. No unit-test framework exists; verification is render + structured-data validation + visual check.
+
+**VERIFICATION OVERRIDE — PHP is NOT installed locally; Node IS.** Ignore the `php -S` / `php -r` / `php -l` steps below. Instead use the Node helper `.dev/render.mjs` (gitignored, never deployed), which emulates the partial includes into static HTML AND validates every JSON-LD block + required head tags:
+- Verify a page: `node .dev/render.mjs <page-dir>` → expect exit 0, "JSON-LD blocks found: 3", all `OK`. It writes `.dev/<page-dir>.html` for visual inspection via preview tools (serve repo root statically so `/assets/...` resolves).
+- Sitemap well-formedness: `node -e "new (require('xmldom-qsa'))" ` is unavailable; instead use `node -e "const s=require('fs').readFileSync('sitemap.xml','utf8'); const n=(s.match(/<url>/g)||[]).length, c=(s.match(/<\/url>/g)||[]).length; if(n!==c||n<3)process.exit(1); console.log('urls:',n)"`.
+
+**CONFIRMED IMAGE DIMENSIONS** (use these exact `width`/`height`, overriding the plan's placeholder values): couple.png 2399×1800, proj-nailhead.png 1000×515, proj-flightsim.png 612×400, proj-hs-building.png 1590×861, proj-farmers.png 1000×515, proj-miners.png 1000×633.
+
+**FOOTER LINKS (added to Task 3):** `partials/footer.php:13` has an "Explore" column already linking `/social-media-management/` and `/wedding-websites/`. Add `/web-design-manchester/` and `/small-business-websites/` there too for sitewide internal links (appears on every page — strongest internal-link signal).
 
 **Reference files (read before starting):**
 - `social-media-management/index.php` — closest structural template (Hero / feat-grid / case-study / FAQ / CTA band + inline `<style>`).

@@ -12,3 +12,6 @@ _design_index.html
 
 # Playwright MCP scratch artifacts
 .playwright-mcp/
+
+# Local dev/verification scratch (never deploy)
+.dev/

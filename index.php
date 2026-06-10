@@ -230,11 +230,6 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
 .recaptcha-note a{color:var(--teal);text-decoration:underline}
 @media(max-width:880px){.ct-grid{grid-template-columns:1fr;gap:34px}form{grid-template-columns:1fr}}
 .foot-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-bottom:34px;border-bottom:1px solid #36393e}
-.foot-social{display:flex;gap:12px;margin-top:16px}
-.foot-social a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s}
-.foot-social a:hover{background:var(--teal);transform:translateY(-2px)}
-.foot-social svg{width:17px;height:17px;fill:#cfcabf;transition:fill .2s}
-.foot-social a:hover svg{fill:#0c2a26}
 /* back to top — sits above the WhatsApp button, centres aligned */
   .to-top{position:fixed;right:27px;bottom:90px;z-index:59;width:46px;height:46px;border-radius:50%;background:var(--paper);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px -10px rgba(0,0,0,.4);cursor:pointer;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .3s,transform .3s,background .2s,border-color .2s}
 .to-top.show{opacity:1;transform:none;pointer-events:auto}

@@ -148,6 +148,56 @@ JSONLD;
         <p>Local websites for Stockport businesses - we're a short drive away in Urmston.</p>
         <span class="go">View Stockport &rarr;</span>
       </a>
+      <a class="area-card" href="/web-design-salford/">
+        <h3>Web Design Salford</h3>
+        <p>Websites for Salford businesses, MediaCity to the high street - we're right next door in Urmston.</p>
+        <span class="go">View Salford &rarr;</span>
+      </a>
+      <a class="area-card" href="/web-design-sale/">
+        <h3>Web Design Sale</h3>
+        <p>Local websites for Sale's independents - we're a couple of minutes away in Urmston.</p>
+        <span class="go">View Sale &rarr;</span>
+      </a>
+      <a class="area-card" href="/web-design-altrincham/">
+        <h3>Web Design Altrincham</h3>
+        <p>Websites for Altrincham's independents and market-town traders - a short hop from our Urmston base.</p>
+        <span class="go">View Altrincham &rarr;</span>
+      </a>
+      <a class="area-card" href="/web-design-urmston/">
+        <h3>Web Design Urmston</h3>
+        <p>We're an Urmston studio - websites for our home town's small businesses.</p>
+        <span class="go">View Urmston &rarr;</span>
+      </a>
+      <a class="area-card" href="/web-design-bury/">
+        <h3>Web Design Bury</h3>
+        <p>Websites for Bury's market traders and independents, built by a local Greater Manchester studio.</p>
+        <span class="go">View Bury &rarr;</span>
+      </a>
+      <a class="area-card" href="/web-design-bolton/">
+        <h3>Web Design Bolton</h3>
+        <p>Websites for Bolton's businesses - a local Greater Manchester studio, in person or remote.</p>
+        <span class="go">View Bolton &rarr;</span>
+      </a>
+      <a class="area-card" href="/web-design-oldham/">
+        <h3>Web Design Oldham</h3>
+        <p>Websites for Oldham's independents - a local Greater Manchester studio, in person or remote.</p>
+        <span class="go">View Oldham &rarr;</span>
+      </a>
+      <a class="area-card" href="/web-design-rochdale/">
+        <h3>Web Design Rochdale</h3>
+        <p>Websites for Rochdale's town-centre businesses - a local Greater Manchester studio.</p>
+        <span class="go">View Rochdale &rarr;</span>
+      </a>
+      <a class="area-card" href="/web-design-ashton-under-lyne/">
+        <h3>Web Design Ashton-under-Lyne</h3>
+        <p>Websites for Ashton-under-Lyne's market and town-centre traders, built by a local GM studio.</p>
+        <span class="go">View Ashton-under-Lyne &rarr;</span>
+      </a>
+      <a class="area-card" href="/web-design-wigan/">
+        <h3>Web Design Wigan</h3>
+        <p>Websites for Wigan's independents - a Greater Manchester studio, remote day-to-day, in person when it matters.</p>
+        <span class="go">View Wigan &rarr;</span>
+      </a>
     </div>
     <p class="areas-note">Don't see your town? We cover the whole of Greater Manchester - <a href="/?prefill=Business%20Website%20(multi%20page)#contact">drop us a message</a> and we'll come to you.</p>
   </div>

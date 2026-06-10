@@ -76,8 +76,9 @@ The `FAQPage` JSON-LD questions/answers must match the on-page FAQ copy verbatim
 ## Other changes
 - `sitemap.xml`: add both URLs, `lastmod 2026-06-10`, `changefreq monthly`, `priority 0.8`.
 - Each page's nav: Home + on-page anchors (e.g. `#why`, `#work`/`#packages`, `#faq`).
-- No homepage changes required (the existing pages were linked from index.php; decide during
-  planning whether to add footer/nav links to the two new pages — optional, low risk).
+- `index.php`: add internal links to both new pages (so they get internal links for SEO +
+  discoverability). Place them where the existing social-media-management / wedding-websites
+  pages are already linked from the homepage, matching that pattern/styling.
 
 ## Out of scope (YAGNI)
 - Per-page OG images (still falls back to shared og-image.jpg — separate task).

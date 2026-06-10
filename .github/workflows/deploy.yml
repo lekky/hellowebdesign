@@ -41,3 +41,4 @@ jobs:
             README.md
             CLAUDE.md
             .claude/**
+            docs/**

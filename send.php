@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Verify reCAPTCHA v3
     if (empty($_POST['g-recaptcha-response'])) {
-        header("Location: index.html?status=error#contact");
+        header("Location: /?status=error#contact");
         exit();
     }
 
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!$captcha_success->success
         || $captcha_success->action !== 'contact'
         || $captcha_success->score < $recaptcha_score_threshold) {
-        header("Location: index.html?status=error#contact");
+        header("Location: /?status=error#contact");
         exit();
     }
 
@@ -91,15 +91,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Attempt to send the email
     if (mail($to, $subject, $email_body, $headers)) {
         // Redirect to a success page or show a success message
-        header("Location: index.html?status=success#contact");
+        header("Location: /?status=success#contact");
         exit();
     } else {
         // Redirect to an error page or show an error message
-        header("Location: index.html?status=error#contact");
+        header("Location: /?status=error#contact");
         exit();
     }
 } else {
     // Not a POST request, redirect or show error
-    header("Location: index.html");
+    header("Location: /");
     exit();
 }

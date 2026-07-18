@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script async defer src="https://www.google.com/recaptcha/api.js?render=6LcixXcsAAAAACLNjsk91s8-RTpuoOeqsnGOqRuH"></script>
 <style>
   :root {
     --charcoal: #1a1c1b;
@@ -195,6 +196,28 @@
   .btn:active { transform: translateY(1px); }
   .foot-note { font-size: 0.82rem; color: var(--ink-dim); font-weight: 300; text-align: center; }
 
+  /* ---- Validation + status ---- */
+  input.invalid, textarea.invalid, select.invalid {
+    border-color: #d9534f;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(217, 83, 79, 0.14);
+  }
+  .err {
+    display: block;
+    color: #c33a36;
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin-top: 0.4rem;
+  }
+  .form-status {
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    font-size: 0.92rem;
+    margin-bottom: 1.5rem;
+  }
+  .form-status.ok  { background: rgba(127, 209, 174, 0.18); border: 1px solid var(--line-mint); color: #2f6b52; }
+  .form-status.err { background: rgba(217, 83, 79, 0.10);  border: 1px solid rgba(217, 83, 79, 0.3); color: #b8322e; }
+
   footer {
     margin-top: 2.5rem;
     text-align: center;
@@ -221,7 +244,11 @@
   </div>
 
 <div class="wrap">
-  <form id="intake">
+  <form id="intake" method="post" action="/info/send-intake.php" novalidate>
+    <!-- honeypot: hidden from people, bots tend to fill it -->
+    <input type="text" name="company_url" id="company_url" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+    <input type="hidden" name="g-recaptcha-response" id="recaptchaToken">
+    <div id="formStatus" class="form-status" hidden></div>
     <div class="card">
 
     <!-- 01 -->
@@ -232,7 +259,8 @@
       </div>
       <div class="field">
         <label for="name">Your name</label>
-        <input type="text" id="name" name="name" placeholder="Jane Smith">
+        <input type="text" id="name" name="name" placeholder="Jane Smith" required aria-describedby="err-name">
+        <span class="err" id="err-name" hidden>Please let us know your name.</span>
       </div>
       <div class="field">
         <label for="business">Business name</label>
@@ -245,7 +273,8 @@
       </div>
       <div class="field">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="you@example.com">
+        <input type="email" id="email" name="email" placeholder="you@example.com" required aria-describedby="err-email">
+        <span class="err" id="err-email" hidden>We need a valid email so we can reply to you.</span>
       </div>
       <div class="field">
         <label for="phone">Phone <span class="optional">(optional)</span></label>
@@ -444,7 +473,7 @@
 
     <div class="actions">
       <button type="submit" class="btn">Send to Hello Web Design</button>
-      <p class="foot-note">This opens an email with your answers ready to send. Nothing is stored anywhere.</p>
+      <p class="foot-note">Sends straight to our inbox. We'll reply within 24 hours &mdash; usually much sooner.</p>
     </div>
 
     </div>
@@ -454,33 +483,76 @@
 </div>
 
 <script>
-  var SEND_TO = "contact@hellowebdesign.co.uk";
-
+  var SITE_KEY = '6LcixXcsAAAAACLNjsk91s8-RTpuoOeqsnGOqRuH';
   var form = document.getElementById('intake');
+  var nameEl = document.getElementById('name');
+  var emailEl = document.getElementById('email');
+  var submitBtn = form.querySelector('button[type=submit]');
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function setError(field, errId, show) {
+    field.classList.toggle('invalid', show);
+    var el = document.getElementById(errId);
+    if (el) el.hidden = !show;
+  }
+
+  // Clear a field's error as soon as the visitor starts fixing it.
+  nameEl.addEventListener('input', function () { setError(nameEl, 'err-name', false); });
+  emailEl.addEventListener('input', function () { setError(emailEl, 'err-email', false); });
+
+  function validate() {
+    var ok = true;
+    var nameBad = nameEl.value.trim() === '';
+    var emailBad = !EMAIL_RE.test(emailEl.value.trim());
+    setError(nameEl, 'err-name', nameBad);
+    setError(emailEl, 'err-email', emailBad);
+    if (nameBad || emailBad) ok = false;
+    if (!ok) {
+      var firstBad = nameBad ? nameEl : emailEl;
+      firstBad.focus();
+      firstBad.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    return ok;
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var fd = new FormData(form);
-    var labels = {
-      name: "Name", business: "Business", address: "Business address",
-      email: "Email", phone: "Phone",
-      team: "Team", location: "Sees clients", services: "Services",
-      highlight: "Wants to promote", booking: "Current booking software",
-      "booking-other": "Other software", pay: "Payment on booking",
-      brand: "Existing branding", existing: "Current web presence",
-      likes: "Sites they like", pages: "Site size", domain: "Owns domain",
-      package: "Package interest", social: "Social media", care: "Care plan",
-      goal: "Success looks like",
-      timeline: "Timeline", budget: "Budget", anything: "Other notes"
-    };
-    var lines = [];
-    Object.keys(labels).forEach(function (key) {
-      var vals = fd.getAll(key).filter(function (v) { return v.trim() !== ""; });
-      if (vals.length) lines.push(labels[key] + ": " + vals.join(", "));
+    if (!validate()) return;
+
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+
+    function reallySubmit() { form.submit(); }
+
+    // If reCAPTCHA didn't load, submit anyway so a real lead is never lost.
+    if (typeof grecaptcha === 'undefined') { reallySubmit(); return; }
+    grecaptcha.ready(function () {
+      grecaptcha.execute(SITE_KEY, { action: 'intake' }).then(function (token) {
+        document.getElementById('recaptchaToken').value = token;
+        reallySubmit();
+      }).catch(function () {
+        // Token fetch failed — still send it rather than block the enquiry.
+        reallySubmit();
+      });
     });
-    var body = encodeURIComponent("New enquiry via the intake form:\n\n" + lines.join("\n\n"));
-    var subject = encodeURIComponent("Website enquiry, " + (fd.get('business') || fd.get('name') || 'New client'));
-    window.location.href = "mailto:" + SEND_TO + "?subject=" + subject + "&body=" + body;
   });
+
+  // Success/error banner after the PHP redirect (/info/?status=success|error)
+  (function () {
+    var status = new URLSearchParams(location.search).get('status');
+    if (!status) return;
+    var box = document.getElementById('formStatus');
+    if (!box) return;
+    box.hidden = false;
+    if (status === 'success') {
+      box.className = 'form-status ok';
+      box.textContent = "Thank you — your answers are on their way to us. We'll be in touch within 24 hours.";
+      form.style.display = 'none';
+    } else {
+      box.className = 'form-status err';
+      box.textContent = "Sorry, something went wrong sending that. Please try again, or email contact@hellowebdesign.co.uk.";
+    }
+    box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  })();
 </script>
 </body>
 </html>

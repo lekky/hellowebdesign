@@ -215,8 +215,40 @@
     font-size: 0.92rem;
     margin-bottom: 1.5rem;
   }
-  .form-status.ok  { background: rgba(127, 209, 174, 0.18); border: 1px solid var(--line-mint); color: #2f6b52; }
   .form-status.err { background: rgba(217, 83, 79, 0.10);  border: 1px solid rgba(217, 83, 79, 0.3); color: #b8322e; }
+  /* Success: a standalone thank-you card (the form is hidden at this point) */
+  .form-status.ok {
+    background: var(--panel);
+    border: 1px solid var(--line-mint);
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(26,28,27,0.04), 0 8px 30px rgba(26,28,27,0.05);
+    color: var(--ink-dim);
+    text-align: center;
+    padding: 3rem 2.25rem;
+    font-size: 1rem;
+    font-weight: 300;
+  }
+  .form-status.ok strong {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.7rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 0.7rem;
+  }
+  .form-status.ok .tick {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(127, 209, 174, 0.22);
+    color: var(--mint-dim);
+    font-size: 1.4rem;
+    margin-bottom: 1.1rem;
+  }
 
   footer {
     margin-top: 2.5rem;
@@ -244,11 +276,11 @@
   </div>
 
 <div class="wrap">
+  <div id="formStatus" class="form-status" hidden></div>
   <form id="intake" method="post" action="/info/send-intake.php" novalidate>
     <!-- honeypot: hidden from people, bots tend to fill it -->
     <input type="text" name="company_url" id="company_url" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
     <input type="hidden" name="g-recaptcha-response" id="recaptchaToken">
-    <div id="formStatus" class="form-status" hidden></div>
     <div class="card">
 
     <!-- 01 -->
@@ -473,13 +505,13 @@
 
     <div class="actions">
       <button type="submit" class="btn">Send to Hello Web Design</button>
-      <p class="foot-note">Sends straight to our inbox. We'll reply within 24 hours &mdash; usually much sooner.</p>
+      <p class="foot-note">Sends straight to our inbox. We'll reply within 24 hours, usually much sooner.</p>
     </div>
 
     </div>
   </form>
 
-  <footer>Hello Web Design 路 Urmston, Manchester</footer>
+  <footer>Hello Web Design &middot; Urmston, Manchester</footer>
 </div>
 
 <script>
@@ -530,7 +562,7 @@
         document.getElementById('recaptchaToken').value = token;
         reallySubmit();
       }).catch(function () {
-        // Token fetch failed — still send it rather than block the enquiry.
+        // Token fetch failed - still send it rather than block the enquiry.
         reallySubmit();
       });
     });
@@ -545,7 +577,10 @@
     box.hidden = false;
     if (status === 'success') {
       box.className = 'form-status ok';
-      box.textContent = "Thank you — your answers are on their way to us. We'll be in touch within 24 hours.";
+      box.innerHTML = '<span class="tick" aria-hidden="true">&#10003;</span>'
+        + '<strong>Thank you, that&rsquo;s landed with us.</strong>'
+        + "We&rsquo;ve got your answers and we&rsquo;ll be in touch within 24 hours, usually much sooner. "
+        + 'In the meantime, feel free to reply to our email with anything you forgot.';
       form.style.display = 'none';
     } else {
       box.className = 'form-status err';

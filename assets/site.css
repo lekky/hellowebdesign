@@ -95,3 +95,6 @@ section{padding:96px 0}
   .wa{position:fixed;right:22px;bottom:22px;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.4);z-index:60;transition:transform .2s}
 .wa svg{width:30px;height:30px;fill:#fff}
 .wa:hover{transform:scale(1.08)}
+/* Hidden - superseded by the Frontdeskly widget. Markup is still in each page,
+   so deleting this one rule brings the button straight back. */
+.wa{display:none}

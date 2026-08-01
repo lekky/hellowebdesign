@@ -52,7 +52,7 @@
   gtag('config', 'G-5GF9NH7X8G');
 </script>
 <!-- Frontdeskly widget -->
-<script src="https://widget.frontdeskly.com/embed.js" data-tenant="hellowebdesign" async></script>
+<script src="https://widget.frontdeskly.com/embed.js" data-client="hellowebdesign" async></script>
 <?php if (!empty($jsonLd)) echo $jsonLd, "\n"; ?>
 </head>
 <body>

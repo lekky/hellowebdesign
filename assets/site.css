@@ -434,3 +434,30 @@ footer{background:var(--charcoal-3);color:#9a958b;padding:54px 0 30px}
   .svc:hover{padding-left:0}
   *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
 }
+
+/* ============================================================
+   40. Accessibility markup support (skip link, dialog, nav state)
+   Owned by the homepage/partials accessibility phase.
+   ============================================================ */
+/* @a11y-block-start */
+/* @a11y-block-end */
+
+
+
+
+/* ============================================================
+   41. Inner pages (service, area hub, city pages)
+   Owned by the service/area phase.
+   ============================================================ */
+/* @inner-block-start */
+/* @inner-block-end */
+
+
+
+
+/* ============================================================
+   42. Light-ground form component (intake page)
+   Owned by the intake phase.
+   ============================================================ */
+/* @intake-block-start */
+/* @intake-block-end */

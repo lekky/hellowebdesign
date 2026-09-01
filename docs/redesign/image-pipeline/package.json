@@ -1,0 +1,12 @@
+{
+  "name": "hellowebdesign-image-pipeline",
+  "private": true,
+  "type": "module",
+  "description": "Generates WebP/AVIF/JPEG variants of the site photos - see ../image-pipeline.md",
+  "scripts": {
+    "build": "node build-images.mjs ../../../assets"
+  },
+  "dependencies": {
+    "@jsquash/avif": "^2.1.1"
+  }
+}

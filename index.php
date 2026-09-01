@@ -83,204 +83,18 @@ JSONLD;
   include $_SERVER['DOCUMENT_ROOT'].'/partials/nav.php';
 ?>
 <style>
-.btn-line:hover{background:var(--teal-ink);border-color:var(--teal-ink);color:var(--paper);transform:translateY(-2px);box-shadow:0 12px 24px -12px rgba(23,63,58,.5)}
-/* reveal */
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
-.reveal.in{opacity:1;transform:none}
-.reveal.d1{transition-delay:.08s}
-.reveal.d2{transition-delay:.16s}
-.reveal.d3{transition-delay:.24s}
-.reveal.d4{transition-delay:.32s}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
-.nav-links a:not(.nav-cta):hover{color:var(--ink)}
-/* HERO */
-  .hero{padding:70px 0 90px;position:relative;overflow:hidden}
-.hero h1{font-size:clamp(44px,6vw,78px);margin:18px 0 24px}
-.hero p.lead{font-size:19px;color:var(--muted);max-width:40ch;margin-bottom:32px}
-.hero-photo{position:relative}
+/* Homepage one-offs. Everything shared (reveal, strip, work/service/pricing cards, quotes,
+   contact form, modals, footer, to-top) lives in /assets/site.css. */
+.hero{position:relative;overflow:hidden}
+.hero h1{font-size:clamp(44px,6vw,78px)}
+.hero p.lead{max-width:40ch}
 .hero-photo .frame{width:100%;height:auto;border-radius:14px;aspect-ratio:4/5;object-fit:cover;box-shadow:0 30px 60px -28px rgba(23,63,58,.45)}
 .hero-tag{position:absolute;left:-22px;bottom:34px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 20px;box-shadow:0 16px 30px -18px rgba(0,0,0,.3)}
-.hero-tag b{font-family:var(--serif);font-size:22px;color:var(--teal-deep)}
+.hero-tag b{font-family:var(--serif);font-size:22px;color:var(--teal-text)}
 .hero-tag span{display:block;font-size:12px;color:var(--muted);letter-spacing:.04em}
-.speed{display:inline-flex;align-items:center;gap:8px;background:var(--paper-2);border:1px solid var(--line);padding:7px 15px;border-radius:999px;font-size:13px;font-weight:600;color:var(--teal-ink)}
-.speed .pulse{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 0 rgba(96,191,181,.6);animation:pulse 2s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(96,191,181,.55)}70%{box-shadow:0 0 0 9px rgba(96,191,181,0)}100%{box-shadow:0 0 0 0 rgba(96,191,181,0)}}
 .hero-photo .float{position:absolute;animation:floaty 6s ease-in-out infinite}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-/* marquee strip */
-  .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;background:var(--paper-2);overflow:hidden}
-.strip-in{display:flex;align-items:center;gap:44px;width:max-content;animation:marq 26s linear infinite}
-.strip:hover .strip-in{animation-play-state:paused}
-@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.strip span{font-family:var(--serif);font-size:20px;color:var(--teal-ink);opacity:.75;font-style:italic;white-space:nowrap}
-.strip small{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap}
-.strip .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0}
-/* ABOUT */
-  .about-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:64px;align-items:center}
-.about-media{position:relative}
-.about-media .main{border-radius:14px;aspect-ratio:3/4;object-fit:cover;width:100%;height:auto}
-.about-media .inset{position:absolute;right:-26px;bottom:-26px;width:46%;height:auto;border-radius:12px;border:5px solid var(--paper);aspect-ratio:4/3;object-fit:cover;box-shadow:0 20px 40px -22px rgba(0,0,0,.4)}
-.about-body p{margin-bottom:18px;color:#46433c;font-size:16.5px}
-.stats{display:flex;gap:40px;margin-top:30px;padding-top:28px;border-top:1px solid var(--line)}
-.stat b{font-family:var(--serif);font-size:42px;color:var(--teal-deep);display:block;line-height:1}
-.stat span{font-size:13px;color:var(--muted);letter-spacing:.04em}
-@media(max-width:880px){.about-grid{grid-template-columns:1fr;gap:48px}.about-media .inset{width:40%}}
-/* WORK */
-  .work{background:var(--paper-2)}
-.work .eyebrow{color:var(--teal-deep)}
-.work h2{color:var(--ink)}
-.work .sec-head p{color:var(--muted)}
-.work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.wc{background:#fff;border-radius:13px;overflow:hidden;border:1.5px solid #d6ccb6;box-shadow:0 14px 30px -26px rgba(0,0,0,.4);transition:transform .25s ease,box-shadow .25s;cursor:pointer;text-align:left;font-family:inherit;color:inherit;padding:0;display:flex;flex-direction:column}
-.wc:hover{transform:translateY(-5px);box-shadow:0 24px 44px -28px rgba(0,0,0,.45)}
-.wc-shot{position:relative;overflow:hidden;aspect-ratio:16/10;background:#e7e2d6;border-bottom:1px solid var(--line)}
-.wc-shot img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s ease}
-.wc:hover .wc-shot img{transform:scale(1.05)}
-.wc-shot .badge-new{position:absolute;top:10px;left:10px;background:var(--teal);color:#0c2a26;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border-radius:999px;z-index:2}
-.wc .wc-cat{display:block;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:4px}
-.wc-body{padding:13px 15px 15px;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.wc h3{font-size:16px;color:var(--ink);line-height:1.16}
-.wc .arr{color:var(--teal-deep);font-weight:700;font-size:16px;flex-shrink:0;transition:transform .2s}
-.wc:hover .arr{transform:translate(2px,-2px)}
-@media(max-width:900px){.work-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.work-grid{grid-template-columns:1fr}}
-/* mobile: collapse projects behind a toggle - show 6 at 2-col, 4 at 1-col */
-  .work-more-wrap{display:none;justify-content:center;margin-top:24px}
-@media(max-width:900px){
-    .work-grid:not(.show-all) .wc:nth-child(n+7){display:none}
-    .work-more-wrap{display:flex}
-  }
-@media(max-width:520px){
-    .work-grid:not(.show-all) .wc:nth-child(n+5){display:none}
-  }
-/* SERVICES */
-  .svc-list{display:grid;gap:0;border-top:1px solid var(--line)}
-.svc{display:grid;grid-template-columns:64px 1fr 1.25fr;gap:30px;padding:34px 0;border-bottom:1px solid var(--line);align-items:center;transition:padding-left .25s ease}
-.svc:hover{padding-left:14px}
-.svc .ic{width:54px;height:54px;border-radius:14px;background:var(--paper-2);display:flex;align-items:center;justify-content:center;color:var(--teal-deep);transition:background .25s,color .25s}
-.svc:hover .ic{background:var(--teal);color:#0c2a26}
-.svc .ic svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.svc h3{font-size:27px}
-.svc p{color:var(--muted);font-size:16px}
-@media(max-width:720px){.svc{grid-template-columns:54px 1fr;gap:18px}.svc p{grid-column:1/-1}}
-/* WHY */
-  .why{background:var(--paper-2)}
-.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:40px 56px}
-.why-item{display:flex;gap:20px}
-.why-item .n{font-family:var(--serif);font-size:30px;color:var(--teal-deep);font-style:italic;line-height:1;flex-shrink:0}
-.why-item h3{font-size:21px;margin-bottom:8px}
-.why-item p{color:var(--muted);font-size:15.5px}
-@media(max-width:720px){.why-grid{grid-template-columns:1fr}}
-/* PACKAGES */
-  .pkg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.pkg{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
-.pkg:hover{transform:translateY(-5px);box-shadow:0 26px 50px -32px rgba(0,0,0,.35)}
-.pkg.feat{background:var(--charcoal);color:var(--paper);border-color:var(--charcoal);position:relative}
-.pkg .pkg-name{font-family:var(--serif);font-size:22px;margin-bottom:4px}
-.pkg .pkg-sub{font-size:13px;color:var(--muted);margin-bottom:18px}
-.pkg.feat .pkg-sub{color:#aecfca}
-.pkg .price{font-family:var(--serif);font-size:34px;color:var(--teal-deep);margin-bottom:18px}
-.pkg.feat .price{color:var(--teal)}
-.pkg ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px;flex:1}
-.pkg li{font-size:14px;display:flex;gap:9px;color:#46433c}
-.pkg.feat li{color:#dce7e4}
-.pkg li::before{content:"";width:16px;height:16px;border-radius:50%;background:var(--teal);flex-shrink:0;margin-top:3px;
-    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/12px no-repeat;
-    mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/12px no-repeat}
-.pkg .btn{justify-content:center;font-size:14px;padding:12px}
-.pkg.feat .btn-fill{background:var(--teal);color:#0c2a26}
-.pkg.feat .btn-fill:hover{background:#fff;color:#0c2a26}
-.feat-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--teal);color:#0c2a26;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 13px;border-radius:999px;white-space:nowrap}
-.addons{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;justify-content:center}
-.addons span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 18px;font-size:13.5px;font-weight:500;color:var(--teal-ink);cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
-.addons span:hover{background:var(--paper-2);border-color:var(--teal);transform:translateY(-1px)}
-@media(max-width:980px){.pkg-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.pkg-grid{grid-template-columns:1fr}}
-.care-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:680px;margin:0 auto}
-.price .per{font-size:15px;color:var(--muted);font-weight:500}
-.pkg.feat .price .per{color:#aecfca}
-.care-note{text-align:center;font-size:13.5px;color:var(--muted);margin-top:22px}
-@media(max-width:560px){.care-grid{grid-template-columns:1fr}}
-/* TESTIMONIALS */
-  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.quote{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px}
-.quote .stars{color:var(--teal);letter-spacing:3px;margin-bottom:14px;font-size:14px}
-.quote p{font-family:var(--serif);font-size:18px;font-style:italic;line-height:1.45;color:#2e2b25;margin-bottom:18px}
-.quote .who span{display:block;font-weight:500;color:var(--muted)}
-@media(max-width:880px){.quotes{grid-template-columns:1fr}}
-/* CONTACT */
-  .contact{background:var(--charcoal-3);color:var(--paper)}
-.contact .eyebrow{color:var(--teal)}
-.contact h2{color:var(--paper)}
-.ct-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px}
-.ct-info p{color:#b7b2a6;margin:18px 0 28px;max-width:34ch}
-.ct-line{display:flex;flex-direction:column;gap:3px;margin-bottom:20px}
-.ct-line small{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)}
-.ct-line a,.ct-line span{font-family:var(--serif);font-size:20px;color:var(--paper)}
-form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-form .full{grid-column:1/-1}
-label{display:block;font-size:13px;color:#b7b2a6;margin-bottom:7px;font-weight:500}
-input,select,textarea{width:100%;background:var(--charcoal-2);border:1px solid #41454a;border-radius:9px;padding:13px 15px;color:var(--paper);font-family:var(--sans);font-size:15px}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--teal)}
-textarea{min-height:110px;resize:vertical}
-form .btn{justify-content:center}
-form button.btn{border:0;cursor:pointer;width:100%}
-form .btn-fill{background:var(--teal);color:#0c2a26}
-form .btn-fill:hover{background:#fff;color:#0c2a26}
-.form-status{padding:13px 16px;border-radius:9px;font-size:14px;font-weight:500;line-height:1.45}
-.form-status.ok{background:rgba(96,191,181,.16);border:1px solid var(--teal);color:#d7f0ec}
-.form-status.err{background:rgba(214,96,90,.16);border:1px solid #d2655f;color:#f3d4d2}
-.grecaptcha-badge{visibility:hidden!important}
-.recaptcha-note{font-size:12px;color:#9a958b;line-height:1.5;margin-top:2px}
-.recaptcha-note a{color:var(--teal);text-decoration:underline}
-@media(max-width:880px){.ct-grid{grid-template-columns:1fr;gap:34px}form{grid-template-columns:1fr}}
-.foot-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-bottom:34px;border-bottom:1px solid #36393e}
-/* back to top — sits above the WhatsApp button, centres aligned */
-  .to-top{position:fixed;right:27px;bottom:90px;z-index:59;width:46px;height:46px;border-radius:50%;background:var(--paper);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px -10px rgba(0,0,0,.4);cursor:pointer;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .3s,transform .3s,background .2s,border-color .2s}
-.to-top.show{opacity:1;transform:none;pointer-events:auto}
-.to-top svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s}
-.to-top:hover{background:var(--teal);border-color:var(--teal)}
-.to-top:hover svg{stroke:#0c2a26}
-/* MODAL */
-  .modal{position:fixed;inset:0;z-index:100;display:none;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto}
-.modal.open{display:flex}
-.modal-bg{position:fixed;inset:0;background:rgba(20,18,14,.55);backdrop-filter:blur(4px);opacity:0;transition:opacity .3s}
-.modal.open .modal-bg{opacity:1}
-.modal-card{position:relative;background:var(--paper);border-radius:18px;max-width:780px;width:100%;overflow:hidden;box-shadow:0 40px 90px -30px rgba(0,0,0,.6);transform:translateY(20px) scale(.98);opacity:0;transition:transform .35s cubic-bezier(.22,.61,.36,1),opacity .35s;margin:auto}
-.modal.open .modal-card{transform:none;opacity:1}
-.modal-shot{aspect-ratio:16/9;background:#1c1e21;overflow:hidden}
-.modal-shot img{width:100%;height:100%;object-fit:cover;object-position:top center}
-.modal-close{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;background:rgba(28,30,33,.88);border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:#f3efe6;z-index:3;transition:transform .2s,background .2s}
-.modal-close:hover{transform:rotate(90deg);background:var(--charcoal-3)}
-.modal-body{padding:32px 36px 36px}
-.modal-body .tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-deep);font-weight:600}
-.modal-body h3{font-size:30px;margin:8px 0 6px}
-.modal-body .meta{font-size:13px;color:var(--muted);margin-bottom:18px}
-.modal-body .summary{font-size:16.5px;color:#46433c;margin-bottom:24px}
-.modal-sub{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:12px}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
-.chips span{background:var(--paper-2);border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:13px;font-weight:500;color:var(--teal-ink)}
-.modal-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}
-@media(max-width:600px){
-    .modal{align-items:flex-end;padding:0}
-    .modal-card{max-width:none;width:100%;border-radius:18px 18px 0 0;transform:translateY(100%);max-height:92vh;overflow-y:auto;margin:0}
-    .modal.open .modal-card{transform:none}
-    .modal-body{padding:26px 24px 30px}
-    .modal-cta{flex-direction:column}
-    .modal-cta .btn{width:100%;justify-content:center}
-  }
-/* PRIVACY MODAL */
-  .pmodal{position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;padding:24px}
-.pmodal.open{display:flex}
-.pmodal-bg{position:fixed;inset:0;background:rgba(20,18,14,.55);backdrop-filter:blur(4px)}
-.pmodal-card{position:relative;background:var(--paper);border-radius:18px;max-width:640px;width:100%;max-height:82vh;overflow-y:auto;padding:44px 44px 36px;box-shadow:0 40px 90px -30px rgba(0,0,0,.6)}
-.pmodal-card h2{font-size:32px;margin-bottom:6px}
-.pmodal-card .updated{font-size:13px;color:var(--muted);margin-bottom:6px}
-.pmodal-card h3{font-family:var(--serif);font-weight:500;font-size:19px;margin:22px 0 6px;color:var(--ink)}
-.pmodal-card p{color:#46433c;font-size:15.5px;margin-bottom:10px}
-.pmodal-card a{color:var(--teal-deep);font-weight:600}
-.pmodal-card .btn{margin-top:26px;border:0;cursor:pointer}
-@media(max-width:600px){.pmodal{padding:0;align-items:flex-end}.pmodal-card{max-width:none;border-radius:18px 18px 0 0;max-height:90vh;padding:30px 24px 28px}}
+@media(prefers-reduced-motion:reduce){.hero-photo .float{animation:none}}
 </style>
 <!-- HERO -->
 <header class="hero" id="top">
@@ -319,7 +133,7 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
     </div>
     <div class="about-body reveal d1">
       <span class="eyebrow">About us</span>
-      <h2 style="font-size:clamp(30px,4vw,46px);margin:14px 0 22px">Real people who actually care about your business</h2>
+      <h2 class="h2-sm">Real people who actually care about your business</h2>
       <p>We're a family-run studio based in Urmston, working closely with local and specialist businesses to build their presence online - from websites to social media, with a hands-on, personal approach.</p>
       <p>We take the time to understand your products, your customers and how your business actually works. That means less back-and-forth and content that feels genuine, not generic. You'll work directly with us, start to finish. No account managers, no handoffs, no middlemen.</p>
       <div class="stats">
@@ -368,7 +182,7 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
       <div class="svc reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M7 21h10"/></svg></span>
         <h3>Custom Websites</h3>
-        <p>Beautiful, responsive sites built to showcase your business and turn visitors into customers - from single-page builds to multi-page. <a href="/web-design-manchester/" style="color:var(--teal-deep);font-weight:600;white-space:nowrap">Web design in Manchester →</a></p>
+        <p>Beautiful, responsive sites built to showcase your business and turn visitors into customers - from single-page builds to multi-page. <a href="/web-design-manchester/" class="link-teal nowrap">Web design in Manchester →</a></p>
       </div>
       <div class="svc reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 12.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg></span>
@@ -378,7 +192,7 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
       <div class="svc reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1 1 21 11.5z"/><path d="M8 11h.01M12 11h.01M16 11h.01"/></svg></span>
         <h3>Social Media Management</h3>
-        <p>Content creation, scheduling, community management and on-site filming visits. You focus on running the business. <a href="/social-media-management/" style="color:var(--teal-deep);font-weight:600;white-space:nowrap">Learn more →</a></p>
+        <p>Content creation, scheduling, community management and on-site filming visits. You focus on running the business. <a href="/social-media-management/" class="link-teal nowrap">Learn more →</a></p>
       </div>
       <div class="svc reveal">
         <span class="ic"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
@@ -409,7 +223,7 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
 <!-- PACKAGES -->
 <section id="packages">
   <div class="wrap">
-    <div class="sec-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+    <div class="sec-head center reveal">
       <span class="eyebrow">Packages</span>
       <h2>Simple, honest pricing</h2>
       <p>Whether you need a starter site to get online or ongoing support, there's a package for you.</p>
@@ -418,7 +232,7 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
       <div class="pkg reveal">
         <div class="pkg-name">Starter Site</div><div class="pkg-sub">One-page, get online fast</div><div class="price">From £499</div>
         <ul><li>Single-page design</li><li>Mobile responsive</li><li>Contact form included</li><li>Live within a week</li></ul>
-        <a href="/small-business-websites/" style="font-size:13.5px;color:var(--teal-deep);font-weight:600;margin-bottom:14px;display:inline-block">More about small business websites →</a>
+        <a href="/small-business-websites/" class="link-teal pkg-link">More about small business websites →</a>
         <a href="#contact" class="btn btn-line" data-prefill="Starter Website (one page)">Get in touch</a>
       </div>
       <div class="pkg feat reveal d1">
@@ -434,7 +248,7 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
       <div class="pkg reveal d3">
         <div class="pkg-name">Wedding</div><div class="pkg-sub">Your day, online</div><div class="price">From £499</div>
         <ul><li>Beautiful wedding site</li><li>RSVP form</li><li>Venue &amp; travel info</li><li>Custom photo gallery</li></ul>
-        <a href="/wedding-websites/" style="font-size:13.5px;color:var(--teal-deep);font-weight:600;margin-bottom:14px;display:inline-block">More about wedding websites →</a>
+        <a href="/wedding-websites/" class="link-teal pkg-link">More about wedding websites →</a>
         <a href="#contact" class="btn btn-line" data-prefill="Wedding Website">Get in touch</a>
       </div>
     </div>
@@ -447,7 +261,7 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
 <!-- CARE PLANS -->
 <section id="care-plans" style="background:#e7f1ef">
   <div class="wrap">
-    <div class="sec-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+    <div class="sec-head center reveal">
       <span class="eyebrow">Care Plans</span>
       <h2>After launch, we've got your back</h2>
       <p>Your website kept secure, updated and online - so you can get on with running your business.</p>
@@ -471,7 +285,7 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
 <!-- TESTIMONIALS -->
 <section class="why" style="background:var(--paper-2)">
   <div class="wrap">
-    <div class="sec-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+    <div class="sec-head center reveal">
       <span class="eyebrow">Testimonials</span>
       <h2>What our clients say</h2>
     </div>
@@ -486,7 +300,7 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
 <!-- FAQ -->
 <section id="faq">
   <div class="wrap">
-    <div class="sec-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+    <div class="sec-head center reveal">
       <span class="eyebrow">FAQs</span>
       <h2>Questions, answered</h2>
       <p>The things people usually ask before getting started.</p>
@@ -529,7 +343,7 @@ form .btn-fill:hover{background:#fff;color:#0c2a26}
   <div class="wrap ct-grid">
     <div class="ct-info reveal">
       <span class="eyebrow">Contact</span>
-      <h2 style="font-size:clamp(30px,4vw,46px);margin-top:14px">Say hello</h2>
+      <h2 class="h2-sm">Say hello</h2>
       <p>Ready to get started? Drop us a message and we'll reply within 24 hours. No pressure, no hard sell - just a friendly chat.</p>
       <div class="ct-line"><small>Email</small><a href="mailto:contact@hellowebdesign.co.uk">contact@hellowebdesign.co.uk</a></div>
       <div class="ct-line"><small>Phone</small><span>Hanna 07763 648866 · Rachid 07816 130955</span></div>

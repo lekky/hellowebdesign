@@ -7,8 +7,11 @@ node_modules/
 _design/
 _design_index.html
 
-# Local preview config (not for deploy)
-.claude/
+# Local preview config (not for deploy). The UI/UX Pro Max skill bundle under
+# .claude/skills/ IS committed so it is available in every session; the deploy
+# workflow excludes .claude/** so it never reaches the web server.
+.claude/*
+!.claude/skills/
 
 # Playwright MCP scratch artifacts
 .playwright-mcp/

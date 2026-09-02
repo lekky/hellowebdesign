@@ -11,8 +11,17 @@
   const navToggle = document.getElementById('navToggle');
   const navLinks  = document.getElementById('navLinks');
   if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => { navLinks.classList.toggle('open'); navToggle.classList.toggle('open'); });
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navLinks.classList.remove('open'); navToggle.classList.remove('open'); }));
+    const setMenu = (open) => {
+      navLinks.classList.toggle('open', open);
+      navToggle.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    navToggle.addEventListener('click', () => setMenu(!navLinks.classList.contains('open')));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+    // Escape closes the open menu and hands focus back to the button
+    addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navLinks.classList.contains('open')) { setMenu(false); navToggle.focus(); }
+    });
   }
 
   // FAQ accordion (only one open at a time)

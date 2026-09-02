@@ -4,10 +4,17 @@ Static marketing site for **hellowebdesign.co.uk** (a husband-and-wife web desig
 studio). Plain `index.html` + `assets/` + a PHP contact handler. No build step.
 
 ## Structure
-- `index.html` — the entire single-page site (inline CSS + JS, "Warm Editorial" design)
+- `index.php` — the homepage (inline page CSS + JS, "Warm Editorial" design); shared head/nav/footer come from `partials/`
 - `send.php` — contact-form handler: reCAPTCHA v3 verify + `mail()`, redirects to `?status=success|error#contact`
-- `assets/` — logo, team photos, 9 project shots
+- `assets/` — logo, team photos, 9 project shots, shared `site.css` / `site.js`
+- service pages (`small-business-websites/`, `wedding-websites/`, `social-media-management/`), area hub + 13 city pages (`web-design-*/`), `info/` intake page
 - `.github/workflows/deploy.yml` — auto-deploy on push to `main`
+
+## UI/UX Pro Max skill
+`.claude/skills/ui-ux-pro-max/` is committed (the rest of `.claude/` stays ignored; deploy excludes `.claude/**`).
+Use it for any visual/UX work. Search: `python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<query>" --domain <ux|style|color|typography|landing|icons>`.
+The site's verified design system lives at `docs/design-system/hellowebdesign/MASTER.md`; the redesign
+proposal is `docs/redesign/2026-09-01-ui-ux-pro-max-redesign-proposal.md`.
 
 ## Deploy ⚠️ pushes to `main` go LIVE
 Merging to `main` triggers GitHub Actions → uploads over **explicit FTPS, port 21**

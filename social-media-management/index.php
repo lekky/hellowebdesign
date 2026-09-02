@@ -72,40 +72,7 @@ JSONLD;
   include $_SERVER['DOCUMENT_ROOT'].'/partials/head.php';
   include $_SERVER['DOCUMENT_ROOT'].'/partials/nav.php';
 ?>
-<style>
-.btn-line:hover{background:var(--charcoal);color:var(--paper)}
-/* HERO */
-  .hero{padding:70px 0 90px}
-.hero h1{font-size:clamp(40px,5.4vw,66px);margin:18px 0 24px}
-.hero p.lead{font-size:19px;color:var(--muted);max-width:44ch;margin-bottom:32px}
-.hero-photo img{width:100%;height:auto;border-radius:14px;aspect-ratio:4/3;object-fit:cover;box-shadow:0 30px 60px -28px rgba(23,63,58,.45)}
-.alt{background:var(--paper-2)}
-/* feature grid */
-  .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:40px 56px}
-.feat-item{display:flex;gap:20px}
-.feat-item .n{font-family:var(--serif);font-size:30px;color:var(--teal-deep);font-style:italic;line-height:1;flex-shrink:0}
-.feat-item h3{font-size:21px;margin-bottom:8px}
-.feat-item p{color:var(--muted);font-size:15.5px}
-@media(max-width:720px){.feat-grid{grid-template-columns:1fr}}
-/* case study */
-  .case-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
-.case-grid img{width:100%;height:auto;border-radius:14px;border:1.5px solid #d6ccb6;box-shadow:0 24px 44px -28px rgba(0,0,0,.45)}
-.case-body h2{font-size:clamp(28px,3.6vw,42px);margin:14px 0 18px}
-.case-body p{color:#46433c;font-size:16.5px;margin-bottom:16px}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 26px}
-.chips span{background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:13px;font-weight:500;color:var(--teal-ink)}
-.quote{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px;margin-top:8px}
-.quote .stars{color:var(--teal);letter-spacing:3px;margin-bottom:12px;font-size:14px}
-.quote p{font-family:var(--serif);font-size:18px;font-style:italic;line-height:1.45;color:#2e2b25;margin-bottom:14px}
-@media(max-width:880px){.case-grid{grid-template-columns:1fr;gap:36px}}
-/* CTA band */
-  .cta-band{background:var(--charcoal-3);color:var(--paper);text-align:center}
-.cta-band h2{color:var(--paper);font-size:clamp(30px,4vw,46px);margin:14px 0 18px}
-.cta-band p{color:#b7b2a6;max-width:46ch;margin:0 auto 30px;font-size:17px}
-.cta-band .btn-fill{background:var(--teal);color:#0c2a26}
-.cta-band .btn-fill:hover{background:#fff;color:#0c2a26}
-.foot-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-bottom:34px;border-top:1px solid #36393e;border-bottom:1px solid #36393e;padding-top:34px}
-</style>
+<main id="main">
 <!-- HERO -->
 <header class="hero">
   <div class="wrap hero-grid">
@@ -118,18 +85,18 @@ JSONLD;
         <a href="#case-study" class="btn btn-line">See it in action</a>
       </div>
     </div>
-    <div class="hero-photo">
-      <img src="/assets/desk.png" width="1800" height="1013" fetchpriority="high" alt="Hanna managing social media analytics for a client" />
+    <div class="hero-photo crop">
+      <picture><source type="image/avif" srcset="/assets/desk-480.avif 480w, /assets/desk-800.avif 800w, /assets/desk-1200.avif 1200w" sizes="(max-width:880px) 100vw, 45vw" /><source type="image/webp" srcset="/assets/desk-480.webp 480w, /assets/desk-800.webp 800w, /assets/desk-1200.webp 1200w" sizes="(max-width:880px) 100vw, 45vw" /><img src="/assets/desk-1200.jpg" width="1800" height="1013" fetchpriority="high" alt="Hanna managing social media analytics for a client" /></picture>
     </div>
   </div>
 </header>
 
 <!-- WHAT'S INCLUDED -->
-<section id="included" class="alt">
+<section id="included" class="alt" aria-labelledby="included-h">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">What's included</span>
-      <h2>Everything handled, so you can run the business</h2>
+      <h2 id="included-h">Everything handled, so you can run the business</h2>
       <p>We take the whole job off your plate - from planning what to post to replying to comments.</p>
     </div>
     <div class="feat-grid">
@@ -142,29 +109,29 @@ JSONLD;
 </section>
 
 <!-- CASE STUDY -->
-<section id="case-study">
+<section id="case-study" aria-labelledby="case-study-h">
   <div class="wrap case-grid">
-    <img src="/assets/proj-bbm.png" width="1795" height="1049" loading="lazy" decoding="async" alt="Bolton Builders Merchants social media content created by HelloWebDesign" />
+    <picture><source type="image/avif" srcset="/assets/proj-bbm-480.avif 480w, /assets/proj-bbm-800.avif 800w, /assets/proj-bbm-1200.avif 1200w" sizes="(max-width:880px) 100vw, 50vw" /><source type="image/webp" srcset="/assets/proj-bbm-480.webp 480w, /assets/proj-bbm-800.webp 800w, /assets/proj-bbm-1200.webp 1200w" sizes="(max-width:880px) 100vw, 50vw" /><img src="/assets/proj-bbm-1200.jpg" width="1795" height="1049" loading="lazy" decoding="async" alt="Bolton Builders Merchants social media content created by HelloWebDesign" /></picture>
     <div class="case-body">
       <span class="eyebrow">Case study</span>
-      <h2>Bolton Builders Merchants</h2>
+      <h2 id="case-study-h">Bolton Builders Merchants</h2>
       <p>Ongoing social media management with a sense of humour. We create and film playful, on-brand content that grew a builders' merchant into a properly entertaining follow - racking up 13.9K+ likes.</p>
       <div class="chips"><span>Content strategy</span><span>On-site filming</span><span>Editing &amp; scheduling</span><span>Community management</span><span>Trend-led video</span></div>
       <div class="quote">
         <div class="stars">★★★★★</div>
         <p>"Having someone handle our social media who actually visits the business and understands what we do has made a massive difference. The content feels authentic, not forced."</p>
-        <div class="who"><strong>Mick H</strong>Local Building Merchant</div>
+        <div class="who"><strong>Mick H</strong><span>Local Building Merchant</span></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq" class="alt">
+<section id="faq" class="alt" aria-labelledby="faq-h">
   <div class="wrap">
-    <div class="sec-head" style="margin-left:auto;margin-right:auto;text-align:center">
+    <div class="sec-head center">
       <span class="eyebrow">FAQs</span>
-      <h2>Questions, answered</h2>
+      <h2 id="faq-h">Questions, answered</h2>
     </div>
     <div class="faq">
       <div class="faq-item">
@@ -184,14 +151,15 @@ JSONLD;
 </section>
 
 <!-- CTA -->
-<section class="cta-band">
+<section class="cta-band" aria-labelledby="cta-h">
   <div class="wrap">
-    <span class="eyebrow" style="color:var(--teal)">Ready when you are</span>
-    <h2>Let's get your socials working for you</h2>
+    <span class="eyebrow">Ready when you are</span>
+    <h2 id="cta-h">Let's get your socials working for you</h2>
     <p>Drop us a message and we'll reply within 24 hours. No pressure, no hard sell - just a friendly chat about what you need.</p>
     <a href="/?prefill=Social%20Media%20Management#contact" class="btn btn-fill">Get in touch →</a>
   </div>
 </section>
 
+</main>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/partials/footer.php'; ?>
 <a class="wa" href="https://wa.me/447816130955?text=Hi%2C%20I%20found%20you%20on%20your%20website%20and%20I%27d%20like%20to%20chat%20about%20social%20media%20management." target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.413c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.515 5.26l-.999 3.648 3.973-1.042zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></a>

@@ -2,10 +2,19 @@
   /* Required vars (set before include): $title, $desc, $canonical
      Optional: $ogImage (default og-image.jpg), $twitterDesc (default $desc),
                $jsonLd (raw <script type="application/ld+json">…</script> markup),
-               $needsRecaptcha (bool, default false) */
+               $needsRecaptcha (bool, default false),
+               $preloadHero (bool, default false) — emit a <link rel="preload"> for the hero photo;
+               the image is $heroPreload = [type, href, srcset, sizes] (default: homepage couple photo) */
   $ogImage        = $ogImage        ?? 'https://hellowebdesign.co.uk/assets/og-image.jpg';
   $twitterDesc    = $twitterDesc    ?? $desc;
   $needsRecaptcha = $needsRecaptcha ?? false;
+  $preloadHero    = $preloadHero    ?? false;
+  $heroPreload    = $heroPreload    ?? [
+    'type'   => 'image/avif',
+    'href'   => '/assets/couple-1200.avif',
+    'srcset' => '/assets/couple-480.avif 480w, /assets/couple-800.avif 800w, /assets/couple-1200.avif 1200w',
+    'sizes'  => '(max-width:880px) 100vw, 45vw',
+  ];
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,6 +48,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/assets/site.css" />
+<?php if ($preloadHero): ?>
+<link rel="preload" as="image" type="<?= $heroPreload['type'] ?>" href="<?= $heroPreload['href'] ?>" imagesrcset="<?= $heroPreload['srcset'] ?>" imagesizes="<?= $heroPreload['sizes'] ?>" />
+<?php endif; ?>
 <script defer src="/assets/site.js"></script>
 <?php if ($needsRecaptcha): ?>
 <script async defer src="https://www.google.com/recaptcha/api.js?render=6LcixXcsAAAAACLNjsk91s8-RTpuoOeqsnGOqRuH"></script>

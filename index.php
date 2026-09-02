@@ -3,6 +3,7 @@
   $desc        = 'Husband-and-wife web design and social media studio in Urmston, helping small businesses across Manchester get online - personal, jargon-free, within a week.';
   $canonical   = 'https://hellowebdesign.co.uk/';
   $needsRecaptcha = true;
+  $preloadHero = true;
   $navItems    = [
     ['/#about',    'About'],
     ['/#work',     'Work'],
@@ -82,6 +83,7 @@ JSONLD;
   include $_SERVER['DOCUMENT_ROOT'].'/partials/head.php';
   include $_SERVER['DOCUMENT_ROOT'].'/partials/nav.php';
 ?>
+<main id="main">
 <style>
 /* Homepage one-offs. Everything shared (reveal, strip, work/service/pricing cards, quotes,
    contact form, modals, footer, to-top) lives in /assets/site.css. */
@@ -109,7 +111,7 @@ JSONLD;
       </div>
     </div>
     <div class="hero-photo reveal d2">
-      <img class="frame" src="assets/couple.png" width="2399" height="1800" fetchpriority="high" alt="Hanna and Rachid, the husband-and-wife team behind HelloWebDesign in Urmston" />
+      <picture><source type="image/avif" srcset="assets/couple-480.avif 480w, assets/couple-800.avif 800w, assets/couple-1200.avif 1200w" sizes="(max-width:880px) 100vw, 45vw" /><source type="image/webp" srcset="assets/couple-480.webp 480w, assets/couple-800.webp 800w, assets/couple-1200.webp 1200w" sizes="(max-width:880px) 100vw, 45vw" /><img class="frame" width="2399" height="1800" fetchpriority="high" alt="Hanna and Rachid, the husband-and-wife team behind HelloWebDesign in Urmston" src="assets/couple-1200.jpg" /></picture>
       <div class="hero-tag float"><b>Hanna &amp; Rachid</b><span>The two people you'll actually work with</span></div>
     </div>
   </div>
@@ -125,15 +127,15 @@ JSONLD;
 </div>
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" aria-labelledby="about-title">
   <div class="wrap about-grid">
     <div class="about-media reveal">
-      <img class="main" src="assets/working.png" width="1140" height="1600" loading="lazy" decoding="async" alt="Hanna and Rachid working together" />
-      <img class="inset" src="assets/desk.png" width="1800" height="1013" loading="lazy" decoding="async" alt="Hanna managing social media analytics" />
+      <picture><source type="image/avif" srcset="assets/working-480.avif 480w, assets/working-800.avif 800w, assets/working-1140.avif 1140w" sizes="(max-width:880px) 100vw, 42vw" /><source type="image/webp" srcset="assets/working-480.webp 480w, assets/working-800.webp 800w, assets/working-1140.webp 1140w" sizes="(max-width:880px) 100vw, 42vw" /><img class="main" width="1140" height="1600" loading="lazy" decoding="async" alt="Hanna and Rachid working together" src="assets/working-1140.jpg" /></picture>
+      <picture><source type="image/avif" srcset="assets/desk-480.avif 480w, assets/desk-800.avif 800w, assets/desk-1200.avif 1200w" sizes="(max-width:880px) 40vw, 20vw" /><source type="image/webp" srcset="assets/desk-480.webp 480w, assets/desk-800.webp 800w, assets/desk-1200.webp 1200w" sizes="(max-width:880px) 40vw, 20vw" /><img class="inset" width="1800" height="1013" loading="lazy" decoding="async" alt="Hanna managing social media analytics" src="assets/desk-1200.jpg" /></picture>
     </div>
     <div class="about-body reveal d1">
       <span class="eyebrow">About us</span>
-      <h2 class="h2-sm">Real people who actually care about your business</h2>
+      <h2 class="h2-sm" id="about-title">Real people who actually care about your business</h2>
       <p>We're a family-run studio based in Urmston, working closely with local and specialist businesses to build their presence online - from websites to social media, with a hands-on, personal approach.</p>
       <p>We take the time to understand your products, your customers and how your business actually works. That means less back-and-forth and content that feels genuine, not generic. You'll work directly with us, start to finish. No account managers, no handoffs, no middlemen.</p>
       <div class="stats">
@@ -146,36 +148,36 @@ JSONLD;
 </section>
 
 <!-- WORK -->
-<section id="work" class="work">
+<section id="work" class="work" aria-labelledby="work-title">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">Our work</span>
-      <h2>Recent projects for real local businesses</h2>
+      <h2 id="work-title">Recent projects for real local businesses</h2>
       <p>A selection of sites, apps and social media we've designed, built and launched. Tap any project to see what we did.</p>
     </div>
-    <div class="work-grid">
-      <button class="wc reveal" data-project="flok"><div class="wc-shot"><span class="badge-new">New</span><img loading="lazy" decoding="async" src="assets/proj-flok.png" alt="FLÓK Medical Aesthetics" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website · Brand</span><h3>FLÓK Medical Aesthetics</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal d1" data-project="savethedate"><div class="wc-shot"><img loading="lazy" decoding="async" src="assets/proj-savethedate.png" alt="Save the Date wedding website" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Wedding website</span><h3>Save the Date</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal d2" data-project="nailhead"><div class="wc-shot"><img loading="lazy" decoding="async" src="assets/proj-nailhead.png" alt="Nailhead Properties" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>Nailhead Properties</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal" data-project="flightsim"><div class="wc-shot"><img loading="lazy" decoding="async" src="assets/proj-flightsim.png" alt="Manchester Flight Sim Centre" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Booking · Web App</span><h3>Manchester Flight Sim Centre</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal d1" data-project="hs"><div class="wc-shot"><img loading="lazy" decoding="async" src="assets/proj-hs-building.png" alt="HS Building Services" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>HS Building Services</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal d2" data-project="farmers"><div class="wc-shot"><img loading="lazy" decoding="async" src="assets/proj-farmers.png" alt="The Farmers Arms" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>The Farmers Arms</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal" data-project="bbm"><div class="wc-shot"><img loading="lazy" decoding="async" src="assets/proj-bbm.png" alt="Bolton Builders Merchants social media" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Social Media</span><h3>Bolton Builders Merchants</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal d1" data-project="fennec"><div class="wc-shot"><img loading="lazy" decoding="async" src="assets/proj-fennec.png" alt="Fennec Consulting" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>Fennec Consulting</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal d2" data-project="miners"><div class="wc-shot"><img loading="lazy" decoding="async" src="assets/proj-miners.png" alt="The Miners Arms" /></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>The Miners Arms</h3></div><span class="arr">↗</span></div></button>
+    <div class="work-grid" id="work-grid">
+      <button class="wc reveal" data-project="flok" aria-haspopup="dialog"><div class="wc-shot"><span class="badge-new">New</span><picture><source type="image/avif" srcset="assets/proj-flok-480.avif 480w, assets/proj-flok-800.avif 800w, assets/proj-flok-1200.avif 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-flok-480.webp 480w, assets/proj-flok-800.webp 800w, assets/proj-flok-1200.webp 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="FLÓK Medical Aesthetics" src="assets/proj-flok-1200.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website · Brand</span><h3>FLÓK Medical Aesthetics</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal d1" data-project="savethedate" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-savethedate-480.avif 480w, assets/proj-savethedate-800.avif 800w, assets/proj-savethedate-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-savethedate-480.webp 480w, assets/proj-savethedate-800.webp 800w, assets/proj-savethedate-1000.webp 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="Save the Date wedding website" src="assets/proj-savethedate-1000.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Wedding website</span><h3>Save the Date</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal d2" data-project="nailhead" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-nailhead-480.avif 480w, assets/proj-nailhead-800.avif 800w, assets/proj-nailhead-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-nailhead-480.webp 480w, assets/proj-nailhead-800.webp 800w, assets/proj-nailhead-1000.webp 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="Nailhead Properties" src="assets/proj-nailhead-1000.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>Nailhead Properties</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal" data-project="flightsim" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-flightsim-480.avif 480w, assets/proj-flightsim-612.avif 612w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-flightsim-480.webp 480w, assets/proj-flightsim-612.webp 612w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="Manchester Flight Sim Centre" src="assets/proj-flightsim-612.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Booking · Web App</span><h3>Manchester Flight Sim Centre</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal d1" data-project="hs" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-hs-building-480.avif 480w, assets/proj-hs-building-800.avif 800w, assets/proj-hs-building-1200.avif 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-hs-building-480.webp 480w, assets/proj-hs-building-800.webp 800w, assets/proj-hs-building-1200.webp 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="HS Building Services" src="assets/proj-hs-building-1200.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>HS Building Services</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal d2" data-project="farmers" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-farmers-480.avif 480w, assets/proj-farmers-800.avif 800w, assets/proj-farmers-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-farmers-480.webp 480w, assets/proj-farmers-800.webp 800w, assets/proj-farmers-1000.webp 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="The Farmers Arms" src="assets/proj-farmers-1000.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>The Farmers Arms</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal" data-project="bbm" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-bbm-480.avif 480w, assets/proj-bbm-800.avif 800w, assets/proj-bbm-1200.avif 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-bbm-480.webp 480w, assets/proj-bbm-800.webp 800w, assets/proj-bbm-1200.webp 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="Bolton Builders Merchants social media" src="assets/proj-bbm-1200.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Social Media</span><h3>Bolton Builders Merchants</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal d1" data-project="fennec" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-fennec-480.avif 480w, assets/proj-fennec-800.avif 800w, assets/proj-fennec-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-fennec-480.webp 480w, assets/proj-fennec-800.webp 800w, assets/proj-fennec-1000.webp 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="Fennec Consulting" src="assets/proj-fennec-1000.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>Fennec Consulting</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal d2" data-project="miners" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-miners-480.avif 480w, assets/proj-miners-800.avif 800w, assets/proj-miners-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-miners-480.webp 480w, assets/proj-miners-800.webp 800w, assets/proj-miners-1000.webp 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="The Miners Arms" src="assets/proj-miners-1000.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>The Miners Arms</h3></div><span class="arr">↗</span></div></button>
     </div>
     <div class="work-more-wrap">
-      <button class="btn btn-line" id="work-toggle" aria-expanded="false">Show all projects ↓</button>
+      <button class="btn btn-line" id="work-toggle" aria-expanded="false" aria-controls="work-grid">Show all projects ↓</button>
     </div>
   </div>
 </section>
 
 <!-- SERVICES -->
-<section id="services">
+<section id="services" aria-labelledby="services-title">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">What we do</span>
-      <h2>Everything you need to get online</h2>
+      <h2 id="services-title">Everything you need to get online</h2>
       <p>From a simple one-page site to a full shop and ongoing social media - all under one roof.</p>
     </div>
     <div class="svc-list">
@@ -204,11 +206,11 @@ JSONLD;
 </section>
 
 <!-- WHY -->
-<section class="why">
+<section class="why" aria-labelledby="why-title">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">Why pick us</span>
-      <h2>What makes us different</h2>
+      <h2 id="why-title">What makes us different</h2>
       <p>We're not a faceless agency. Here's why local businesses choose us.</p>
     </div>
     <div class="why-grid">
@@ -221,11 +223,11 @@ JSONLD;
 </section>
 
 <!-- PACKAGES -->
-<section id="packages">
+<section id="packages" aria-labelledby="packages-title">
   <div class="wrap">
     <div class="sec-head center reveal">
       <span class="eyebrow">Packages</span>
-      <h2>Simple, honest pricing</h2>
+      <h2 id="packages-title">Simple, honest pricing</h2>
       <p>Whether you need a starter site to get online or ongoing support, there's a package for you.</p>
     </div>
     <div class="pkg-grid">
@@ -253,17 +255,17 @@ JSONLD;
       </div>
     </div>
     <div class="addons reveal">
-      <span data-prefill="Social Media Management">+ Social Media Management</span><span data-prefill="Web / Mobile Application">+ Web Applications</span><span data-prefill="Web / Mobile Application">+ Mobile Apps</span><span data-prefill="Something else">+ Business Process Consultancy</span>
+      <button type="button" data-prefill="Social Media Management">+ Social Media Management</button><button type="button" data-prefill="Web / Mobile Application">+ Web Applications</button><button type="button" data-prefill="Web / Mobile Application">+ Mobile Apps</button><button type="button" data-prefill="Something else">+ Business Process Consultancy</button>
     </div>
   </div>
 </section>
 
 <!-- CARE PLANS -->
-<section id="care-plans" style="background:#e7f1ef">
+<section id="care-plans" style="background:#e7f1ef" aria-labelledby="care-plans-title">
   <div class="wrap">
     <div class="sec-head center reveal">
       <span class="eyebrow">Care Plans</span>
-      <h2>After launch, we've got your back</h2>
+      <h2 id="care-plans-title">After launch, we've got your back</h2>
       <p>Your website kept secure, updated and online - so you can get on with running your business.</p>
     </div>
     <div class="care-grid">
@@ -283,11 +285,11 @@ JSONLD;
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="why" style="background:var(--paper-2)">
+<section class="why" style="background:var(--paper-2)" aria-labelledby="testimonials-title">
   <div class="wrap">
     <div class="sec-head center reveal">
       <span class="eyebrow">Testimonials</span>
-      <h2>What our clients say</h2>
+      <h2 id="testimonials-title">What our clients say</h2>
     </div>
     <div class="quotes">
       <div class="quote reveal"><div class="stars">★★★★★</div><p>"Really impressed with the whole process. They took the time to understand what we needed and delivered a site we're genuinely proud of. Couldn't recommend them enough."</p><div class="who"><strong>Anoush S</strong><span>Local Pub Owner</span></div></div>
@@ -298,11 +300,11 @@ JSONLD;
 </section>
 
 <!-- FAQ -->
-<section id="faq">
+<section id="faq" aria-labelledby="faq-title">
   <div class="wrap">
     <div class="sec-head center reveal">
       <span class="eyebrow">FAQs</span>
-      <h2>Questions, answered</h2>
+      <h2 id="faq-title">Questions, answered</h2>
       <p>The things people usually ask before getting started.</p>
     </div>
     <div class="faq reveal">
@@ -339,32 +341,33 @@ JSONLD;
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="contact">
+<section id="contact" class="contact" aria-labelledby="contact-title">
   <div class="wrap ct-grid">
     <div class="ct-info reveal">
       <span class="eyebrow">Contact</span>
-      <h2 class="h2-sm">Say hello</h2>
+      <h2 class="h2-sm" id="contact-title">Say hello</h2>
       <p>Ready to get started? Drop us a message and we'll reply within 24 hours. No pressure, no hard sell - just a friendly chat.</p>
       <div class="ct-line"><small>Email</small><a href="mailto:contact@hellowebdesign.co.uk">contact@hellowebdesign.co.uk</a></div>
       <div class="ct-line"><small>Phone</small><span>Hanna 07763 648866 · Rachid 07816 130955</span></div>
       <div class="ct-line"><small>Based in</small><span>Urmston, Manchester, UK</span></div>
     </div>
-    <form method="POST" action="send.php" id="contactForm" class="reveal d1">
+    <form method="POST" action="send.php" id="contactForm" class="reveal d1" aria-describedby="recaptcha-note">
       <div class="full" id="formStatus" hidden role="status" aria-live="polite"></div>
-      <div><label>Your name *</label><input type="text" name="name" required /></div>
-      <div><label>Phone number</label><input type="tel" name="phone" /></div>
-      <div><label>Email address *</label><input type="email" name="email" required /></div>
-      <div><label>Business name</label><input type="text" name="business_name" /></div>
-      <div class="full"><label>What are you interested in? *</label>
-        <select name="interested_package" required><option value="">Select an option</option><option>Starter Website (one page)</option><option>Business Website (multi page)</option><option>E-Commerce / Online Shop</option><option>Wedding Website</option><option>Social Media Management</option><option>Care Plan - Essentials</option><option>Care Plan - Complete</option><option>Web / Mobile Application</option><option>Something else</option></select>
+      <div><label for="f-name">Your name *</label><input type="text" id="f-name" name="name" autocomplete="name" required aria-required="true" /></div>
+      <div><label for="f-phone">Phone number</label><input type="tel" id="f-phone" name="phone" autocomplete="tel" /></div>
+      <div><label for="f-email">Email address *</label><input type="email" id="f-email" name="email" autocomplete="email" required aria-required="true" /></div>
+      <div><label for="f-business">Business name</label><input type="text" id="f-business" name="business_name" autocomplete="organization" /></div>
+      <div class="full"><label for="f-interest">What are you interested in? *</label>
+        <select id="f-interest" name="interested_package" required aria-required="true"><option value="">Select an option</option><option>Starter Website (one page)</option><option>Business Website (multi page)</option><option>E-Commerce / Online Shop</option><option>Wedding Website</option><option>Social Media Management</option><option>Care Plan - Essentials</option><option>Care Plan - Complete</option><option>Web / Mobile Application</option><option>Something else</option></select>
       </div>
-      <div class="full"><label>Tell us a bit about what you need</label><textarea name="message"></textarea></div>
+      <div class="full"><label for="f-message">Tell us a bit about what you need</label><textarea id="f-message" name="message"></textarea></div>
       <input type="hidden" name="g-recaptcha-response" id="recaptchaToken" />
       <div class="full"><button type="submit" class="btn btn-fill">Send message →</button></div>
-      <p class="recaptcha-note full">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> apply.</p>
+      <p class="recaptcha-note full" id="recaptcha-note">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> apply.</p>
     </form>
   </div>
 </section>
+</main>
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/partials/footer.php'; ?>
 <button class="to-top" id="toTop" aria-label="Back to top"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
@@ -374,9 +377,9 @@ JSONLD;
 <!-- PRIVACY MODAL -->
 <div class="pmodal" id="privacyModal" aria-hidden="true">
   <div class="pmodal-bg" data-pclose></div>
-  <div class="pmodal-card" role="dialog" aria-modal="true" aria-label="Privacy Policy">
+  <div class="pmodal-card" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
     <button class="modal-close" data-pclose aria-label="Close">✕</button>
-    <h2>Privacy Policy</h2>
+    <h2 id="privacy-title">Privacy Policy</h2>
     <p class="updated"><strong>Last updated:</strong> February 2026</p>
     <h3>Who we are</h3>
     <p>HelloWebDesign is a creative studio run by Hanna and Rachid. Our website address is hellowebdesign.co.uk.</p>
@@ -397,7 +400,7 @@ JSONLD;
 <!-- MODAL -->
 <div class="modal" id="modal" aria-hidden="true">
   <div class="modal-bg" data-close></div>
-  <div class="modal-card" role="dialog" aria-modal="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="m-title">
     <button class="modal-close" data-close aria-label="Close">✕</button>
     <div class="modal-shot"><img id="m-img" alt="" /></div>
     <div class="modal-body">
@@ -489,34 +492,58 @@ JSONLD;
 
   // project case studies
   const projects = {
-    flok: { tag:'Website · Brand', title:'FLÓK Medical Aesthetics', meta:'Medical aesthetics & skin clinic · 2026', img:'assets/proj-flok.png', url:'https://www.flok-aesthetics.com/',
+    flok: { tag:'Website · Brand', title:'FLÓK Medical Aesthetics', meta:'Medical aesthetics & skin clinic · 2026', img:'assets/proj-flok-1200.webp', url:'https://www.flok-aesthetics.com/',
       summary:"A recent build for a skin and aesthetics clinic that wanted to feel like a welcoming community, not a clinical treatment room. We crafted an elegant, editorial site with a calm serif voice, soft imagery and clear paths to booking and treatments.",
       chips:['Brand-led web design','Editorial layout','Treatments & pricing','Booking journey','Reviews & training pages','Mobile responsive'] },
-    hs: { tag:'Website', title:'HS Building Services', meta:'Builders · Greater Manchester', img:'assets/proj-hs-building.png',
+    hs: { tag:'Website', title:'HS Building Services', meta:'Builders · Greater Manchester', img:'assets/proj-hs-building-1200.webp',
       summary:"A bold, confident site for an Urmston builder covering roofing, extensions, renovations and loft conversions. Designed to win trust fast and funnel visitors straight to a free quote.",
       chips:['Custom website','Strong hero & branding','Services breakdown','Get-a-quote forms','Project gallery'] },
-    nailhead: { tag:'Website', title:'Nailhead Properties', meta:'Property investment · Manchester', img:'assets/proj-nailhead.png',
+    nailhead: { tag:'Website', title:'Nailhead Properties', meta:'Property investment · Manchester', img:'assets/proj-nailhead-1000.webp',
       summary:"A warm, trustworthy site for a Greater Manchester property investment company - telling their 'putting heart back into homes' story and reassuring sellers with fair, transparent messaging.",
       chips:['Custom website','Story-led about page','Trust signals','Portfolio of homes','Enquiry capture'] },
-    flightsim: { tag:'Booking · Web App', title:'Manchester Flight Sim Centre', meta:'Experience days · Salford', img:'assets/proj-flightsim.png',
+    flightsim: { tag:'Booking · Web App', title:'Manchester Flight Sim Centre', meta:'Experience days · Salford', img:'assets/proj-flightsim-612.webp',
       summary:"A booking-focused build for a flight-simulator experience centre, making it easy for the public, pilots and trainees to choose a simulator and book a session.",
       chips:['Booking platform','Experience packages','Secure payments','Mobile responsive'] },
-    farmers: { tag:'Website', title:'The Farmers Arms', meta:'Country pub · Burscough', img:'assets/proj-farmers.png',
+    farmers: { tag:'Website', title:'The Farmers Arms', meta:'Country pub · Burscough', img:'assets/proj-farmers-1000.webp',
       summary:"A characterful site for a proper country pub on the Leeds & Liverpool canal - big atmospheric imagery, an editorial headline treatment and quick access to the menu and 'find us'.",
       chips:['Custom website','Full-bleed imagery','Menu & opening hours','Find-us & directions'] },
-    bbm: { tag:'Social Media Management', title:'Bolton Builders Merchants', meta:'Social media · Atherton', img:'assets/proj-bbm.png',
+    bbm: { tag:'Social Media Management', title:'Bolton Builders Merchants', meta:'Social media · Atherton', img:'assets/proj-bbm-1200.webp',
       summary:"Ongoing social media management with a sense of humour. We create and film playful, on-brand content that grew a builders' merchant into a properly entertaining follow - racking up 13.9K+ likes.",
       chips:['Content strategy','On-site filming','Editing & scheduling','Community management','Trend-led video'] },
-    savethedate: { tag:'Wedding', title:'Save the Date', meta:'Wedding website', img:'assets/proj-savethedate.png',
+    savethedate: { tag:'Wedding', title:'Save the Date', meta:'Wedding website', img:'assets/proj-savethedate-1000.webp',
       summary:"A personal one-page wedding site to share the day with guests - the schedule, location, accommodation and an easy RSVP, wrapped in a warm, romantic look.",
       chips:['Wedding website','RSVP form','Schedule & location','Photo gallery','Gift list'] },
-    fennec: { tag:'Website', title:'Fennec Consulting', meta:'Business, IT & web solutions', img:'assets/proj-fennec.png',
+    fennec: { tag:'Website', title:'Fennec Consulting', meta:'Business, IT & web solutions', img:'assets/proj-fennec-1000.webp',
       summary:"A clean, professional site for a business, IT and web consultancy - clear services, transparent pricing and a confident first impression.",
       chips:['Custom website','Services & pricing','Contact journey','Mobile responsive'] },
-    miners: { tag:'Website', title:'The Miners Arms', meta:'Village pub', img:'assets/proj-miners.png',
+    miners: { tag:'Website', title:'The Miners Arms', meta:'Village pub', img:'assets/proj-miners-1000.webp',
       summary:"A welcoming site for a quaint, peaceful village pub - showing off the setting with a relaxed, friendly tone and easy links to the menu and gallery.",
       chips:['Custom website','Atmospheric hero','Menu & gallery','Find-us & contact'] }
   };
+
+  // dialog focus management shared by the project + privacy modals:
+  // inert the page behind, move focus to the close button, trap Tab, restore focus on close
+  const pageLandmarks = () => Array.from(document.querySelectorAll('nav, main, footer, #toTop, .wa'));
+  const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  function dialogOpen(root){
+    root._opener = document.activeElement;
+    pageLandmarks().forEach(el => el.setAttribute('inert', ''));
+    const close = root.querySelector('.modal-close');
+    if (close) close.focus();
+  }
+  function dialogClose(root, restoreFocus = true){
+    pageLandmarks().forEach(el => el.removeAttribute('inert'));
+    const opener = root._opener; root._opener = null;
+    if (restoreFocus && opener && typeof opener.focus === 'function' && document.contains(opener)) opener.focus();
+  }
+  function trapTab(root, e){
+    if (e.key !== 'Tab') return;
+    const items = Array.from(root.querySelectorAll(FOCUSABLE)).filter(el => el.offsetParent !== null || el === document.activeElement);
+    if (!items.length) return;
+    const first = items[0], last = items[items.length - 1];
+    if (e.shiftKey && (document.activeElement === first || !root.contains(document.activeElement))){ e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && (document.activeElement === last || !root.contains(document.activeElement))){ e.preventDefault(); first.focus(); }
+  }
 
   const modal = document.getElementById('modal');
   function openProject(id){
@@ -532,10 +559,17 @@ JSONLD;
     if (p.url){ view.href = p.url; view.style.display = ''; } else { view.style.display = 'none'; }
     modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
     document.body.style.overflow = 'hidden';
+    dialogOpen(modal);
   }
-  function closeModal(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  function closeModal(restoreFocus = true){
+    if (!modal.classList.contains('open')) return;
+    modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow='';
+    dialogClose(modal, restoreFocus);
+  }
   document.querySelectorAll('.wc').forEach(b => b.addEventListener('click', () => openProject(b.dataset.project)));
-  modal.addEventListener('click', (e) => { if (e.target.hasAttribute('data-close')) closeModal(); });
+  // closing via the "#contact" link: let the hash jump set the focus point instead of restoring it to the card
+  modal.addEventListener('click', (e) => { if (e.target.hasAttribute('data-close')) closeModal(e.target.tagName !== 'A'); });
+  modal.addEventListener('keydown', (e) => trapTab(modal, e));
   addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
   // contact form: fetch a reCAPTCHA v3 token (action 'contact') before submitting
@@ -592,10 +626,15 @@ JSONLD;
   // privacy policy modal
   const pModal = document.getElementById('privacyModal');
   const pLink = document.getElementById('privacyLink');
-  function closePrivacy(){ pModal.classList.remove('open'); pModal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  function closePrivacy(){
+    if (!pModal.classList.contains('open')) return;
+    pModal.classList.remove('open'); pModal.setAttribute('aria-hidden','true'); document.body.style.overflow='';
+    dialogClose(pModal);
+  }
   if (pLink && pModal){
-    pLink.addEventListener('click', (e) => { e.preventDefault(); pModal.classList.add('open'); pModal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; });
+    pLink.addEventListener('click', (e) => { e.preventDefault(); pModal.classList.add('open'); pModal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; dialogOpen(pModal); });
     pModal.addEventListener('click', (e) => { if (e.target.hasAttribute('data-pclose')) closePrivacy(); });
+    pModal.addEventListener('keydown', (e) => trapTab(pModal, e));
     addEventListener('keydown', (e) => { if (e.key === 'Escape') closePrivacy(); });
     // deep link from service pages (/#privacy)
     if (location.hash === '#privacy'){ pLink.click(); }

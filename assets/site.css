@@ -450,6 +450,26 @@ footer{background:var(--charcoal-3);color:#9a958b;padding:54px 0 30px}
    Owned by the service/area phase.
    ============================================================ */
 /* @inner-block-start */
+/* narrow column for standalone quotes / FAQ wrappers (was style="max-width:760px") */
+.narrow{max-width:760px;margin:0 auto}
+.quote.narrow{margin-top:28px}
+/* quote nested in a case study: keep the quote type (section 15 .case-body p would otherwise win) */
+.case-body .quote p{font-size:18px;color:#2e2b25;margin-bottom:18px}
+/* a dark .cta-band sits directly on the dark footer: draw the hairline between them.
+   Sibling rule covers the current DOM (footer partial follows the band); the :has()
+   rule covers a future <main> wrapper whose last child is the band. */
+.cta-band + footer .foot-top{border-top:1px solid #36393e;padding-top:34px}
+main:has(.cta-band:last-child) + footer .foot-top{border-top:1px solid #36393e;padding-top:34px}
+/* nearby-areas row on city pages: pill links, 44px targets */
+.nearby{padding:var(--space-5) 0}
+.nearby h2{font-size:clamp(26px,3.2vw,36px);margin:12px 0 10px}
+.nearby p{color:var(--muted);font-size:16px;max-width:60ch}
+.nearby-list{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.nearby-list a{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 20px;background:#fff;border:1px solid var(--line);border-radius:var(--r-pill);color:var(--teal-text);font-size:14.5px;font-weight:600;transition:background .2s,border-color .2s,transform .2s}
+.nearby-list a:hover{border-color:var(--teal);background:var(--paper);transform:translateY(-1px)}
+.nearby-list a.hub{background:var(--charcoal);border-color:var(--charcoal);color:var(--paper)}
+.nearby-list a.hub:hover{background:var(--teal-ink);border-color:var(--teal-ink)}
+@media (prefers-reduced-motion:reduce){.nearby-list a:hover{transform:none}}
 /* @inner-block-end */
 
 

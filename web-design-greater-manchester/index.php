@@ -72,44 +72,6 @@
 JSONLD;
 ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/partials/head.php'; ?>
-<style>
-.btn-line:hover{background:var(--charcoal);color:var(--paper)}
-/* HERO */
-  .hero{padding:70px 0 90px}
-.hero h1{font-size:clamp(40px,5.4vw,66px);margin:18px 0 24px}
-.hero p.lead{font-size:19px;color:var(--muted);max-width:44ch;margin-bottom:32px}
-.hero-photo img{width:100%;height:auto;border-radius:14px;aspect-ratio:4/3;object-fit:cover;box-shadow:0 30px 60px -28px rgba(23,63,58,.45)}
-.alt{background:var(--paper-2)}
-/* areas grid */
-  .areas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
-.area-card{display:block;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px 26px;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
-.area-card:hover{transform:translateY(-3px);box-shadow:0 18px 34px -22px rgba(23,63,58,.45);border-color:var(--teal)}
-.area-card h3{font-size:20px;margin:0 0 6px;color:var(--teal-ink)}
-.area-card p{color:var(--muted);font-size:14.5px;margin:0;line-height:1.5}
-.area-card .go{display:inline-block;margin-top:14px;color:var(--teal-deep);font-size:13px;font-weight:600}
-.areas-note{color:var(--muted);font-size:15px;margin-top:24px}
-@media(max-width:760px){.areas-grid{grid-template-columns:1fr}}
-/* feature grid */
-  .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:40px 56px}
-.feat-item{display:flex;gap:20px}
-.feat-item .n{font-family:var(--serif);font-size:30px;color:var(--teal-deep);font-style:italic;line-height:1;flex-shrink:0}
-.feat-item h3{font-size:21px;margin-bottom:8px}
-.feat-item p{color:var(--muted);font-size:15.5px}
-@media(max-width:720px){.feat-grid{grid-template-columns:1fr}}
-/* work grid */
-  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:8px}
-.work-card img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:12px;display:block;margin-bottom:12px}
-.work-card h3{font-size:18px;margin-bottom:2px}
-.work-card p{color:var(--muted);font-size:14px}
-@media(max-width:880px){.work-grid{grid-template-columns:1fr}}
-/* CTA band */
-  .cta-band{background:var(--charcoal-3);color:var(--paper);text-align:center}
-.cta-band h2{color:var(--paper);font-size:clamp(30px,4vw,46px);margin:14px 0 18px}
-.cta-band p{color:#b7b2a6;max-width:46ch;margin:0 auto 30px;font-size:17px}
-.cta-band .btn-fill{background:var(--teal);color:#0c2a26}
-.cta-band .btn-fill:hover{background:#fff;color:#0c2a26}
-.foot-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-bottom:34px;border-top:1px solid #36393e;border-bottom:1px solid #36393e;padding-top:34px}
-</style>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/partials/nav.php'; ?>
 <!-- HERO -->
 <header class="hero">
@@ -123,18 +85,18 @@ JSONLD;
         <a href="#areas" class="btn btn-line">See the areas we cover</a>
       </div>
     </div>
-    <div class="hero-photo">
-      <img src="/assets/proj-nailhead.png" width="1000" height="515" fetchpriority="high" alt="Nailhead Properties website designed by HelloWebDesign for a Greater Manchester business" />
+    <div class="hero-photo crop">
+      <picture><source type="image/avif" srcset="/assets/proj-nailhead-480.avif 480w, /assets/proj-nailhead-800.avif 800w, /assets/proj-nailhead-1000.avif 1000w" sizes="(max-width:880px) 100vw, 45vw" /><source type="image/webp" srcset="/assets/proj-nailhead-480.webp 480w, /assets/proj-nailhead-800.webp 800w, /assets/proj-nailhead-1000.webp 1000w" sizes="(max-width:880px) 100vw, 45vw" /><img src="/assets/proj-nailhead-1000.jpg" width="1000" height="515" fetchpriority="high" alt="Nailhead Properties website designed by HelloWebDesign for a Greater Manchester business" /></picture>
     </div>
   </div>
 </header>
 
 <!-- AREAS -->
-<section id="areas" class="alt">
+<section id="areas" class="alt" aria-labelledby="areas-h">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Areas we cover</span>
-      <h2>Local web design, town by town</h2>
+      <h2 id="areas-h">Local web design, town by town</h2>
       <p>We work all over Greater Manchester. Here are the towns we have dedicated pages for - more added as we go.</p>
     </div>
     <div class="areas-grid">
@@ -199,16 +161,16 @@ JSONLD;
         <span class="go">View Wigan &rarr;</span>
       </a>
     </div>
-    <p class="areas-note">Don't see your town? We cover the whole of Greater Manchester - <a href="/?prefill=Business%20Website%20(multi%20page)#contact">drop us a message</a> and we'll come to you.</p>
+    <p class="areas-note">Don't see your town? We cover the whole of Greater Manchester - <a class="link-teal" href="/?prefill=Business%20Website%20(multi%20page)#contact">drop us a message</a> and we'll come to you.</p>
   </div>
 </section>
 
 <!-- WHY LOCAL -->
-<section id="why">
+<section id="why" aria-labelledby="why-h">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Why local</span>
-      <h2>A local studio, not a faceless agency</h2>
+      <h2 id="why-h">A local studio, not a faceless agency</h2>
       <p>Big-brand experience, focused entirely on helping small businesses near us grow.</p>
     </div>
     <div class="feat-grid">
@@ -221,37 +183,37 @@ JSONLD;
 </section>
 
 <!-- LOCAL WORK -->
-<section id="work" class="alt">
+<section id="work" class="alt" aria-labelledby="work-h">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Our work</span>
-      <h2>Recent websites for Greater Manchester businesses</h2>
+      <h2 id="work-h">Recent websites for Greater Manchester businesses</h2>
     </div>
-    <div class="work-grid">
-      <div class="work-card"><img src="/assets/proj-nailhead.png" width="1000" height="515" loading="lazy" decoding="async" alt="Nailhead Properties website - property investment, Manchester" /><h3>Nailhead Properties</h3><p>Property investment &middot; Manchester</p></div>
-      <div class="work-card"><img src="/assets/proj-flightsim.png" width="612" height="400" loading="lazy" decoding="async" alt="Manchester Flight Sim Centre booking website, Salford" /><h3>Manchester Flight Sim Centre</h3><p>Booking &amp; web app &middot; Salford</p></div>
-      <div class="work-card"><img src="/assets/proj-hs-building.png" width="1590" height="861" loading="lazy" decoding="async" alt="HS Building Services website, Greater Manchester" /><h3>HS Building Services</h3><p>Builders &middot; Greater Manchester</p></div>
+    <div class="work-grid cols-3">
+      <div class="work-card"><picture><source type="image/avif" srcset="/assets/proj-nailhead-480.avif 480w, /assets/proj-nailhead-800.avif 800w, /assets/proj-nailhead-1000.avif 1000w" sizes="(max-width:880px) 100vw, 33vw" /><source type="image/webp" srcset="/assets/proj-nailhead-480.webp 480w, /assets/proj-nailhead-800.webp 800w, /assets/proj-nailhead-1000.webp 1000w" sizes="(max-width:880px) 100vw, 33vw" /><img src="/assets/proj-nailhead-1000.jpg" width="1000" height="515" loading="lazy" decoding="async" alt="Nailhead Properties website - property investment, Manchester" /></picture><h3>Nailhead Properties</h3><p>Property investment &middot; Manchester</p></div>
+      <div class="work-card"><picture><source type="image/avif" srcset="/assets/proj-flightsim-480.avif 480w, /assets/proj-flightsim-612.avif 612w" sizes="(max-width:880px) 100vw, 33vw" /><source type="image/webp" srcset="/assets/proj-flightsim-480.webp 480w, /assets/proj-flightsim-612.webp 612w" sizes="(max-width:880px) 100vw, 33vw" /><img src="/assets/proj-flightsim-612.jpg" width="612" height="400" loading="lazy" decoding="async" alt="Manchester Flight Sim Centre booking website, Salford" /></picture><h3>Manchester Flight Sim Centre</h3><p>Booking &amp; web app &middot; Salford</p></div>
+      <div class="work-card"><picture><source type="image/avif" srcset="/assets/proj-hs-building-480.avif 480w, /assets/proj-hs-building-800.avif 800w, /assets/proj-hs-building-1200.avif 1200w" sizes="(max-width:880px) 100vw, 33vw" /><source type="image/webp" srcset="/assets/proj-hs-building-480.webp 480w, /assets/proj-hs-building-800.webp 800w, /assets/proj-hs-building-1200.webp 1200w" sizes="(max-width:880px) 100vw, 33vw" /><img src="/assets/proj-hs-building-1200.jpg" width="1590" height="861" loading="lazy" decoding="async" alt="HS Building Services website, Greater Manchester" /></picture><h3>HS Building Services</h3><p>Builders &middot; Greater Manchester</p></div>
     </div>
   </div>
 </section>
 
 <!-- TESTIMONIAL -->
-<section>
-  <div class="wrap" style="max-width:760px">
-    <div class="quote" style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px">
-      <div class="stars" style="color:var(--teal);letter-spacing:3px;margin-bottom:12px;font-size:14px">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p style="font-family:var(--serif);font-size:18px;font-style:italic;line-height:1.45;color:#2e2b25;margin-bottom:14px">"Really impressed with the whole process. They took the time to understand what we needed and delivered a site we're genuinely proud of. Couldn't recommend them enough."</p>
-      <div class="who"><strong>Anoush S</strong>Local Pub Owner</div>
+<section aria-label="What clients say">
+  <div class="wrap narrow">
+    <div class="quote">
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p>"Really impressed with the whole process. They took the time to understand what we needed and delivered a site we're genuinely proud of. Couldn't recommend them enough."</p>
+      <div class="who"><strong>Anoush S</strong><span>Local Pub Owner</span></div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq" class="alt">
+<section id="faq" class="alt" aria-labelledby="faq-h">
   <div class="wrap">
-    <div class="sec-head" style="margin-left:auto;margin-right:auto;text-align:center">
+    <div class="sec-head center">
       <span class="eyebrow">FAQs</span>
-      <h2>Questions, answered</h2>
+      <h2 id="faq-h">Questions, answered</h2>
     </div>
     <div class="faq">
       <div class="faq-item">
@@ -271,10 +233,10 @@ JSONLD;
 </section>
 
 <!-- CTA -->
-<section class="cta-band">
+<section class="cta-band" aria-labelledby="cta-h">
   <div class="wrap">
-    <span class="eyebrow" style="color:var(--teal)">Ready when you are</span>
-    <h2>Let's build your Greater Manchester business a website</h2>
+    <span class="eyebrow">Ready when you are</span>
+    <h2 id="cta-h">Let's build your Greater Manchester business a website</h2>
     <p>Drop us a message and we'll reply within 24 hours. No pressure, no hard sell - just a friendly chat about what you need.</p>
     <a href="/?prefill=Business%20Website%20(multi%20page)#contact" class="btn btn-fill">Get in touch &rarr;</a>
   </div>

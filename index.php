@@ -380,13 +380,13 @@ JSONLD;
   <div class="pmodal-card" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
     <button class="modal-close" data-pclose aria-label="Close">✕</button>
     <h2 id="privacy-title">Privacy Policy</h2>
-    <p class="updated"><strong>Last updated:</strong> February 2026</p>
+    <p class="updated"><strong>Last updated:</strong> September 2026</p>
     <h3>Who we are</h3>
     <p>HelloWebDesign is a creative studio run by Hanna and Rachid. Our website address is hellowebdesign.co.uk.</p>
     <h3>What data we collect</h3>
     <p>When you use our contact form, we collect the information you provide: your name, email address, phone number, business name, and message. We use this solely to respond to your enquiry.</p>
     <h3>Analytics</h3>
-    <p>We use Google Analytics to understand how visitors use our site so we can improve it. Google Analytics sets cookies and may collect data such as your approximate location, device, and the pages you visit. This is processed by Google in line with their <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>. We only ever look at this data in aggregate, never to identify you personally.</p>
+    <p>We use <a href="https://posthog.com/privacy" target="_blank" rel="noopener">PostHog</a>, an analytics tool hosted in the EU, to see which pages and buttons people actually use, and to replay how visitors move through the site so we can spot where things get confusing. These replays mask everything you type and all the text on the page, so we can see that someone got stuck on the contact form without ever seeing what they wrote. PostHog sets cookies and processes this data in line with their privacy policy.</p>
     <h3>How we use your data</h3>
     <p>We only use the information you provide to respond to your enquiry and, if applicable, to deliver the services you've requested. We never sell or share your data with third parties.</p>
     <h3>Your rights</h3>

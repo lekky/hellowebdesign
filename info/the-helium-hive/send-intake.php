@@ -67,13 +67,18 @@ function clean($v) {
 
 // label => POST field name, in the order they appear on the form.
 $fields = [
-    'Budget'             => 'budget',
-    'Timeline'           => 'timeline',
     'Wants more of'      => 'highlight',
     'Areas covered'      => 'areas',
+    'Package interest'   => 'package',
+    'Site size'          => 'pages',
+    'Owns domain'        => 'domain',
+    'Success looks like' => 'goal',
+    'Social media'       => 'social',
+    'Timeline'           => 'timeline',
+    'Budget'             => 'budget',
+    'Other notes'        => 'anything',
     'Name'               => 'name',
     'Email'              => 'email',
-    'Other notes'        => 'anything',
 ];
 
 $lines = [];

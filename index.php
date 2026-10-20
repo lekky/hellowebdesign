@@ -5,12 +5,13 @@
   $needsRecaptcha = true;
   $preloadHero = true;
   $navItems    = [
-    ['/#about',    'About'],
+    ['/#how',      'How it works'],
     ['/#work',     'Work'],
     ['/#services', 'Services'],
-    ['/#packages', 'Packages'],
+    ['/#packages', 'Pricing'],
   ];
   $ctaHref     = '/#contact';
+  $ctaLabel    = 'Message us';
   $jsonLd      = <<<'JSONLD'
 <script type="application/ld+json">
 {
@@ -85,95 +86,197 @@ JSONLD;
 ?>
 <main id="main">
 <style>
-/* Homepage one-offs. Everything shared (reveal, strip, work/service/pricing cards, quotes,
+/* Homepage one-offs. Everything shared (reveal, work/service/pricing cards, quotes,
    contact form, modals, footer, to-top) lives in /assets/site.css. */
-.hero{position:relative;overflow:hidden}
-.hero h1{font-size:clamp(44px,6vw,78px)}
-.hero p.lead{max-width:40ch}
+
+/* --- hero: "Hi, we're Hanna and Rachid" + quick form, photo with floating review card --- */
+.hero{position:relative;overflow:hidden;padding:64px 0 88px}
+.hero-grid{align-items:flex-start}
+.hero h1{font-size:clamp(46px,6vw,80px);margin:18px 0 20px}
+.hero p.lead{max-width:46ch;margin-bottom:28px}
+.hero-cta{margin-bottom:30px}
+.hero-cta .btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.quick{background:#fff;border:1.5px solid #d6ccb6;border-radius:16px;padding:22px 24px 24px;box-shadow:0 24px 44px -32px rgba(23,63,58,.45);display:flex;flex-direction:column;gap:14px;max-width:560px}
+.quick-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.quick-head strong{font-family:var(--serif);font-weight:500;font-size:22px}
+.quick-head span{font-size:13px;color:var(--teal-text);font-weight:600}
+.quick-row{display:flex;gap:12px;flex-wrap:wrap}
+.quick-row>div{flex:1 1 180px}
+.quick label{display:block;font-size:13.5px;font-weight:500;margin-bottom:6px}
+.quick input{width:100%;min-height:44px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 14px;color:var(--ink);font-family:var(--sans);font-size:16px}
+.quick input:focus{border-color:var(--teal-deep);background:#fff}
+.quick input::placeholder{color:var(--muted);opacity:.7}
+.quick .btn{width:100%;border:0;cursor:pointer}
 .hero-photo .frame{width:100%;height:auto;border-radius:14px;aspect-ratio:4/5;object-fit:cover;box-shadow:0 30px 60px -28px rgba(23,63,58,.45)}
-.hero-tag{position:absolute;left:-22px;bottom:34px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 20px;box-shadow:0 16px 30px -18px rgba(0,0,0,.3)}
-.hero-tag b{font-family:var(--serif);font-size:22px;color:var(--teal-text)}
-.hero-tag span{display:block;font-size:12px;color:var(--muted);letter-spacing:.04em}
-.hero-photo .float{position:absolute;animation:floaty 6s ease-in-out infinite}
-@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@media(prefers-reduced-motion:reduce){.hero-photo .float{animation:none}}
+.hero-photo{isolation:isolate}
+.hero-photo::before{content:"";position:absolute;inset:22px -22px -22px 22px;border:1.5px solid var(--teal);border-radius:14px;opacity:.6;z-index:-1}
+/* photo + review card move together on scroll (capped in JS), the hairline frame stays put */
+.hero-media{position:relative;will-change:transform}
+.hero-media picture{display:block}
+.hero-review{position:absolute;left:-28px;bottom:36px;max-width:340px;margin:0;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:0 16px 30px -18px rgba(0,0,0,.3);animation:floaty 6s ease-in-out infinite}
+.hero-review .stars{color:var(--teal-deep);letter-spacing:2px;font-size:13px;margin-bottom:6px}
+.hero-review blockquote{margin:0 0 8px;font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.4;color:#2e2b25}
+.hero-review figcaption{font-size:13px;color:var(--muted)}
+.hero-review figcaption strong{color:var(--ink)}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+/* headline arrives word by word (spans added by JS; without JS the h1 reveals as one block) */
+.hero h1.split{opacity:1;transform:none}
+.hero h1 .w{display:inline-block;opacity:0;transform:translateY(.35em);filter:blur(5px);animation:wordIn .75s cubic-bezier(.22,.61,.36,1) forwards;animation-delay:calc(var(--i) * 75ms + 120ms)}
+@keyframes wordIn{to{opacity:1;transform:none;filter:blur(0)}}
+@media(max-width:1100px){.hero-review{left:-14px;bottom:-18px;max-width:min(300px,100%);padding:14px 16px}.hero-review blockquote{font-size:15.5px}}
+@media(max-width:880px){.hero-review{left:12px;bottom:16px;max-width:calc(100% - 24px)}.hero-photo::before{inset:16px -12px -12px 16px}}
+
+/* --- promises row --- */
+.promises{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:40px 0}
+.promise-grid{display:flex;flex-wrap:wrap;gap:24px}
+.promise{flex:1 1 220px;display:flex;gap:14px;align-items:flex-start}
+.promise .ic{width:44px;height:44px;border-radius:12px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--teal-deep)}
+.promise .ic svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.promise strong{display:block;font-size:15.5px}
+.promise span{font-size:14px;color:var(--muted)}
+
+/* --- what happens next (timeline) --- */
+/* each step carries its own line so wrapped rows (tablets, phones) get a line and dot of their own */
+.timeline{display:flex;flex-wrap:wrap}
+.step{flex:1 1 240px;padding:28px 28px 24px 0;position:relative;border-top:1.5px solid var(--teal-deep)}
+.step::before{content:"";position:absolute;top:-8px;left:0;width:14px;height:14px;border-radius:50%;background:var(--teal-deep);border:3px solid var(--paper)}
+.step.last::before{background:var(--teal)}
+.step small{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-text);font-weight:700}
+.step h3{font-size:24px;margin:8px 0}
+.step p{font-size:15.5px;color:var(--muted)}
+
+/* --- work: one big tile + three side tiles, the rest behind a toggle --- */
+.work-grid{grid-template-columns:repeat(3,1fr)}
+.wc.wc-feat{grid-column:1/3;grid-row:1/4}
+.wc.wc-feat .wc-shot{aspect-ratio:auto;flex:1;min-height:0}
+.wc.wc-feat .wc-body{padding:18px 22px 20px}
+.wc.wc-feat h3{font-size:24px}
+.wc.wc-side{flex-direction:row;min-height:150px}
+.wc.wc-side .wc-shot{width:42%;flex-shrink:0;aspect-ratio:auto;border-bottom:0;border-right:1px solid var(--line)}
+.wc.wc-side .wc-body{flex:1}
+.work-grid:not(.show-all) .wc:nth-child(n+5){display:none}
+.work-more-wrap{display:flex}
+@media(max-width:900px){
+  .work-grid{grid-template-columns:repeat(2,1fr)}
+  .wc.wc-feat{grid-column:1/-1;grid-row:auto}
+  .wc.wc-feat .wc-shot{aspect-ratio:16/10;flex:none}
+  .wc.wc-side{flex-direction:column;min-height:0}
+  .wc.wc-side .wc-shot{width:auto;aspect-ratio:16/10;border-right:0;border-bottom:1px solid var(--line)}
+}
+@media(max-width:520px){.work-grid{grid-template-columns:1fr}}
+
+/* --- pricing comparison table --- */
+.cmp-wrap{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:16px}
+.cmp{border-collapse:collapse;width:100%;min-width:720px}
+.cmp th,.cmp td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);font-size:14.5px;vertical-align:top}
+.cmp thead th{background:var(--paper-2);border-bottom:1px solid #d6ccb6;vertical-align:bottom}
+.cmp thead th:first-child{width:26%}
+.cmp tbody th{font-weight:600;color:var(--ink)}
+.cmp .plan{display:block;font-family:var(--serif);font-weight:500;font-size:22px}
+.cmp .cost{display:block;font-family:var(--serif);font-weight:500;font-size:28px;color:var(--teal-deep);font-variant-numeric:tabular-nums}
+.cmp .pop{background:var(--charcoal);color:var(--paper)}
+.cmp .pop .cost{color:var(--teal)}
+.cmp .pop .feat-badge{position:static;transform:none;display:inline-block;margin-bottom:6px}
+.cmp td.hi{background:#fbfaf7}
+.cmp tr:last-child th,.cmp tr:last-child td{border-bottom:0}
+.cmp .btn{font-size:14px;padding:11px 18px}
+.cmp-note{text-align:center;font-size:14px;color:var(--muted);margin-top:20px}
+/* phones: the table scrolls sideways; keep the row labels pinned and say so */
+.cmp-hint{display:none;font-size:13px;color:var(--muted);text-align:right;margin:0 0 8px}
+@media(max-width:760px){
+  .cmp-hint{display:block}
+  .cmp tbody th,.cmp thead th:first-child{position:sticky;left:0;z-index:1;background:#fff;box-shadow:1px 0 0 var(--line)}
+  .cmp thead th:first-child{background:var(--paper-2)}
+}
+.addons{margin-top:18px}
+
+/* --- faq: heading left, accordion right --- */
+.faq-grid{display:flex;gap:56px;flex-wrap:wrap}
+.faq-grid .sec-head{flex:1 1 300px;margin-bottom:0}
+.faq-grid .faq{flex:1.4 1 480px;max-width:none;margin:0}
+.faq-grid .sec-head .btn{margin-top:8px}
+
+/* --- contact: three ways to talk --- */
+.talk{display:flex;flex-direction:column;gap:12px;margin-top:4px}
+.talk a{display:block;background:var(--charcoal-2);border:1px solid #41454a;border-radius:14px;padding:18px 20px;color:var(--paper);transition:border-color .2s,transform .2s}
+.talk a:hover{border-color:var(--teal);transform:translateY(-2px)}
+.talk small{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:4px}
+.talk b{display:block;font-family:var(--serif);font-weight:400;font-size:20px}
+.talk span{font-size:13.5px;color:#b7b2a6}
+
+@media(prefers-reduced-motion:reduce){
+  .hero-review{animation:none}
+  .hero h1 .w{animation:none;opacity:1;transform:none;filter:none}
+  .hero-media{transform:none!important}
+  .talk a:hover{transform:none}
+}
 </style>
+
 <!-- HERO -->
-<header class="hero" id="top">
+<header class="hero" id="about">
   <div class="wrap hero-grid">
     <div>
-      <span class="speed reveal"><span class="pulse"></span>Online within a week</span>
-      <h1 class="reveal d1">We build websites that <em>grow</em> your business.</h1>
-      <p class="lead reveal d2">A husband-and-wife studio in Urmston, helping small businesses across Manchester look brilliant online - without the jargon or the agency markup.</p>
+      <span class="eyebrow reveal" style="display:inline-flex;align-items:center;gap:12px"><span style="width:26px;height:1.5px;background:var(--teal-deep)"></span>Urmston, Manchester</span>
+      <h1 class="reveal d1">Hi, we're <em>Hanna</em> and <em>Rachid</em>.</h1>
+      <p class="lead reveal d2">We build websites and run social media for small businesses across Manchester. When you get in touch, you talk to us. When we build your site, we build it. No account managers, ever.</p>
       <div class="hero-cta reveal d3">
-        <a href="#contact" class="btn btn-fill">Start your project →</a>
-        <a href="#work" class="btn btn-line">See our work</a>
+        <a href="https://wa.me/447816130955?text=Hi%2C%20I%20found%20you%20on%20your%20website%20and%20I%27d%20like%20to%20chat%20about%20a%20project." class="btn btn-fill" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1 1 21 11.5z"/></svg>WhatsApp us</a>
+        <a href="tel:07763648866" class="btn btn-line"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Call Hanna 07763 648866</a>
       </div>
+      <form method="POST" action="send.php" class="quick reveal d4" id="quickForm" data-recaptcha aria-label="Quick enquiry">
+        <div class="quick-head"><strong>Or tell us what you need</strong><span>We reply within 24 hours</span></div>
+        <div class="quick-row">
+          <div><label for="q-name">Your name *</label><input type="text" id="q-name" name="name" autocomplete="name" required aria-required="true" /></div>
+          <div><label for="q-email">Email *</label><input type="email" id="q-email" name="email" autocomplete="email" required aria-required="true" /></div>
+        </div>
+        <div><label for="q-msg">What do you need? One line is fine.</label><input type="text" id="q-msg" name="message" placeholder="e.g. a one-page site for my café" /></div>
+        <input type="hidden" name="interested_package" value="Quick enquiry (homepage)" />
+        <input type="hidden" name="g-recaptcha-response" />
+        <button type="submit" class="btn btn-fill">Send to Hanna &amp; Rachid →</button>
+      </form>
     </div>
     <div class="hero-photo reveal d2">
-      <picture><source type="image/avif" srcset="assets/couple-480.avif 480w, assets/couple-800.avif 800w, assets/couple-1200.avif 1200w" sizes="(max-width:880px) 100vw, 45vw" /><source type="image/webp" srcset="assets/couple-480.webp 480w, assets/couple-800.webp 800w, assets/couple-1200.webp 1200w" sizes="(max-width:880px) 100vw, 45vw" /><img class="frame" width="2399" height="1800" fetchpriority="high" alt="Hanna and Rachid, the husband-and-wife team behind HelloWebDesign in Urmston" src="assets/couple-1200.jpg" /></picture>
-      <div class="hero-tag float"><b>Hanna &amp; Rachid</b><span>The two people you'll actually work with</span></div>
+      <div class="hero-media">
+        <picture><source type="image/avif" srcset="assets/couple-480.avif 480w, assets/couple-800.avif 800w, assets/couple-1200.avif 1200w" sizes="(max-width:880px) 100vw, 45vw" /><source type="image/webp" srcset="assets/couple-480.webp 480w, assets/couple-800.webp 800w, assets/couple-1200.webp 1200w" sizes="(max-width:880px) 100vw, 45vw" /><img class="frame" width="2399" height="1800" fetchpriority="high" alt="Hanna and Rachid, the husband-and-wife team behind HelloWebDesign in Urmston" src="assets/couple-1200.jpg" /></picture>
+        <figure class="hero-review">
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <blockquote>“They took the time to understand what we needed and delivered a site we're genuinely proud of.”</blockquote>
+          <figcaption><strong>Anoush S</strong> · Local pub owner</figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 </header>
 
-<div class="strip">
-  <div class="strip-in" id="marquee">
-    <small>20+ years with brands like</small><span class="dot"></span>
-    <span>Next</span><span class="dot"></span><span>Iceland</span><span class="dot"></span><span>Pets at Home</span><span class="dot"></span><span>SimplyBe</span><span class="dot"></span>
-    <small>20+ years with brands like</small><span class="dot"></span>
-    <span>Next</span><span class="dot"></span><span>Iceland</span><span class="dot"></span><span>Pets at Home</span><span class="dot"></span><span>SimplyBe</span><span class="dot"></span>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section id="about" aria-labelledby="about-title">
-  <div class="wrap about-grid">
-    <div class="about-media reveal">
-      <picture><source type="image/avif" srcset="assets/working-480.avif 480w, assets/working-800.avif 800w, assets/working-1140.avif 1140w" sizes="(max-width:880px) 100vw, 42vw" /><source type="image/webp" srcset="assets/working-480.webp 480w, assets/working-800.webp 800w, assets/working-1140.webp 1140w" sizes="(max-width:880px) 100vw, 42vw" /><img class="main" width="1140" height="1600" loading="lazy" decoding="async" alt="Hanna and Rachid working together" src="assets/working-1140.jpg" /></picture>
-      <picture><source type="image/avif" srcset="assets/desk-480.avif 480w, assets/desk-800.avif 800w, assets/desk-1200.avif 1200w" sizes="(max-width:880px) 40vw, 20vw" /><source type="image/webp" srcset="assets/desk-480.webp 480w, assets/desk-800.webp 800w, assets/desk-1200.webp 1200w" sizes="(max-width:880px) 40vw, 20vw" /><img class="inset" width="1800" height="1013" loading="lazy" decoding="async" alt="Hanna managing social media analytics" src="assets/desk-1200.jpg" /></picture>
-    </div>
-    <div class="about-body reveal d1">
-      <span class="eyebrow">About us</span>
-      <h2 class="h2-sm" id="about-title">Real people who actually care about your business</h2>
-      <p>We're a family-run studio based in Urmston, working closely with local and specialist businesses to build their presence online - from websites to social media, with a hands-on, personal approach.</p>
-      <p>We take the time to understand your products, your customers and how your business actually works. That means less back-and-forth and content that feels genuine, not generic. You'll work directly with us, start to finish. No account managers, no handoffs, no middlemen.</p>
-      <div class="stats">
-        <div class="stat"><b data-count="20" data-suffix="+">0</b><span>Years experience</span></div>
-        <div class="stat"><b data-count="2">0</b><span>Person team</span></div>
-        <div class="stat"><b data-count="100" data-suffix="%">0</b><span>Hands-on</span></div>
-      </div>
-    </div>
+<!-- PROMISES -->
+<section class="promises" aria-label="Our promises">
+  <div class="wrap promise-grid">
+    <div class="promise reveal"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></span><div><strong>No hidden fees</strong><span>The price we quote is the price you pay.</span></div></div>
+    <div class="promise reveal d1"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><strong>Live within a week</strong><span>For one-page starter sites.</span></div></div>
+    <div class="promise reveal d2"><span class="ic"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></span><div><strong>A direct line to us</strong><span>Two people, start to finish.</span></div></div>
+    <div class="promise reveal d3"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></span><div><strong>20+ years with big brands</strong><span>Next, Iceland, Pets at Home, SimplyBe.</span></div></div>
   </div>
 </section>
 
-<!-- WORK -->
-<section id="work" class="work" aria-labelledby="work-title">
+<!-- WHAT HAPPENS NEXT -->
+<section id="how" aria-labelledby="how-title">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Our work</span>
-      <h2 id="work-title">Recent projects for real local businesses</h2>
-      <p>A selection of sites, apps and social media we've designed, built and launched. Tap any project to see what we did.</p>
+      <span class="eyebrow">What happens next</span>
+      <h2 id="how-title">From your message to a live site</h2>
+      <p>No mystery, no waiting around. This is what the next couple of weeks look like.</p>
     </div>
-    <div class="work-grid" id="work-grid">
-      <button class="wc reveal" data-project="flok" aria-haspopup="dialog"><div class="wc-shot"><span class="badge-new">New</span><picture><source type="image/avif" srcset="assets/proj-flok-480.avif 480w, assets/proj-flok-800.avif 800w, assets/proj-flok-1200.avif 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-flok-480.webp 480w, assets/proj-flok-800.webp 800w, assets/proj-flok-1200.webp 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="FLÓK Medical Aesthetics" src="assets/proj-flok-1200.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website · Brand</span><h3>FLÓK Medical Aesthetics</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal d1" data-project="savethedate" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-savethedate-480.avif 480w, assets/proj-savethedate-800.avif 800w, assets/proj-savethedate-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-savethedate-480.webp 480w, assets/proj-savethedate-800.webp 800w, assets/proj-savethedate-1000.webp 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="Save the Date wedding website" src="assets/proj-savethedate-1000.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Wedding website</span><h3>Save the Date</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal d2" data-project="nailhead" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-nailhead-480.avif 480w, assets/proj-nailhead-800.avif 800w, assets/proj-nailhead-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-nailhead-480.webp 480w, assets/proj-nailhead-800.webp 800w, assets/proj-nailhead-1000.webp 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="Nailhead Properties" src="assets/proj-nailhead-1000.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>Nailhead Properties</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal" data-project="flightsim" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-flightsim-480.avif 480w, assets/proj-flightsim-612.avif 612w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-flightsim-480.webp 480w, assets/proj-flightsim-612.webp 612w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="Manchester Flight Sim Centre" src="assets/proj-flightsim-612.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Booking · Web App</span><h3>Manchester Flight Sim Centre</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal d1" data-project="hs" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-hs-building-480.avif 480w, assets/proj-hs-building-800.avif 800w, assets/proj-hs-building-1200.avif 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-hs-building-480.webp 480w, assets/proj-hs-building-800.webp 800w, assets/proj-hs-building-1200.webp 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="HS Building Services" src="assets/proj-hs-building-1200.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>HS Building Services</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal d2" data-project="farmers" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-farmers-480.avif 480w, assets/proj-farmers-800.avif 800w, assets/proj-farmers-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-farmers-480.webp 480w, assets/proj-farmers-800.webp 800w, assets/proj-farmers-1000.webp 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="The Farmers Arms" src="assets/proj-farmers-1000.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>The Farmers Arms</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal" data-project="bbm" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-bbm-480.avif 480w, assets/proj-bbm-800.avif 800w, assets/proj-bbm-1200.avif 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-bbm-480.webp 480w, assets/proj-bbm-800.webp 800w, assets/proj-bbm-1200.webp 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="Bolton Builders Merchants social media" src="assets/proj-bbm-1200.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Social Media</span><h3>Bolton Builders Merchants</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal d1" data-project="fennec" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-fennec-480.avif 480w, assets/proj-fennec-800.avif 800w, assets/proj-fennec-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-fennec-480.webp 480w, assets/proj-fennec-800.webp 800w, assets/proj-fennec-1000.webp 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="Fennec Consulting" src="assets/proj-fennec-1000.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>Fennec Consulting</h3></div><span class="arr">↗</span></div></button>
-      <button class="wc reveal d2" data-project="miners" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-miners-480.avif 480w, assets/proj-miners-800.avif 800w, assets/proj-miners-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-miners-480.webp 480w, assets/proj-miners-800.webp 800w, assets/proj-miners-1000.webp 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="The Miners Arms" src="assets/proj-miners-1000.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>The Miners Arms</h3></div><span class="arr">↗</span></div></button>
-    </div>
-    <div class="work-more-wrap">
-      <button class="btn btn-line" id="work-toggle" aria-expanded="false" aria-controls="work-grid">Show all projects ↓</button>
+    <div class="timeline">
+      <div class="step reveal"><small>Today</small><h3>You get a reply from one of us</h3><p>Within 24 hours, from Hanna or Rachid. We'll ask a couple of questions and suggest a time to talk.</p></div>
+      <div class="step reveal d1"><small>This week</small><h3>A 20-minute chat and a fixed quote</h3><p>Phone, video or a visit if that helps. You get a clear price and timeline in writing. No obligation.</p></div>
+      <div class="step reveal d2"><small>Next week</small><h3>Your starter site goes live</h3><p>One-page sites are live within a week of go-ahead. Bigger builds get a timeline we agree up front.</p></div>
+      <div class="step last reveal d3"><small>After that</small><h3>We're still here</h3><p>Optional care plans from £19 a month keep it secure, backed up and updated. Or look after it yourself. Both are fine.</p></div>
     </div>
   </div>
 </section>
 
 <!-- SERVICES -->
-<section id="services" aria-labelledby="services-title">
+<section id="services" class="alt" aria-labelledby="services-title">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">What we do</span>
@@ -205,57 +308,85 @@ JSONLD;
   </div>
 </section>
 
-<!-- WHY -->
-<section class="why" aria-labelledby="why-title">
+<!-- WORK -->
+<section id="work" class="work" aria-labelledby="work-title">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Why pick us</span>
-      <h2 id="why-title">What makes us different</h2>
-      <p>We're not a faceless agency. Here's why local businesses choose us.</p>
+      <span class="eyebrow">Things we've made</span>
+      <h2 id="work-title">Local businesses we've helped get online</h2>
+      <p>A selection of sites, apps and social media we've designed, built and launched. Tap any project to see what we did.</p>
     </div>
-    <div class="why-grid">
-      <div class="why-item reveal"><span class="n">01</span><div><h3>You deal with us directly</h3><p>No account managers, no juniors. You speak to the people doing the work, every time.</p></div></div>
-      <div class="why-item reveal d1"><span class="n">02</span><div><h3>No hidden fees</h3><p>The price we quote is the price you pay. Extra work is always agreed before we proceed.</p></div></div>
-      <div class="why-item reveal"><span class="n">03</span><div><h3>We understand small business</h3><p>We run one ourselves. We know the budgets, the priorities and what actually moves the needle.</p></div></div>
-      <div class="why-item reveal d1"><span class="n">04</span><div><h3>Big-brand experience</h3><p>20+ years with household names, now focused entirely on helping local businesses grow.</p></div></div>
+    <div class="work-grid" id="work-grid">
+      <button class="wc wc-feat reveal" data-project="flok" aria-haspopup="dialog"><div class="wc-shot"><span class="badge-new">New</span><picture><source type="image/avif" srcset="assets/proj-flok-480.avif 480w, assets/proj-flok-800.avif 800w, assets/proj-flok-1200.avif 1200w" sizes="(max-width:900px) 100vw, 55vw" /><source type="image/webp" srcset="assets/proj-flok-480.webp 480w, assets/proj-flok-800.webp 800w, assets/proj-flok-1200.webp 1200w" sizes="(max-width:900px) 100vw, 55vw" /><img loading="lazy" decoding="async" alt="FLÓK Medical Aesthetics" src="assets/proj-flok-1200.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website · Brand</span><h3>FLÓK Medical Aesthetics</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc wc-side reveal d1" data-project="farmers" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-farmers-480.avif 480w, assets/proj-farmers-800.avif 800w, assets/proj-farmers-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 15vw" /><source type="image/webp" srcset="assets/proj-farmers-480.webp 480w, assets/proj-farmers-800.webp 800w, assets/proj-farmers-1000.webp 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 15vw" /><img loading="lazy" decoding="async" alt="The Farmers Arms" src="assets/proj-farmers-1000.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Country pub</span><h3>The Farmers Arms</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc wc-side reveal d2" data-project="bbm" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-bbm-480.avif 480w, assets/proj-bbm-800.avif 800w, assets/proj-bbm-1200.avif 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 15vw" /><source type="image/webp" srcset="assets/proj-bbm-480.webp 480w, assets/proj-bbm-800.webp 800w, assets/proj-bbm-1200.webp 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 15vw" /><img loading="lazy" decoding="async" alt="Bolton Builders Merchants social media" src="assets/proj-bbm-1200.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Social media</span><h3>Bolton Builders Merchants</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc wc-side reveal d3" data-project="savethedate" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-savethedate-480.avif 480w, assets/proj-savethedate-800.avif 800w, assets/proj-savethedate-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 15vw" /><source type="image/webp" srcset="assets/proj-savethedate-480.webp 480w, assets/proj-savethedate-800.webp 800w, assets/proj-savethedate-1000.webp 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 15vw" /><img loading="lazy" decoding="async" alt="Save the Date wedding website" src="assets/proj-savethedate-1000.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Wedding website</span><h3>Save the Date</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal" data-project="nailhead" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-nailhead-480.avif 480w, assets/proj-nailhead-800.avif 800w, assets/proj-nailhead-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 33vw" /><source type="image/webp" srcset="assets/proj-nailhead-480.webp 480w, assets/proj-nailhead-800.webp 800w, assets/proj-nailhead-1000.webp 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 33vw" /><img loading="lazy" decoding="async" alt="Nailhead Properties" src="assets/proj-nailhead-1000.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>Nailhead Properties</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal d1" data-project="flightsim" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-flightsim-480.avif 480w, assets/proj-flightsim-612.avif 612w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 33vw" /><source type="image/webp" srcset="assets/proj-flightsim-480.webp 480w, assets/proj-flightsim-612.webp 612w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 33vw" /><img loading="lazy" decoding="async" alt="Manchester Flight Sim Centre" src="assets/proj-flightsim-612.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Booking · Web App</span><h3>Manchester Flight Sim Centre</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal d2" data-project="hs" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-hs-building-480.avif 480w, assets/proj-hs-building-800.avif 800w, assets/proj-hs-building-1200.avif 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 33vw" /><source type="image/webp" srcset="assets/proj-hs-building-480.webp 480w, assets/proj-hs-building-800.webp 800w, assets/proj-hs-building-1200.webp 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 33vw" /><img loading="lazy" decoding="async" alt="HS Building Services" src="assets/proj-hs-building-1200.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>HS Building Services</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal" data-project="fennec" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-fennec-480.avif 480w, assets/proj-fennec-800.avif 800w, assets/proj-fennec-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 33vw" /><source type="image/webp" srcset="assets/proj-fennec-480.webp 480w, assets/proj-fennec-800.webp 800w, assets/proj-fennec-1000.webp 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 33vw" /><img loading="lazy" decoding="async" alt="Fennec Consulting" src="assets/proj-fennec-1000.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>Fennec Consulting</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc reveal d1" data-project="miners" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-miners-480.avif 480w, assets/proj-miners-800.avif 800w, assets/proj-miners-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 33vw" /><source type="image/webp" srcset="assets/proj-miners-480.webp 480w, assets/proj-miners-800.webp 800w, assets/proj-miners-1000.webp 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 33vw" /><img loading="lazy" decoding="async" alt="The Miners Arms" src="assets/proj-miners-1000.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>The Miners Arms</h3></div><span class="arr">↗</span></div></button>
+    </div>
+    <div class="work-more-wrap">
+      <button class="btn btn-line" id="work-toggle" aria-expanded="false" aria-controls="work-grid">Show all projects ↓</button>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" aria-labelledby="testimonials-title">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Reviews</span>
+      <h2 id="testimonials-title">What our clients say</h2>
+    </div>
+    <div class="quotes">
+      <div class="quote reveal"><div class="stars">★★★★★</div><p>"Really impressed with the whole process. They took the time to understand what we needed and delivered a site we're genuinely proud of. Couldn't recommend them enough."</p><div class="who"><strong>Anoush S</strong><span>Local Pub Owner</span></div></div>
+      <div class="quote reveal d1"><div class="stars">★★★★★</div><p>"Having someone handle our social media who actually visits the business and understands what we do has made a massive difference. The content feels authentic, not forced."</p><div class="who"><strong>Mick H</strong><span>Local Building Merchant</span></div></div>
+      <div class="quote reveal d2"><div class="stars">★★★★★</div><p>"Our wedding website was amazing, made it so easy for our guests and us having everything all in one place."</p><div class="who"><strong>Hassan OE</strong><span>Wedding Website</span></div></div>
     </div>
   </div>
 </section>
 
 <!-- PACKAGES -->
-<section id="packages" aria-labelledby="packages-title">
+<section id="packages" class="alt" aria-labelledby="packages-title">
   <div class="wrap">
     <div class="sec-head center reveal">
-      <span class="eyebrow">Packages</span>
-      <h2 id="packages-title">Simple, honest pricing</h2>
-      <p>Whether you need a starter site to get online or ongoing support, there's a package for you.</p>
+      <span class="eyebrow">Pricing</span>
+      <h2 id="packages-title">Compare the packages</h2>
+      <p>The price we quote is the price you pay. Wedding websites also start from £499.</p>
     </div>
-    <div class="pkg-grid">
-      <div class="pkg reveal">
-        <div class="pkg-name">Starter Site</div><div class="pkg-sub">One-page, get online fast</div><div class="price">From £499</div>
-        <ul><li>Single-page design</li><li>Mobile responsive</li><li>Contact form included</li><li>Live within a week</li></ul>
-        <a href="/small-business-websites/" class="link-teal pkg-link">More about small business websites →</a>
-        <a href="#contact" class="btn btn-line" data-prefill="Starter Website (one page)">Get in touch</a>
-      </div>
-      <div class="pkg feat reveal d1">
-        <span class="feat-badge">Most popular</span><div class="pkg-name">Business Pro</div><div class="pkg-sub">For growing businesses</div><div class="price">Custom</div>
-        <ul><li>Multi-page website</li><li>Custom design</li><li>Advanced SEO setup</li><li>Google integration</li></ul>
-        <a href="#contact" class="btn btn-fill" data-prefill="Business Website (multi page)">Start your project</a>
-      </div>
-      <div class="pkg reveal d2">
-        <div class="pkg-name">E-Commerce</div><div class="pkg-sub">Sell online</div><div class="price">Custom</div>
-        <ul><li>Full online shop</li><li>Secure payments</li><li>Order management</li><li>Product catalogue</li></ul>
-        <a href="#contact" class="btn btn-line" data-prefill="E-Commerce / Online Shop">Get in touch</a>
-      </div>
-      <div class="pkg reveal d3">
-        <div class="pkg-name">Wedding</div><div class="pkg-sub">Your day, online</div><div class="price">From £499</div>
-        <ul><li>Beautiful wedding site</li><li>RSVP form</li><li>Venue &amp; travel info</li><li>Custom photo gallery</li></ul>
-        <a href="/wedding-websites/" class="link-teal pkg-link">More about wedding websites →</a>
-        <a href="#contact" class="btn btn-line" data-prefill="Wedding Website">Get in touch</a>
-      </div>
+    <p class="cmp-hint" aria-hidden="true">Swipe to compare →</p>
+    <div class="cmp-wrap reveal">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"><span class="plan">Starter Site</span><span class="cost">From £499</span></th>
+            <th scope="col" class="pop"><span class="feat-badge">Most popular</span><span class="plan">Business Pro</span><span class="cost">Custom quote</span></th>
+            <th scope="col"><span class="plan">E-Commerce</span><span class="cost">Custom quote</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Pages</th><td>One page</td><td class="hi">Multi-page</td><td>Shop + pages</td></tr>
+          <tr><th scope="row">Design</th><td>Clean layout, your branding</td><td class="hi">Fully custom</td><td>Fully custom</td></tr>
+          <tr><th scope="row">Mobile responsive</th><td>✓</td><td class="hi">✓</td><td>✓</td></tr>
+          <tr><th scope="row">Contact form</th><td>✓</td><td class="hi">✓</td><td>✓</td></tr>
+          <tr><th scope="row">SEO setup</th><td>Basics</td><td class="hi">Advanced + Google integration</td><td>Advanced + Google integration</td></tr>
+          <tr><th scope="row">Secure payments &amp; orders</th><td>—</td><td class="hi">—</td><td>✓ Product catalogue &amp; order management</td></tr>
+          <tr><th scope="row">Typical time to live</th><td>Within a week</td><td class="hi">Agreed up front</td><td>Agreed up front</td></tr>
+          <tr>
+            <th scope="row"></th>
+            <td><a href="#contact" class="btn btn-line" data-prefill="Starter Website (one page)">Get in touch</a></td>
+            <td class="hi"><a href="#contact" class="btn btn-fill" data-prefill="Business Website (multi page)">Start your project</a></td>
+            <td><a href="#contact" class="btn btn-line" data-prefill="E-Commerce / Online Shop">Get in touch</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+    <p class="cmp-note">Not sure which one? <a href="#contact" class="link-teal">Tell us what you need</a> and we'll suggest the right fit. <a href="/small-business-websites/" class="link-teal">More about small business websites →</a></p>
     <div class="addons reveal">
-      <button type="button" data-prefill="Social Media Management">+ Social Media Management</button><button type="button" data-prefill="Web / Mobile Application">+ Web Applications</button><button type="button" data-prefill="Web / Mobile Application">+ Mobile Apps</button><button type="button" data-prefill="Something else">+ Business Process Consultancy</button>
+      <button type="button" data-prefill="Wedding Website">+ Wedding Websites</button><button type="button" data-prefill="Social Media Management">+ Social Media Management</button><button type="button" data-prefill="Web / Mobile Application">+ Web &amp; Mobile Apps</button><button type="button" data-prefill="Something else">+ Something else</button>
     </div>
   </div>
 </section>
@@ -284,30 +415,16 @@ JSONLD;
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="why" style="background:var(--paper-2)" aria-labelledby="testimonials-title">
-  <div class="wrap">
-    <div class="sec-head center reveal">
-      <span class="eyebrow">Testimonials</span>
-      <h2 id="testimonials-title">What our clients say</h2>
-    </div>
-    <div class="quotes">
-      <div class="quote reveal"><div class="stars">★★★★★</div><p>"Really impressed with the whole process. They took the time to understand what we needed and delivered a site we're genuinely proud of. Couldn't recommend them enough."</p><div class="who"><strong>Anoush S</strong><span>Local Pub Owner</span></div></div>
-      <div class="quote reveal d1"><div class="stars">★★★★★</div><p>"Having someone handle our social media who actually visits the business and understands what we do has made a massive difference. The content feels authentic, not forced."</p><div class="who"><strong>Mick H</strong><span>Local Building Merchant</span></div></div>
-      <div class="quote reveal d2"><div class="stars">★★★★★</div><p>"Our wedding website was amazing, made it so easy for our guests and us having everything all in one place."</p><div class="who"><strong>Hassan OE</strong><span>Wedding Website</span></div></div>
-    </div>
-  </div>
-</section>
-
 <!-- FAQ -->
 <section id="faq" aria-labelledby="faq-title">
-  <div class="wrap">
-    <div class="sec-head center reveal">
-      <span class="eyebrow">FAQs</span>
-      <h2 id="faq-title">Questions, answered</h2>
-      <p>The things people usually ask before getting started.</p>
+  <div class="wrap faq-grid">
+    <div class="sec-head reveal from-left">
+      <span class="eyebrow">Before you ask</span>
+      <h2 id="faq-title">The things people usually want to know</h2>
+      <p>Anything else, just ask. That's what the chat is for.</p>
+      <a href="#contact" class="btn btn-line">Ask us something</a>
     </div>
-    <div class="faq reveal">
+    <div class="faq reveal d1">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">How quickly can my site go live?<span class="pm"></span></button>
         <div class="faq-a"><div class="faq-a-inner"><p>Simple one-page starter sites can be live within a week. Multi-page, e-commerce and bespoke builds take a little longer - we'll agree a clear timeline with you before we start.</p></div></div>
@@ -343,15 +460,17 @@ JSONLD;
 <!-- CONTACT -->
 <section id="contact" class="contact" aria-labelledby="contact-title">
   <div class="wrap ct-grid">
-    <div class="ct-info reveal">
-      <span class="eyebrow">Contact</span>
-      <h2 class="h2-sm" id="contact-title">Say hello</h2>
-      <p>Ready to get started? Drop us a message and we'll reply within 24 hours. No pressure, no hard sell - just a friendly chat.</p>
-      <div class="ct-line"><small>Email</small><a href="mailto:contact@hellowebdesign.co.uk">contact@hellowebdesign.co.uk</a></div>
-      <div class="ct-line"><small>Phone</small><span>Hanna 07763 648866 · Rachid 07816 130955</span></div>
-      <div class="ct-line"><small>Based in</small><span>Urmston, Manchester, UK</span></div>
+    <div class="ct-info reveal from-left">
+      <span class="eyebrow">Prefer to talk?</span>
+      <h2 class="h2-sm" id="contact-title">Pick whichever is easiest for you</h2>
+      <p>No pressure, no hard sell. Just a friendly chat about what you're after. We reply within 24 hours.</p>
+      <div class="talk">
+        <a href="https://wa.me/447816130955?text=Hi%2C%20I%20found%20you%20on%20your%20website%20and%20I%27d%20like%20to%20chat%20about%20a%20project." target="_blank" rel="noopener"><small>WhatsApp</small><b>Message Rachid</b><span>Usually the quickest reply</span></a>
+        <a href="tel:07763648866"><small>Phone</small><b>Hanna 07763 648866</b><span>Rachid 07816 130955</span></a>
+        <a href="mailto:contact@hellowebdesign.co.uk"><small>Email</small><b>contact@hellowebdesign.co.uk</b><span>Urmston, Manchester, UK</span></a>
+      </div>
     </div>
-    <form method="POST" action="send.php" id="contactForm" class="reveal d1" aria-describedby="recaptcha-note">
+    <form method="POST" action="send.php" id="contactForm" class="reveal d1" data-recaptcha aria-describedby="recaptcha-note">
       <div class="full" id="formStatus" hidden role="status" aria-live="polite"></div>
       <div><label for="f-name">Your name *</label><input type="text" id="f-name" name="name" autocomplete="name" required aria-required="true" /></div>
       <div><label for="f-phone">Phone number</label><input type="tel" id="f-phone" name="phone" autocomplete="tel" /></div>
@@ -418,10 +537,47 @@ JSONLD;
   </div>
 </div>
 <script>
-  // back to top (page-specific; nav-shadow/mobile-menu/FAQ are in /assets/site.js)
+  // back to top (page-specific; nav-shadow/mobile-menu/FAQ/scroll-spy are in /assets/site.js)
   const toTop = document.getElementById('toTop');
   addEventListener('scroll', () => toTop.classList.toggle('show', scrollY > 500), { passive: true });
   toTop.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // hero headline: wrap each word so it can arrive on its own (keeps the <em>s intact)
+  const heroH1 = document.querySelector('.hero h1');
+  if (heroH1 && !reduceMotion){
+    let i = 0;
+    const wrapWords = (node) => {
+      Array.from(node.childNodes).forEach((n) => {
+        if (n.nodeType === 3){
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach((part) => {
+            if (!part) return;
+            if (/^\s+$/.test(part)){ frag.appendChild(document.createTextNode(part)); return; }
+            const s = document.createElement('span'); s.className = 'w'; s.style.setProperty('--i', i++); s.textContent = part;
+            frag.appendChild(s);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1){ wrapWords(n); }
+      });
+    };
+    wrapWords(heroH1);
+    heroH1.classList.remove('reveal', 'd1');
+    heroH1.classList.add('split');
+  }
+
+  // hero photo + review card: gentle parallax against the hairline frame, capped so the photo never leaves it
+  const heroPic = document.querySelector('.hero-media');
+  if (heroPic && !reduceMotion){
+    let ticking = false;
+    const parallax = () => {
+      ticking = false;
+      if (scrollY > innerHeight) return;
+      heroPic.style.transform = 'translateY(' + Math.max(-36, scrollY * -0.06).toFixed(1) + 'px)';
+    };
+    addEventListener('scroll', () => { if (!ticking){ ticking = true; requestAnimationFrame(parallax); } }, { passive: true });
+  }
 
   // reveal on scroll (scroll-position based - robust across environments)
   const reveals = Array.from(document.querySelectorAll('.reveal'));
@@ -442,7 +598,7 @@ JSONLD;
     }
   }
 
-  // projects: show first 4 on mobile, expand the rest on tap
+  // projects: the featured four are always shown; the rest expand on tap
   const workGrid = document.querySelector('.work-grid');
   const workToggle = document.getElementById('work-toggle');
   if (workGrid && workToggle){
@@ -456,32 +612,12 @@ JSONLD;
         const open = workGrid.classList.toggle('show-all');
         workToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
         workToggle.textContent = open ? expanded : collapsed;
-        if (!open) document.getElementById('work').scrollIntoView({behavior:'smooth', block:'start'});
+        if (open) revealCheck(); else document.getElementById('work').scrollIntoView({behavior:'smooth', block:'start'});
       });
     }
   }
 
-  // animated count-up
-  const counters = Array.from(document.querySelectorAll('[data-count]'));
-  function runCount(el){
-    const target = +el.dataset.count, suffix = el.dataset.suffix || '';
-    const dur = 1100, t0 = performance.now();
-    const tick = (t) => {
-      const p = Math.min(1, (t - t0) / dur), eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(eased * target) + suffix;
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }
-  function countCheck(){
-    const trigger = innerHeight * 0.85;
-    for (let i = counters.length - 1; i >= 0; i--){
-      const el = counters[i];
-      if (el.getBoundingClientRect().top < trigger){ runCount(el); counters.splice(i,1); }
-    }
-  }
-
-  function onScroll(){ revealCheck(); countCheck(); }
+  function onScroll(){ revealCheck(); }
   addEventListener('scroll', onScroll, { passive:true });
   addEventListener('resize', onScroll);
   // initial passes (next frame + small delay to catch late layout)
@@ -572,27 +708,27 @@ JSONLD;
   modal.addEventListener('keydown', (e) => trapTab(modal, e));
   addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-  // contact form: fetch a reCAPTCHA v3 token (action 'contact') before submitting
+  // forms (hero quick form + full contact form): fetch a reCAPTCHA v3 token (action 'contact') before submitting
   const SITE_KEY = '6LcixXcsAAAAACLNjsk91s8-RTpuoOeqsnGOqRuH';
-  const cForm = document.getElementById('contactForm');
-  if (cForm){
-    cForm.addEventListener('submit', (e) => {
+  document.querySelectorAll('form[data-recaptcha]').forEach((form) => {
+    form.addEventListener('submit', (e) => {
       // if reCAPTCHA failed to load, submit anyway so the form still works
       if (typeof grecaptcha === 'undefined'){ return; }
       e.preventDefault();
-      const btn = cForm.querySelector('button[type=submit]');
+      const btn = form.querySelector('button[type=submit]');
+      const label = btn ? btn.textContent : '';
       if (btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
       grecaptcha.ready(() => {
         grecaptcha.execute(SITE_KEY, { action: 'contact' }).then((token) => {
-          document.getElementById('recaptchaToken').value = token;
-          cForm.submit();
+          form.querySelector('input[name="g-recaptcha-response"]').value = token;
+          form.submit();
         }).catch(() => {
-          if (btn){ btn.disabled = false; btn.textContent = 'Send message →'; }
+          if (btn){ btn.disabled = false; btn.textContent = label; }
           alert('reCAPTCHA failed to verify. Please try again.');
         });
       });
     });
-  }
+  });
 
   // show a status banner after the PHP redirect (/?status=success|error#contact)
   (() => {
@@ -618,7 +754,7 @@ JSONLD;
   document.querySelectorAll('[data-prefill]').forEach((el) => {
     el.addEventListener('click', () => {
       if (interestSelect){ interestSelect.value = el.dataset.prefill; }
-      // add-ons are <span> (no href) — scroll to the form ourselves
+      // add-ons are <button>s (no href) — scroll to the form ourselves
       if (el.tagName !== 'A'){ document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); }
     });
   });

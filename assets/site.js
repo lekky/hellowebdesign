@@ -24,6 +24,27 @@
     });
   }
 
+  // scroll-spy: underline the nav link for the section currently in view
+  // (links are "/#id" or "#id"; only sections that exist on this page take part)
+  const spyLinks = Array.from(document.querySelectorAll('.nav-links a:not(.nav-cta)'))
+    .map(a => { const id = (a.getAttribute('href') || '').split('#')[1]; const el = id && document.getElementById(id); return el ? { a, el } : null; })
+    .filter(Boolean);
+  if (spyLinks.length && 'IntersectionObserver' in window) {
+    const setActive = (el) => spyLinks.forEach(({ a, el: s }) => {
+      const on = s === el;
+      a.classList.toggle('active', on);
+      if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+    });
+    const visible = new Map();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => e.isIntersecting ? visible.set(e.target, e.intersectionRatio) : visible.delete(e.target));
+      let best = null, bestRatio = 0;
+      visible.forEach((r, el) => { if (r > bestRatio) { best = el; bestRatio = r; } });
+      setActive(best);
+    }, { rootMargin: '-35% 0px -45% 0px', threshold: [0, .25, .5, .75, 1] });
+    spyLinks.forEach(({ el }) => io.observe(el));
+  }
+
   // FAQ accordion (only one open at a time)
   document.querySelectorAll('.faq-q').forEach((q) => {
     q.addEventListener('click', () => {

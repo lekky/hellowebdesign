@@ -18,3 +18,6 @@ _design_index.html
 
 # Local dev/verification scratch (never deploy)
 .dev/
+
+# python bytecode from the ui-ux-pro-max search script
+__pycache__/

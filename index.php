@@ -96,7 +96,19 @@ JSONLD;
 .hero-tag span{display:block;font-size:12px;color:var(--muted);letter-spacing:.04em}
 .hero-photo .float{position:absolute;animation:floaty 6s ease-in-out infinite}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@media(prefers-reduced-motion:reduce){.hero-photo .float{animation:none}}
+/* offset hairline frame behind the photo; the photo parallaxes against it on scroll */
+.hero-photo{isolation:isolate}
+.hero-photo::before{content:"";position:absolute;inset:22px -22px -22px 22px;border:1.5px solid var(--teal);border-radius:14px;opacity:.6;z-index:-1}
+.hero-photo picture{display:block;will-change:transform}
+/* headline arrives word by word (spans added by JS; without JS the h1 reveals as one block) */
+.hero h1.split{opacity:1;transform:none}
+.hero h1 .w{display:inline-block;opacity:0;transform:translateY(.35em);filter:blur(5px);animation:wordIn .75s cubic-bezier(.22,.61,.36,1) forwards;animation-delay:calc(var(--i) * 75ms + 120ms)}
+@keyframes wordIn{to{opacity:1;transform:none;filter:blur(0)}}
+@media(prefers-reduced-motion:reduce){
+  .hero-photo .float{animation:none}
+  .hero h1 .w{animation:none;opacity:1;transform:none;filter:none}
+  .hero-photo picture{transform:none!important}
+}
 </style>
 <!-- HERO -->
 <header class="hero" id="top">
@@ -117,23 +129,26 @@ JSONLD;
   </div>
 </header>
 
-<div class="strip">
-  <div class="strip-in" id="marquee">
-    <small>20+ years with brands like</small><span class="dot"></span>
-    <span>Next</span><span class="dot"></span><span>Iceland</span><span class="dot"></span><span>Pets at Home</span><span class="dot"></span><span>SimplyBe</span><span class="dot"></span>
-    <small>20+ years with brands like</small><span class="dot"></span>
-    <span>Next</span><span class="dot"></span><span>Iceland</span><span class="dot"></span><span>Pets at Home</span><span class="dot"></span><span>SimplyBe</span><span class="dot"></span>
+<div class="strip" id="strip">
+  <div class="strip-track">
+    <div class="strip-in" id="marquee">
+      <small>20+ years with brands like</small><span class="dot"></span>
+      <span>Next</span><span class="dot"></span><span>Iceland</span><span class="dot"></span><span>Pets at Home</span><span class="dot"></span><span>SimplyBe</span><span class="dot"></span>
+      <small>20+ years with brands like</small><span class="dot"></span>
+      <span>Next</span><span class="dot"></span><span>Iceland</span><span class="dot"></span><span>Pets at Home</span><span class="dot"></span><span>SimplyBe</span><span class="dot"></span>
+    </div>
   </div>
+  <button type="button" class="strip-pause" id="stripPause" aria-pressed="false" aria-label="Pause scrolling brand list"><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="5" height="16" rx="1"/><rect x="14" y="4" width="5" height="16" rx="1"/></svg><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></button>
 </div>
 
 <!-- ABOUT -->
 <section id="about" aria-labelledby="about-title">
   <div class="wrap about-grid">
-    <div class="about-media reveal">
-      <picture><source type="image/avif" srcset="assets/working-480.avif 480w, assets/working-800.avif 800w, assets/working-1140.avif 1140w" sizes="(max-width:880px) 100vw, 42vw" /><source type="image/webp" srcset="assets/working-480.webp 480w, assets/working-800.webp 800w, assets/working-1140.webp 1140w" sizes="(max-width:880px) 100vw, 42vw" /><img class="main" width="1140" height="1600" loading="lazy" decoding="async" alt="Hanna and Rachid working together" src="assets/working-1140.jpg" /></picture>
-      <picture><source type="image/avif" srcset="assets/desk-480.avif 480w, assets/desk-800.avif 800w, assets/desk-1200.avif 1200w" sizes="(max-width:880px) 40vw, 20vw" /><source type="image/webp" srcset="assets/desk-480.webp 480w, assets/desk-800.webp 800w, assets/desk-1200.webp 1200w" sizes="(max-width:880px) 40vw, 20vw" /><img class="inset" width="1800" height="1013" loading="lazy" decoding="async" alt="Hanna managing social media analytics" src="assets/desk-1200.jpg" /></picture>
+    <div class="about-media">
+      <picture><source type="image/avif" srcset="assets/working-480.avif 480w, assets/working-800.avif 800w, assets/working-1140.avif 1140w" sizes="(max-width:880px) 100vw, 42vw" /><source type="image/webp" srcset="assets/working-480.webp 480w, assets/working-800.webp 800w, assets/working-1140.webp 1140w" sizes="(max-width:880px) 100vw, 42vw" /><img class="main reveal clip" width="1140" height="1600" loading="lazy" decoding="async" alt="Hanna and Rachid working together" src="assets/working-1140.jpg" /></picture>
+      <picture><source type="image/avif" srcset="assets/desk-480.avif 480w, assets/desk-800.avif 800w, assets/desk-1200.avif 1200w" sizes="(max-width:880px) 40vw, 20vw" /><source type="image/webp" srcset="assets/desk-480.webp 480w, assets/desk-800.webp 800w, assets/desk-1200.webp 1200w" sizes="(max-width:880px) 40vw, 20vw" /><img class="inset reveal scale d3" width="1800" height="1013" loading="lazy" decoding="async" alt="Hanna managing social media analytics" src="assets/desk-1200.jpg" /></picture>
     </div>
-    <div class="about-body reveal d1">
+    <div class="about-body reveal from-right d1">
       <span class="eyebrow">About us</span>
       <h2 class="h2-sm" id="about-title">Real people who actually care about your business</h2>
       <p>We're a family-run studio based in Urmston, working closely with local and specialist businesses to build their presence online - from websites to social media, with a hands-on, personal approach.</p>
@@ -156,7 +171,7 @@ JSONLD;
       <p>A selection of sites, apps and social media we've designed, built and launched. Tap any project to see what we did.</p>
     </div>
     <div class="work-grid" id="work-grid">
-      <button class="wc reveal" data-project="flok" aria-haspopup="dialog"><div class="wc-shot"><span class="badge-new">New</span><picture><source type="image/avif" srcset="assets/proj-flok-480.avif 480w, assets/proj-flok-800.avif 800w, assets/proj-flok-1200.avif 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-flok-480.webp 480w, assets/proj-flok-800.webp 800w, assets/proj-flok-1200.webp 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="FLÓK Medical Aesthetics" src="assets/proj-flok-1200.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website · Brand</span><h3>FLÓK Medical Aesthetics</h3></div><span class="arr">↗</span></div></button>
+      <button class="wc wc-feat reveal" data-project="flok" aria-haspopup="dialog"><div class="wc-shot"><span class="badge-new">New</span><picture><source type="image/avif" srcset="assets/proj-flok-480.avif 480w, assets/proj-flok-800.avif 800w, assets/proj-flok-1200.avif 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-flok-480.webp 480w, assets/proj-flok-800.webp 800w, assets/proj-flok-1200.webp 1200w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="FLÓK Medical Aesthetics" src="assets/proj-flok-1200.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website · Brand</span><h3>FLÓK Medical Aesthetics</h3></div><span class="arr">↗</span></div></button>
       <button class="wc reveal d1" data-project="savethedate" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-savethedate-480.avif 480w, assets/proj-savethedate-800.avif 800w, assets/proj-savethedate-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-savethedate-480.webp 480w, assets/proj-savethedate-800.webp 800w, assets/proj-savethedate-1000.webp 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="Save the Date wedding website" src="assets/proj-savethedate-1000.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Wedding website</span><h3>Save the Date</h3></div><span class="arr">↗</span></div></button>
       <button class="wc reveal d2" data-project="nailhead" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-nailhead-480.avif 480w, assets/proj-nailhead-800.avif 800w, assets/proj-nailhead-1000.avif 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-nailhead-480.webp 480w, assets/proj-nailhead-800.webp 800w, assets/proj-nailhead-1000.webp 1000w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="Nailhead Properties" src="assets/proj-nailhead-1000.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Website</span><h3>Nailhead Properties</h3></div><span class="arr">↗</span></div></button>
       <button class="wc reveal" data-project="flightsim" aria-haspopup="dialog"><div class="wc-shot"><picture><source type="image/avif" srcset="assets/proj-flightsim-480.avif 480w, assets/proj-flightsim-612.avif 612w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><source type="image/webp" srcset="assets/proj-flightsim-480.webp 480w, assets/proj-flightsim-612.webp 612w" sizes="(max-width:520px) 100vw, (max-width:900px) 50vw, 25vw" /><img loading="lazy" decoding="async" alt="Manchester Flight Sim Centre" src="assets/proj-flightsim-612.jpg" /></picture></div><div class="wc-body"><div class="wc-meta"><span class="wc-cat">Booking · Web App</span><h3>Manchester Flight Sim Centre</h3></div><span class="arr">↗</span></div></button>
@@ -343,7 +358,7 @@ JSONLD;
 <!-- CONTACT -->
 <section id="contact" class="contact" aria-labelledby="contact-title">
   <div class="wrap ct-grid">
-    <div class="ct-info reveal">
+    <div class="ct-info reveal from-left">
       <span class="eyebrow">Contact</span>
       <h2 class="h2-sm" id="contact-title">Say hello</h2>
       <p>Ready to get started? Drop us a message and we'll reply within 24 hours. No pressure, no hard sell - just a friendly chat.</p>
@@ -422,6 +437,53 @@ JSONLD;
   const toTop = document.getElementById('toTop');
   addEventListener('scroll', () => toTop.classList.toggle('show', scrollY > 500), { passive: true });
   toTop.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // hero headline: wrap each word so it can arrive on its own (keeps the <em> intact)
+  const heroH1 = document.querySelector('.hero h1');
+  if (heroH1 && !reduceMotion){
+    let i = 0;
+    const wrapWords = (node) => {
+      Array.from(node.childNodes).forEach((n) => {
+        if (n.nodeType === 3){
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach((part) => {
+            if (!part) return;
+            if (/^\s+$/.test(part)){ frag.appendChild(document.createTextNode(part)); return; }
+            const s = document.createElement('span'); s.className = 'w'; s.style.setProperty('--i', i++); s.textContent = part;
+            frag.appendChild(s);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1){ wrapWords(n); }
+      });
+    };
+    wrapWords(heroH1);
+    heroH1.classList.remove('reveal', 'd1');
+    heroH1.classList.add('split');
+  }
+
+  // hero photo: gentle parallax against its hairline frame while the hero is on screen
+  const heroPic = document.querySelector('.hero-photo picture');
+  if (heroPic && !reduceMotion){
+    let ticking = false;
+    const parallax = () => {
+      ticking = false;
+      if (scrollY > innerHeight) return;
+      heroPic.style.transform = 'translateY(' + (scrollY * -0.08).toFixed(1) + 'px)';
+    };
+    addEventListener('scroll', () => { if (!ticking){ ticking = true; requestAnimationFrame(parallax); } }, { passive: true });
+  }
+
+  // brand marquee: pause/play control (hover-pause alone isn't reachable by keyboard or touch)
+  const strip = document.getElementById('strip'), stripPause = document.getElementById('stripPause');
+  if (strip && stripPause){
+    stripPause.addEventListener('click', () => {
+      const paused = strip.classList.toggle('paused');
+      stripPause.setAttribute('aria-pressed', paused ? 'true' : 'false');
+      stripPause.setAttribute('aria-label', paused ? 'Play scrolling brand list' : 'Pause scrolling brand list');
+    });
+  }
 
   // reveal on scroll (scroll-position based - robust across environments)
   const reveals = Array.from(document.querySelectorAll('.reveal'));

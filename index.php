@@ -110,7 +110,9 @@ JSONLD;
 .hero-photo .frame{width:100%;height:auto;border-radius:14px;aspect-ratio:4/5;object-fit:cover;box-shadow:0 30px 60px -28px rgba(23,63,58,.45)}
 .hero-photo{isolation:isolate}
 .hero-photo::before{content:"";position:absolute;inset:22px -22px -22px 22px;border:1.5px solid var(--teal);border-radius:14px;opacity:.6;z-index:-1}
-.hero-photo picture{display:block;will-change:transform}
+/* photo + review card move together on scroll (capped in JS), the hairline frame stays put */
+.hero-media{position:relative;will-change:transform}
+.hero-media picture{display:block}
 .hero-review{position:absolute;left:-28px;bottom:36px;max-width:340px;margin:0;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:0 16px 30px -18px rgba(0,0,0,.3);animation:floaty 6s ease-in-out infinite}
 .hero-review .stars{color:var(--teal-deep);letter-spacing:2px;font-size:13px;margin-bottom:6px}
 .hero-review blockquote{margin:0 0 8px;font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.4;color:#2e2b25}
@@ -121,6 +123,7 @@ JSONLD;
 .hero h1.split{opacity:1;transform:none}
 .hero h1 .w{display:inline-block;opacity:0;transform:translateY(.35em);filter:blur(5px);animation:wordIn .75s cubic-bezier(.22,.61,.36,1) forwards;animation-delay:calc(var(--i) * 75ms + 120ms)}
 @keyframes wordIn{to{opacity:1;transform:none;filter:blur(0)}}
+@media(max-width:1100px){.hero-review{left:-14px;bottom:-18px;max-width:min(300px,100%);padding:14px 16px}.hero-review blockquote{font-size:15.5px}}
 @media(max-width:880px){.hero-review{left:12px;bottom:16px;max-width:calc(100% - 24px)}.hero-photo::before{inset:16px -12px -12px 16px}}
 
 /* --- promises row --- */
@@ -133,8 +136,9 @@ JSONLD;
 .promise span{font-size:14px;color:var(--muted)}
 
 /* --- what happens next (timeline) --- */
-.timeline{display:flex;flex-wrap:wrap;border-top:1.5px solid var(--teal-deep)}
-.step{flex:1 1 240px;padding:28px 28px 0 0;position:relative}
+/* each step carries its own line so wrapped rows (tablets, phones) get a line and dot of their own */
+.timeline{display:flex;flex-wrap:wrap}
+.step{flex:1 1 240px;padding:28px 28px 24px 0;position:relative;border-top:1.5px solid var(--teal-deep)}
 .step::before{content:"";position:absolute;top:-8px;left:0;width:14px;height:14px;border-radius:50%;background:var(--teal-deep);border:3px solid var(--paper)}
 .step.last::before{background:var(--teal)}
 .step small{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-text);font-weight:700}
@@ -203,7 +207,7 @@ JSONLD;
 @media(prefers-reduced-motion:reduce){
   .hero-review{animation:none}
   .hero h1 .w{animation:none;opacity:1;transform:none;filter:none}
-  .hero-photo picture{transform:none!important}
+  .hero-media{transform:none!important}
   .talk a:hover{transform:none}
 }
 </style>
@@ -232,12 +236,14 @@ JSONLD;
       </form>
     </div>
     <div class="hero-photo reveal d2">
-      <picture><source type="image/avif" srcset="assets/couple-480.avif 480w, assets/couple-800.avif 800w, assets/couple-1200.avif 1200w" sizes="(max-width:880px) 100vw, 45vw" /><source type="image/webp" srcset="assets/couple-480.webp 480w, assets/couple-800.webp 800w, assets/couple-1200.webp 1200w" sizes="(max-width:880px) 100vw, 45vw" /><img class="frame" width="2399" height="1800" fetchpriority="high" alt="Hanna and Rachid, the husband-and-wife team behind HelloWebDesign in Urmston" src="assets/couple-1200.jpg" /></picture>
-      <figure class="hero-review">
-        <div class="stars" aria-hidden="true">★★★★★</div>
-        <blockquote>“They took the time to understand what we needed and delivered a site we're genuinely proud of.”</blockquote>
-        <figcaption><strong>Anoush S</strong> · Local pub owner</figcaption>
-      </figure>
+      <div class="hero-media">
+        <picture><source type="image/avif" srcset="assets/couple-480.avif 480w, assets/couple-800.avif 800w, assets/couple-1200.avif 1200w" sizes="(max-width:880px) 100vw, 45vw" /><source type="image/webp" srcset="assets/couple-480.webp 480w, assets/couple-800.webp 800w, assets/couple-1200.webp 1200w" sizes="(max-width:880px) 100vw, 45vw" /><img class="frame" width="2399" height="1800" fetchpriority="high" alt="Hanna and Rachid, the husband-and-wife team behind HelloWebDesign in Urmston" src="assets/couple-1200.jpg" /></picture>
+        <figure class="hero-review">
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <blockquote>“They took the time to understand what we needed and delivered a site we're genuinely proud of.”</blockquote>
+          <figcaption><strong>Anoush S</strong> · Local pub owner</figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 </header>
@@ -561,14 +567,14 @@ JSONLD;
     heroH1.classList.add('split');
   }
 
-  // hero photo: gentle parallax against its hairline frame while the hero is on screen
-  const heroPic = document.querySelector('.hero-photo picture');
+  // hero photo + review card: gentle parallax against the hairline frame, capped so the photo never leaves it
+  const heroPic = document.querySelector('.hero-media');
   if (heroPic && !reduceMotion){
     let ticking = false;
     const parallax = () => {
       ticking = false;
       if (scrollY > innerHeight) return;
-      heroPic.style.transform = 'translateY(' + (scrollY * -0.08).toFixed(1) + 'px)';
+      heroPic.style.transform = 'translateY(' + Math.max(-36, scrollY * -0.06).toFixed(1) + 'px)';
     };
     addEventListener('scroll', () => { if (!ticking){ ticking = true; requestAnimationFrame(parallax); } }, { passive: true });
   }
